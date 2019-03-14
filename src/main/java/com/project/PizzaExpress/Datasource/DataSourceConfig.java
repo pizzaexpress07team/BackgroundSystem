@@ -1,63 +1,46 @@
 package com.project.PizzaExpress.Datasource;
 
+import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.ibatis.session.SqlSessionFactory;
-//import org.apache.log4j.Logger;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.PlatformTransactionManager;
-
-@Component
-@ConfigurationProperties(prefix = "spring.datasource")
-@ComponentScan
-@MapperScan("com.project.PizzaExpress")//扫描有@Mapper注解的interface定义
+@Configuration
+@PropertySource("classpath:application.properties")
 public class DataSourceConfig {
+    @Value("${spring.datasource.driver-class-name}")
+    private String driver;
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
+    @Value("${spring.datasource.dbcp2.initial-size}")
+    private int initial;
+    @Value("${spring.datasource.dbcp2.max-idle}")
+    private int maxIdle;
+    @Value("${spring.datasource.dbcp2.min-idle}")
+    private int minIdle;
+    @Value("${spring.datasource.dbcp2.max-wait-millis}")
+    private long maxWaitMillis;
 
-        //logger引入
-        //private static final Logger logger = Logger.getLogger(DataSourceConfig.class);
-        @Autowired
-        ApplicationContext applicationContext;//引入上下文
-        @Autowired
-        DataSourceProperties dataSourceProperties;//引入数据源参数
-
-        // DataSource配置
-        /**
-      * "@Bean"注解就不多解释了，就是说把它当成一个Bean类来处理
-      * "@ConfigurationProperties"注解会默认读取application.proerties文件中的spring.datasource配置，并自动赋值到DataSource中
-      */
-        @Bean
-        public DataSource dataSource(){
-                return new BasicDataSource();
-        }
-
-        // 提供SqlSession(数据库事务操作相关的配置)
-        @Bean
-        public SqlSessionFactory sqlSessionFactoryBean() throws Exception{
-                SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();//创建SqlSessionFactoryBean类
-                sqlSessionFactoryBean.setDataSource(dataSource());//设置数据库链接
-                //如果你不想写mapper.xml文件来实现功能的话，下面两行可以注释。
-                //PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-                //sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/com/example/mapper/*.xml"));
-                return sqlSessionFactoryBean.getObject();
-        }
-
-        /**
-      * 事务配置引入
-      * @return
-      */
-        @Bean
-        public PlatformTransactionManager transactionManager(){
-                return new DataSourceTransactionManager(dataSource());//事务声明
-        }
-
+    @Bean
+    public DataSource dataSource(){
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName(driver);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setInitialSize(initial);
+        dataSource.setMaxIdle(maxIdle);
+        dataSource.setMinIdle(minIdle);
+        dataSource.setMaxWait(maxWaitMillis);
+        dataSource.setValidationQuery("SELECT 1");
+        dataSource.setTestOnBorrow(true);
+        return dataSource;
+    }
 }

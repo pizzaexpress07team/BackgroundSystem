@@ -1,37 +1,32 @@
 package com.project.PizzaExpress;
 
-import com.project.PizzaExpress.Datasource.DataSourceConfig;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
+//@ComponentScan(basePackages={"me.shijunjie"}) // 扫描该包路径下的所有spring组件
+/*@EnableJpaRepositories("me.shijunjie.dao") // JPA扫描该包路径下的Repositorie
+ *//*@EntityScan("me.shijunjie.entity") // 扫描实体类
+ */@SpringBootApplication
+@EnableScheduling
+public class PizzaExpressApplication extends SpringBootServletInitializer{
 
-@Controller
-@EnableAutoConfiguration
-public class PizzaExpressApplication {
-
-	@RequestMapping("/")
-	@ResponseBody
-	String home() {
-		return "Pizza Express for PDQ!";
-	}
-
-	@RequestMapping("/test")
-	@ResponseBody
-	String test() {
-		return "Test!";
-	}
+//	@RequestMapping("/")
+//	@ResponseBody
+//	String home() {
+//		return "Pizza Express for PDQ!";
+//	}
+//
+//
+//	@ResponseBody
+//	String test() {
+//
+//		TestController tc = new TestController();
+//		return tc.save();
+//	}
 
 	public static void main(String[] args) throws Exception {
-		DataSourceConfig dsc = new DataSourceConfig();
-		DataSource ds = dsc.dataSource();
-		//Connection c = ds.getConnection();
-		//System.out.println(c);
-//		System.out.println(dataSourceProperties);
 
 		SpringApplication.run(PizzaExpressApplication.class, args);
 	}
