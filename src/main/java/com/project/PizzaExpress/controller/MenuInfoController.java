@@ -1,5 +1,6 @@
 package com.project.PizzaExpress.controller;
 
+import com.project.PizzaExpress.service.menuInfo.IViewMenuInfoService;
 import com.project.PizzaExpress.service.menuInfo.ViewMenuInfoServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import javax.annotation.Resource;
 public class MenuInfoController {
 
     @Resource
-    private ViewMenuInfoServiceImpl menuInfoService;
+    private IViewMenuInfoService menuInfoService = new ViewMenuInfoServiceImpl();
 
     @RequestMapping("/info")
     public String displayMenu()
