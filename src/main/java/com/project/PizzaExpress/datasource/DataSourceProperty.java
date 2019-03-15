@@ -1,7 +1,4 @@
-package com.project.PizzaExpress.Datasource;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+package com.project.PizzaExpress.datasource;
 
 public class DataSourceProperty {
 

@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.Datasource;
+package com.project.PizzaExpress.datasource;
 
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -14,7 +14,7 @@ public class MyBatisMapperScannerConfig {
         //获取之前注入的beanName为sqlSessionFactory的对象
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         //指定xml配置文件的路径
-        mapperScannerConfigurer.setBasePackage("com.project.PizzaExpress.DAO");
+        mapperScannerConfigurer.setBasePackage("com.project.PizzaExpress.dao");
         return mapperScannerConfigurer;
     }
 }

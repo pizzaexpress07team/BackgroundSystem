@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.Datasource;
+package com.project.PizzaExpress.datasource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;

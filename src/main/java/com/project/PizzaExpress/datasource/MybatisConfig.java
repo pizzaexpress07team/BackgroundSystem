@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.Datasource;
+package com.project.PizzaExpress.datasource;
 
 import javax.sql.DataSource;
 

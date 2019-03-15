@@ -1,7 +1,7 @@
-package com.project.PizzaExpress.Controller;
+package com.project.PizzaExpress.controller;
 
-import com.project.PizzaExpress.Entity.PizzaEntity;
-import com.project.PizzaExpress.Service.TestService;
+import com.project.PizzaExpress.entity.PizzaEntity;
+import com.project.PizzaExpress.service.TestService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +14,12 @@ public class TestController {
     @Resource
     private TestService testService;
 
+    @RequestMapping("/message")
+    public String test()
+    {
+        return "Test message.";
+    }
+
     /**
      * 测试保存数据方法.
      * @return running message
@@ -22,8 +28,14 @@ public class TestController {
     public String save(){
         PizzaEntity pe = new PizzaEntity();
         pe.setName("test");
-        testService.save(pe);//保存数据.
+        testService.save(pe);
         return "ok.TestController.save";
+
+    }
+
+    @RequestMapping("/query")
+    public String query(){
+        return "get it!";
 
     }
 }

@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-//@ComponentScan(basePackages={"me.shijunjie"}) // 扫描该包路径下的所有spring组件
-/*@EnableJpaRepositories("me.shijunjie.dao") // JPA扫描该包路径下的Repositorie
- *//*@EntityScan("me.shijunjie.entity") // 扫描实体类
- */@SpringBootApplication
+//@ComponentScan(basePackages={"com.project.PizzaExpress"}) // 扫描该包路径下的所有spring组件
+//@EnableJpaRepositories("com.project.PizzaExpress.dao") // JPA扫描该包路径下的Repositories
+//@EntityScan("com.project.PizzaExpress.entity") // 扫描实体类
+@SpringBootApplication
 @EnableScheduling
 public class PizzaExpressApplication extends SpringBootServletInitializer{
 
@@ -27,7 +27,6 @@ public class PizzaExpressApplication extends SpringBootServletInitializer{
 //	}
 
 	public static void main(String[] args) throws Exception {
-
 		SpringApplication.run(PizzaExpressApplication.class, args);
 	}
 
