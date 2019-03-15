@@ -4,85 +4,85 @@ import java.sql.Timestamp;
 
 public class UserEntity {
 
-    private String Id;
-    private String name;
+    private String uid;
+    private String username;
     private String password;
     private String addr;
-    private int isAdmin;
+    private int is_admin;
     private String phone;
     private String sina;
     private String qq;
-    private Timestamp createTime;
+    private Timestamp create_time;
 
-    public void setId(String id) {
-        Id = id;
+    public String getUid() {
+        return uid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
-
-    public void setIsAdmin(int isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setSina(String sina) {
-        this.sina = sina;
-    }
-
-    public void setQq(String qq) {
-        this.qq = qq;
-    }
-
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getId() {
-        return Id;
-    }
-
-    public String getName() {
-        return name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getAddr() {
         return addr;
     }
 
-    public int getIsAdmin() {
-        return isAdmin;
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    public int getIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(int is_admin) {
+        this.is_admin = is_admin;
     }
 
     public String getPhone() {
         return phone;
     }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getSina() {
         return sina;
+    }
+
+    public void setSina(String sina) {
+        this.sina = sina;
     }
 
     public String getQq() {
         return qq;
     }
 
-    public Timestamp getCreateTime() {
-        return createTime;
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public Timestamp getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Timestamp create_time) {
+        this.create_time = create_time;
     }
 }

@@ -5,112 +5,112 @@ import java.sql.Timestamp;
 
 public class OrderEntity {
 
-    private long Id;
-    private long uId;
-    private Timestamp createTime;
-    private Timestamp payTime;
-    private int deliveryState;
-    private long fId;
-    private long dId;
+    private long o_id;
+    private long u_id;
+    private Timestamp o_create_time;
+    private Timestamp o_pay_time;
+    private int delivery_tate;
+    private long f_id;
+    private long d_id;
     private String detail;
-    private BigDecimal totalPrice;
-    private int payState;
-    private String deliveryAddr;
-    private long payId;
+    private BigDecimal total_price;
+    private int o_pay_state;
+    private String o_delivery_addr;
+    private long pay_id;
 
-    public void setoId(long Id) {
-        this.Id = Id;
+    public long getO_id() {
+        return o_id;
     }
 
-    public void setuId(long uId) {
-        this.uId = uId;
+    public void setO_id(long o_id) {
+        this.o_id = o_id;
     }
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
+    public long getU_id() {
+        return u_id;
     }
 
-    public void setPayTime(Timestamp payTime) {
-        this.payTime = payTime;
+    public void setU_id(long u_id) {
+        this.u_id = u_id;
     }
 
-    public void setDeliveryState(int deliveryState) {
-        this.deliveryState = deliveryState;
+    public Timestamp getO_create_time() {
+        return o_create_time;
     }
 
-    public void setfId(long fId) {
-        this.fId = fId;
+    public void setO_create_time(Timestamp o_create_time) {
+        this.o_create_time = o_create_time;
     }
 
-    public void setdId(long dId) {
-        this.dId = dId;
+    public Timestamp getO_pay_time() {
+        return o_pay_time;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setO_pay_time(Timestamp o_pay_time) {
+        this.o_pay_time = o_pay_time;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public int getDelivery_tate() {
+        return delivery_tate;
     }
 
-    public void setPayState(int payState) {
-        this.payState = payState;
+    public void setDelivery_tate(int delivery_tate) {
+        this.delivery_tate = delivery_tate;
     }
 
-    public void setDeliveryAddr(String deliveryAddr) {
-        this.deliveryAddr = deliveryAddr;
+    public long getF_id() {
+        return f_id;
     }
 
-    public void setPayId(long payId) {
-        this.payId = payId;
+    public void setF_id(long f_id) {
+        this.f_id = f_id;
     }
 
-    public long getoId() {
-        return Id;
+    public long getD_id() {
+        return d_id;
     }
 
-    public long getuId() {
-        return uId;
-    }
-
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
-
-    public Timestamp getPayTime() {
-        return payTime;
-    }
-
-    public int getDeliveryState() {
-        return deliveryState;
-    }
-
-    public long getfId() {
-        return fId;
-    }
-
-    public long getdId() {
-        return dId;
+    public void setD_id(long d_id) {
+        this.d_id = d_id;
     }
 
     public String getDetail() {
         return detail;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
-    public int getPayState() {
-        return payState;
+    public BigDecimal getTotal_price() {
+        return total_price;
     }
 
-    public String getDeliveryAddr() {
-        return deliveryAddr;
+    public void setTotal_price(BigDecimal total_price) {
+        this.total_price = total_price;
     }
 
-    public long getPayId() {
-        return payId;
+    public int getO_pay_state() {
+        return o_pay_state;
+    }
+
+    public void setO_pay_state(int o_pay_state) {
+        this.o_pay_state = o_pay_state;
+    }
+
+    public String getO_delivery_addr() {
+        return o_delivery_addr;
+    }
+
+    public void setO_delivery_addr(String o_delivery_addr) {
+        this.o_delivery_addr = o_delivery_addr;
+    }
+
+    public long getPay_id() {
+        return pay_id;
+    }
+
+    public void setPay_id(long pay_id) {
+        this.pay_id = pay_id;
     }
 }

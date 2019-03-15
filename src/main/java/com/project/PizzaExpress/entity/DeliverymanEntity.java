@@ -4,49 +4,49 @@ import java.sql.Timestamp;
 
 public class DeliverymanEntity {
 
-    private long Id;
-    private String name;
-    private String phone;
-    private Timestamp createTime;
-    private String fId;
+    private long d_id;
+    private String d_name;
+    private String d_phone;
+    private Timestamp create_time;
+    private String f_id;
 
-    public void setId(long id) {
-        Id = id;
+    public long getD_id() {
+        return d_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setD_id(long d_id) {
+        this.d_id = d_id;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getD_name() {
+        return d_name;
     }
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
+    public void setD_name(String d_name) {
+        this.d_name = d_name;
     }
 
-    public void setfId(String fId) {
-        this.fId = fId;
+    public String getD_phone() {
+        return d_phone;
     }
 
-    public long getId() {
-        return Id;
+    public void setD_phone(String d_phone) {
+        this.d_phone = d_phone;
     }
 
-    public String getName() {
-        return name;
+    public Timestamp getCreate_time() {
+        return create_time;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setCreate_time(Timestamp create_time) {
+        this.create_time = create_time;
     }
 
-    public Timestamp getCreateTime() {
-        return createTime;
+    public String getF_id() {
+        return f_id;
     }
 
-    public String getfId() {
-        return fId;
+    public void setF_id(String f_id) {
+        this.f_id = f_id;
     }
 }

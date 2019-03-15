@@ -27,7 +27,7 @@ public class TestController {
     @RequestMapping("/save")
     public String save(){
         PizzaEntity pe = new PizzaEntity();
-        pe.setName("test");
+        pe.setP_name("test");
         testService.save(pe);
         return "ok.TestController.save";
 

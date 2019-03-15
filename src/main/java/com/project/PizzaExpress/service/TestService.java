@@ -1,6 +1,6 @@
 package com.project.PizzaExpress.service;
 
-import com.project.PizzaExpress.dao.PizzaDAO;
+import com.project.PizzaExpress.dao.TestDAO;
 import com.project.PizzaExpress.entity.PizzaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 public class TestService {
 
     @Autowired
-    private PizzaDAO pizzaDAO;
+    private TestDAO testDAO;
 
     public void save(PizzaEntity pe)
     {
-        pizzaDAO.save(pe);
+
+        testDAO.save(pe);
     }
 }
