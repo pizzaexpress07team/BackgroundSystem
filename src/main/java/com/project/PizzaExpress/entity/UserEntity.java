@@ -1,5 +1,8 @@
 package com.project.PizzaExpress.entity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.sql.Timestamp;
 
 public class UserEntity {
@@ -84,5 +87,24 @@ public class UserEntity {
 
     public void setCreate_time(Timestamp create_time) {
         this.create_time = create_time;
+    }
+
+    public static UserEntity fromJsonString(String userInfo)
+    {
+        UserEntity userEntity = new UserEntity();
+        JSONObject jsonObject = JSON.parseObject(userInfo);
+
+        //用户信息插入
+        userEntity.setUid(jsonObject.getString("uid"));
+        userEntity.setUsername(jsonObject.getString("username"));
+        userEntity.setPassword(jsonObject.getString("password"));
+        userEntity.setAddr(jsonObject.getString("addr"));
+        userEntity.setIs_admin(jsonObject.getBigDecimal("is_admin").intValue());
+        userEntity.setPhone(jsonObject.getString("phone"));
+        userEntity.setSina(jsonObject.getString("sina"));
+        userEntity.setQq(jsonObject.getString("qq"));
+        userEntity.setCreate_time(Timestamp.valueOf(jsonObject.getString("create_time")));
+
+        return userEntity;
     }
 }
