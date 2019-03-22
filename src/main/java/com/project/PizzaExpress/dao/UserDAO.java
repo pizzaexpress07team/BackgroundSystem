@@ -2,8 +2,6 @@ package com.project.PizzaExpress.dao;
 
 import com.project.PizzaExpress.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
-
-import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
@@ -22,7 +20,7 @@ public interface UserDAO {
             @Result(property = "phone", column = "phone"),
             @Result(property = "sina", column = "sina"),
             @Result(property = "qq", column = "qq"),
-            @Result(property = "create_time", column = "create_time"),
+            @Result(property = "create_time", column = "create_time")
     })
     List<UserEntity> queryUserInfo(String uid);
 

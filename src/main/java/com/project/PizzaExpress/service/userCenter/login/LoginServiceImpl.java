@@ -4,10 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.project.PizzaExpress.dao.UserDAO;
-import com.project.PizzaExpress.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -26,6 +24,8 @@ public class LoginServiceImpl implements  ILoginService{
      */
     public String login(String username, String password)
     {
+        if (userDAO == null)
+            System.out.println("error");
         List<String> passwords = userDAO.query(username);
         JSONObject result = new JSONObject();
         if (passwords == null || passwords.size() == 0)

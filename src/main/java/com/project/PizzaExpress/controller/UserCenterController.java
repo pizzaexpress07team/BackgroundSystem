@@ -42,7 +42,7 @@ public class UserCenterController {
 
     @RequestMapping("/signUp")
     public void signUp(HttpSession session, @RequestBody String userInfo) {
-        session.setAttribute("errorCode", signUpService.signUp(userInfo));
+        session.setAttribute("return", signUpService.signUp(userInfo));
     }
 
     @RequestMapping("/modify")
@@ -53,6 +53,6 @@ public class UserCenterController {
     @RequestMapping("/view")
     public void viewInfo(HttpSession session, @RequestBody String username)
     {
-        session.setAttribute("errorCode", viewInfoService.viewInfo(username));
+        session.setAttribute("return", viewInfoService.viewInfo(username));
     }
 }

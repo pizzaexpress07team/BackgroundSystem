@@ -7,7 +7,6 @@ import com.project.PizzaExpress.dao.PizzaDAO;
 import com.project.PizzaExpress.entity.PizzaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -26,7 +25,7 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         JSONObject result = new JSONObject();
         if (pizzaList == null || pizzaList.size() == 0)
         {
-            result.put("errorCode", -1);
+            result.put("errorCode", 1);
             result.put("errorMsg", "Menu has not been found or it is empty!");
         }
         else
