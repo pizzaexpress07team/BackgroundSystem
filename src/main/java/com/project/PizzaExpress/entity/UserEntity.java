@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 public class UserEntity {
 
@@ -95,7 +96,8 @@ public class UserEntity {
         JSONObject jsonObject = JSON.parseObject(userInfo);
 
         //用户信息插入
-        userEntity.setUid(jsonObject.getString("uid"));
+        String uid = UUID.randomUUID().toString().replaceAll("-", "");
+        userEntity.setUid(uid);
         userEntity.setUsername(jsonObject.getString("username"));
         userEntity.setPassword(jsonObject.getString("password"));
         userEntity.setAddr(jsonObject.getString("addr"));

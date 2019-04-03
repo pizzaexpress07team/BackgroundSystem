@@ -22,6 +22,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -101,6 +102,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.project.PizzaExpress.PizzaExpressApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -31,7 +31,7 @@ public class SignUpServiceImpl implements ISignUpService{
             }
             else
             {
-                result.put("errorCode", 1);
+                result.put("errorCode", 2);
                 result.put("errorMsg", "System Error : Sign Up Error");
             }
         }

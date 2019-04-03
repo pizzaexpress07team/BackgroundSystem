@@ -32,10 +32,15 @@ public class ViewInfoServiceImpl implements IViewInfoService {
             result.put("qq", userEntity.getQq());
             result.put("create_time", userEntity.getCreate_time());
         }
-        else
+        else if (results.size() > 1)
         {
             result.put("errorCode", 1);
             result.put("errorMsg", "System Error : Duplicate Username");
+        }
+        else
+        {
+            result.put("errorCode", 2);
+            result.put("errorMsg", "No such user");
         }
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
     }

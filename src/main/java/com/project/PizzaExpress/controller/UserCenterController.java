@@ -31,8 +31,10 @@ public class UserCenterController {
      * 2 : 用户名存在但密码错误
      */
     @RequestMapping("/login")
-    public void login(HttpSession session, @RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
-        session.setAttribute("return", loginService.login(username, password));
+    public String login(HttpSession session, @RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
+        String result = loginService.login(username, password);
+        session.setAttribute("return", result);
+        return result;
     }
 
     @RequestMapping("/logout")
@@ -51,7 +53,7 @@ public class UserCenterController {
     }
 
     @RequestMapping("/view")
-    public void viewInfo(HttpSession session, @RequestBody String username)
+    public void viewInfo(HttpSession session, @RequestParam(name = "username") String username)
     {
         session.setAttribute("return", viewInfoService.viewInfo(username));
     }
