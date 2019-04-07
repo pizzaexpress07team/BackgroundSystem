@@ -1,18 +1,31 @@
 package com.project.PizzaExpress.dao;
 
 import com.project.PizzaExpress.entity.PizzaEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.project.PizzaExpress.entity.UserEntity;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 @Mapper
 public interface PizzaDAO {
 
-    @Insert("insert into pizza(p_type, p_id, p_name, price, is_empty, p_picture, f_id, p_size) "+
-            "values(#{type}, #{id}, #{name}, #{price}, #{is_empty}, #{picture}, #{fId}, #{size})")
-    void save(PizzaEntity pe);
+    @Insert("insert into pizza(p_type, p_name, price, is_empty, p_picture, f_id, p_size) "+
+            "values(#{type}, #{name}, #{price}, #{is_empty}, #{picture}, #{fId}, #{size})")
+    void insert(PizzaEntity pe);
 
     @Select("select * from pizza")
     List<PizzaEntity> queryAll();
+
+    @Select("select p_type, p_id, p_name, price, is_empty, p_picture, f_id, p_size from user where p_id = #{p_id}")
+    @Results({
+            @Result(property = "p_type", column = "p_type"),
+            @Result(property = "p_id", column = "p_id"),
+            @Result(property = "p_name", column = "p_name"),
+            @Result(property = "price", column = "price"),
+            @Result(property = "is_empty", column = "is_empty"),
+            @Result(property = "p_picture", column = "p_picture"),
+            @Result(property = "f_id", column = "f_id"),
+            @Result(property = "p_size", column = "p_size")
+    })
+    List<UserEntity> queryPizzaInfo(String p_id);
 }

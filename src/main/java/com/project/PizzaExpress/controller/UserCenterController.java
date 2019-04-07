@@ -8,21 +8,23 @@ import com.project.PizzaExpress.service.userCenter.login.LoginServiceImpl;
 import com.project.PizzaExpress.service.userCenter.signUp.SignUpServiceImpl;
 import com.project.PizzaExpress.service.userCenter.viewInfo.IViewInfoService;
 import com.project.PizzaExpress.service.userCenter.viewInfo.ViewInfoServiceImpl;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserCenterController {
 
     @Resource
     private ILoginService loginService = new LoginServiceImpl();
+    @Resource
     private ISignUpService signUpService = new SignUpServiceImpl();
+    @Resource
     private IModifyService modifyService = new ModifyServiceImpl();
+    @Resource
     private IViewInfoService viewInfoService = new ViewInfoServiceImpl();
 
     /* errorCode:
@@ -47,14 +49,22 @@ public class UserCenterController {
         session.setAttribute("return", signUpService.signUp(userInfo));
     }
 
+    /* return value:
+     * 0 : 成功
+     * 1 : 失败
+     */
     @RequestMapping("/modify")
-    public void modify(HttpSession session, @RequestBody String userInfo) {
-        session.setAttribute("errorCode", modifyService.modify(userInfo));
+    public int modify(HttpSession session, @RequestBody String userInfo) {
+        boolean errorCode = modifyService.modify(userInfo);
+        session.setAttribute("errorCode", errorCode);
+        return errorCode ? 0 : 1;
     }
 
     @RequestMapping("/view")
-    public void viewInfo(HttpSession session, @RequestParam(name = "username") String username)
+    public String viewInfo(HttpSession session, @RequestParam(name = "username") String username)
     {
-        session.setAttribute("return", viewInfoService.viewInfo(username));
+        String userInfo = viewInfoService.viewInfo(username);
+        session.setAttribute("return", userInfo);
+        return userInfo;
     }
 }

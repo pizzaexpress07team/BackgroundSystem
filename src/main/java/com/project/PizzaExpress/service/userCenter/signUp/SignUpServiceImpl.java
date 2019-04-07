@@ -16,7 +16,7 @@ public class SignUpServiceImpl implements ISignUpService{
     private UserDAO userDAO;
 
     public String signUp(String userInfo) {
-        UserEntity userEntity = UserEntity.fromJsonString(userInfo);
+        UserEntity userEntity = UserEntity.fromJsonString(userInfo, false);
         JSONObject result = new JSONObject();
         if (userDAO.query(userEntity.getUsername()).size() != 0)
         {
@@ -28,6 +28,7 @@ public class SignUpServiceImpl implements ISignUpService{
             if (userDAO.query(userEntity.getUsername()).size() == 1)
             {
                 result.put("errorCode", 0);
+                result.put("username", userEntity.getUsername());
             }
             else
             {

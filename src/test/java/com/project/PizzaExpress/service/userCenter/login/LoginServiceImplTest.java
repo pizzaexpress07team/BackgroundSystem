@@ -17,7 +17,7 @@ public class LoginServiceImplTest {
 
     @Test
     public void login() {
-        Assert.assertThat(loginService.login("test", "test"), is("{\"errorCode\":0}"));
+        Assert.assertThat(loginService.login("test", "test"), is("{\"errorCode\":0,\"username\":\"test\"}"));
         Assert.assertThat(loginService.login("error username", "test"), is("{\"errorCode\":1,\"errorMsg\":\"Error username\"}"));
         Assert.assertThat(loginService.login("test", "error password"), is("{\"errorCode\":2,\"errorMsg\":\"Wrong password\"}"));
     }

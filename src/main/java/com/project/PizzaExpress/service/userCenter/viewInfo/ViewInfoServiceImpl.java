@@ -7,7 +7,6 @@ import com.project.PizzaExpress.dao.UserDAO;
 import com.project.PizzaExpress.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -22,15 +21,17 @@ public class ViewInfoServiceImpl implements IViewInfoService {
         JSONObject result = new JSONObject();
         if (results.size() == 1) {
             UserEntity userEntity = results.get(0);
+            JSONObject userInfo = userEntity.toJsonObject();
             result.put("errorCode", 0);
-            result.put("uid", userEntity.getUid());
-            result.put("username", userEntity.getUsername());
-            result.put("addr", userEntity.getAddr());
-            result.put("is_admin", userEntity.getIs_admin());
-            result.put("phone", userEntity.getPhone());
-            result.put("sina", userEntity.getSina());
-            result.put("qq", userEntity.getQq());
-            result.put("create_time", userEntity.getCreate_time());
+            result.put("userInfo", userInfo);
+//            result.put("uid", userEntity.getUid());
+//            result.put("username", userEntity.getUsername());
+//            result.put("addr", userEntity.getAddr());
+//            result.put("is_admin", userEntity.getIs_admin());
+//            result.put("phone", userEntity.getPhone());
+//            result.put("sina", userEntity.getSina());
+//            result.put("qq", userEntity.getQq());
+//            result.put("create_time", userEntity.getCreate_time());
         }
         else if (results.size() > 1)
         {

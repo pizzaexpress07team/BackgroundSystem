@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.entity;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.sql.Timestamp;
@@ -90,14 +91,37 @@ public class UserEntity {
         this.create_time = create_time;
     }
 
-    public static UserEntity fromJsonString(String userInfo)
+    public JSONObject toJsonObject()
+    {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("uid", uid);
+        jsonObject.put("username", username);
+        jsonObject.put("password", password);
+        jsonObject.put("addr", addr);
+        jsonObject.put("is_admin", is_admin);
+        jsonObject.put("phone", phone);
+        jsonObject.put("sina", sina);
+        jsonObject.put("qq", qq);
+        jsonObject.put("create_time", create_time.toString());
+
+        return jsonObject;
+    }
+
+    public static UserEntity fromJsonString(String userInfo, boolean isUpdate)
     {
         UserEntity userEntity = new UserEntity();
         JSONObject jsonObject = JSON.parseObject(userInfo);
 
         //用户信息插入
-        String uid = UUID.randomUUID().toString().replaceAll("-", "");
-        userEntity.setUid(uid);
+        if (isUpdate)
+        {
+            userEntity.setUid(jsonObject.getString("uid"));
+        }
+        else
+        {
+            String uid = UUID.randomUUID().toString().replaceAll("-", "");
+            userEntity.setUid(uid);
+        }
         userEntity.setUsername(jsonObject.getString("username"));
         userEntity.setPassword(jsonObject.getString("password"));
         userEntity.setAddr(jsonObject.getString("addr"));

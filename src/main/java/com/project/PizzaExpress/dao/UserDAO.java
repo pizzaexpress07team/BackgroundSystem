@@ -10,7 +10,7 @@ public interface UserDAO {
     @Select("select password from user where username = #{name}")
     List<String> query(String name);
 
-    @Select("select uid, username, addr, is_admin, phone, sina, qq, create_time from user where username = #{username}")
+    @Select("select uid, username, password, addr, is_admin, phone, sina, qq, create_time from user where username = #{username}")
     @Results({
             @Result(property = "uid", column = "uid"),
             @Result(property = "username", column = "username"),
@@ -22,7 +22,7 @@ public interface UserDAO {
             @Result(property = "qq", column = "qq"),
             @Result(property = "create_time", column = "create_time")
     })
-    List<UserEntity> queryUserInfo(String uid);
+    List<UserEntity> queryUserInfo(String username);
 
     @Insert("insert into user(uid,username,password,addr,is_admin,phone,sina,qq,create_time)"+
             "values(#{uid},#{username},#{password},#{addr},#{is_admin},#{phone},#{sina},#{qq},#{create_time})")

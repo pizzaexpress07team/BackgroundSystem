@@ -5,32 +5,32 @@ import java.sql.Timestamp;
 
 public class OrderEntity {
 
-    private long o_id;
-    private long u_id;
+    private String o_id;
+    private String u_id;
     private Timestamp o_create_time;
     private Timestamp o_pay_time;
     private int delivery_tate;
-    private long f_id;
-    private long d_id;
+    private String f_id;
+    private String d_id;
     private String detail;
     private BigDecimal total_price;
     private int o_pay_state;
     private String o_delivery_addr;
-    private long pay_id;
+    private String pay_id;
 
-    public long getO_id() {
+    public String getO_id() {
         return o_id;
     }
 
-    public void setO_id(long o_id) {
+    public void setO_id(String o_id) {
         this.o_id = o_id;
     }
 
-    public long getU_id() {
+    public String getU_id() {
         return u_id;
     }
 
-    public void setU_id(long u_id) {
+    public void setU_id(String u_id) {
         this.u_id = u_id;
     }
 
@@ -58,19 +58,19 @@ public class OrderEntity {
         this.delivery_tate = delivery_tate;
     }
 
-    public long getF_id() {
+    public String getF_id() {
         return f_id;
     }
 
-    public void setF_id(long f_id) {
+    public void setF_id(String f_id) {
         this.f_id = f_id;
     }
 
-    public long getD_id() {
+    public String getD_id() {
         return d_id;
     }
 
-    public void setD_id(long d_id) {
+    public void setD_id(String d_id) {
         this.d_id = d_id;
     }
 
@@ -106,11 +106,12 @@ public class OrderEntity {
         this.o_delivery_addr = o_delivery_addr;
     }
 
-    public long getPay_id() {
+    public String getPay_id() {
         return pay_id;
     }
 
-    public void setPay_id(long pay_id) {
+    public void setPay_id(String pay_id) {
         this.pay_id = pay_id;
     }
+
 }

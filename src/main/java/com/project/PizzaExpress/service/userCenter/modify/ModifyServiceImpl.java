@@ -13,7 +13,7 @@ public class ModifyServiceImpl implements IModifyService{
 
     public boolean modify(String userInfo)
     {
-        UserEntity userEntity = UserEntity.fromJsonString(userInfo);
+        UserEntity userEntity = UserEntity.fromJsonString(userInfo, true);
         return (userDAO.update( userEntity.getUid(),
                                 userEntity.getPassword(),
                                 userEntity.getAddr(),
