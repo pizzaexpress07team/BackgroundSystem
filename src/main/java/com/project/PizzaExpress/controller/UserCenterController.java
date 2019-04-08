@@ -9,7 +9,6 @@ import com.project.PizzaExpress.service.userCenter.signUp.SignUpServiceImpl;
 import com.project.PizzaExpress.service.userCenter.viewInfo.IViewInfoService;
 import com.project.PizzaExpress.service.userCenter.viewInfo.ViewInfoServiceImpl;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -45,8 +44,10 @@ public class UserCenterController {
     }
 
     @RequestMapping("/signUp")
-    public void signUp(HttpSession session, @RequestBody String userInfo) {
-        session.setAttribute("return", signUpService.signUp(userInfo));
+    public String signUp(HttpSession session, @RequestBody String userInfo) {
+        String re = signUpService.signUp(userInfo);
+        session.setAttribute("return", re);
+        return re;
     }
 
     /* return value:
@@ -54,10 +55,10 @@ public class UserCenterController {
      * 1 : 失败
      */
     @RequestMapping("/modify")
-    public int modify(HttpSession session, @RequestBody String userInfo) {
-        boolean errorCode = modifyService.modify(userInfo);
-        session.setAttribute("errorCode", errorCode);
-        return errorCode ? 0 : 1;
+    public String modify(HttpSession session, @RequestBody String userInfo) {
+        String re = modifyService.modify(userInfo);
+        session.setAttribute("return", re);
+        return re;
     }
 
     @RequestMapping("/view")

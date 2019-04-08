@@ -97,7 +97,6 @@ public class PizzaEntity {
         PizzaEntity pizzaEntity = new PizzaEntity();
         JSONObject jsonObject = JSON.parseObject(pizzaInfo);
 
-        pizzaEntity.setP_type(jsonObject.getString("p_type"));
         if (isUpdate)
         {
             pizzaEntity.setP_id(jsonObject.getString("p_id"));
@@ -107,12 +106,18 @@ public class PizzaEntity {
             String pid = UUID.randomUUID().toString().replaceAll("-", "");
             pizzaEntity.setP_id(pid);
         }
-        pizzaEntity.setP_name(jsonObject.getString("p_name"));
-        pizzaEntity.setPrice(jsonObject.getBigDecimal("price"));
-        pizzaEntity.setIs_empty(jsonObject.getBoolean("is_empty"));
-        pizzaEntity.setP_picture(jsonObject.getString("p_picture"));
-        pizzaEntity.setF_id(jsonObject.getString("f_id"));
-        pizzaEntity.setP_size(jsonObject.getString("p_size"));
+        try{
+            pizzaEntity.setP_type(jsonObject.getString("p_type").toString());
+            pizzaEntity.setP_name(jsonObject.getString("p_name").toString());
+            pizzaEntity.setPrice(jsonObject.getBigDecimal("price").abs());
+            pizzaEntity.setIs_empty(jsonObject.getBoolean("is_empty").equals(true));
+            pizzaEntity.setP_picture(jsonObject.getString("p_picture").toString());
+            pizzaEntity.setF_id(jsonObject.getString("f_id").toString());
+            pizzaEntity.setP_size(jsonObject.getString("p_size").toString());
+        }catch (NullPointerException e)
+        {
+            return null;
+        }
 
         return pizzaEntity;
     }

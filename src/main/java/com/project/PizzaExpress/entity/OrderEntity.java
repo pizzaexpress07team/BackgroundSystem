@@ -1,7 +1,11 @@
 package com.project.PizzaExpress.entity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.UUID;
 
 public class OrderEntity {
 
@@ -9,12 +13,12 @@ public class OrderEntity {
     private String u_id;
     private Timestamp o_create_time;
     private Timestamp o_pay_time;
-    private int delivery_tate;
+    private int delivery_state;
     private String f_id;
     private String d_id;
     private String detail;
     private BigDecimal total_price;
-    private int o_pay_state;
+    private String o_pay_state;
     private String o_delivery_addr;
     private String pay_id;
 
@@ -50,12 +54,12 @@ public class OrderEntity {
         this.o_pay_time = o_pay_time;
     }
 
-    public int getDelivery_tate() {
-        return delivery_tate;
+    public int getDelivery_state() {
+        return delivery_state;
     }
 
-    public void setDelivery_tate(int delivery_tate) {
-        this.delivery_tate = delivery_tate;
+    public void setDelivery_state(int delivery_tate) {
+        this.delivery_state = delivery_tate;
     }
 
     public String getF_id() {
@@ -90,11 +94,11 @@ public class OrderEntity {
         this.total_price = total_price;
     }
 
-    public int getO_pay_state() {
+    public String getO_pay_state() {
         return o_pay_state;
     }
 
-    public void setO_pay_state(int o_pay_state) {
+    public void setO_pay_state(String o_pay_state) {
         this.o_pay_state = o_pay_state;
     }
 
@@ -112,6 +116,51 @@ public class OrderEntity {
 
     public void setPay_id(String pay_id) {
         this.pay_id = pay_id;
+    }
+
+    public static OrderEntity fromJsonString(String orderInfo, boolean isUpdate)
+    {
+        OrderEntity orderEntity = new OrderEntity();
+        JSONObject jsonObject = JSON.parseObject(orderInfo);
+
+        if (isUpdate)
+        {
+            orderEntity.setO_id(jsonObject.getString("o_id"));
+            orderEntity.setU_id(jsonObject.getString("u_id"));
+            Timestamp opt = jsonObject.getTimestamp("o_pay_time");
+            if (opt != null)
+                orderEntity.setO_pay_time(opt);
+            orderEntity.setDelivery_state(jsonObject.getInteger("delivery_state"));
+            orderEntity.setF_id(jsonObject.getString("f_id"));
+            orderEntity.setD_id(jsonObject.getString("d_id"));
+            orderEntity.setDetail(jsonObject.getString("detail"));
+            orderEntity.setTotal_price(jsonObject.getBigDecimal("total_price"));
+            orderEntity.setO_pay_state(jsonObject.getString("o_pay_state"));
+            orderEntity.setO_delivery_addr(jsonObject.getString("o_delivery_addr"));
+            orderEntity.setPay_id(jsonObject.getString("pay_id"));
+        }
+        else
+        {
+            String pid = UUID.randomUUID().toString().replaceAll("-", "");
+            orderEntity.setO_id(pid);
+            orderEntity.setO_create_time(new Timestamp(new Date().getTime()));
+            try{
+                orderEntity.setU_id(jsonObject.getString("u_id").toString());
+                orderEntity.setDelivery_state(jsonObject.getInteger("delivery_state").intValue());
+                orderEntity.setF_id(jsonObject.getString("f_id").toString());
+                orderEntity.setD_id(jsonObject.getString("d_id").toString());
+                orderEntity.setDetail(jsonObject.getString("detail").toString());
+                orderEntity.setTotal_price(jsonObject.getBigDecimal("total_price").abs());
+                orderEntity.setO_pay_state(jsonObject.getString("o_pay_state").toString());
+                orderEntity.setO_delivery_addr(jsonObject.getString("o_delivery_addr").toString());
+                orderEntity.setPay_id(jsonObject.getString("pay_id").toString());
+            }catch (NullPointerException e)
+            {
+                return null;
+            }
+        }
+
+        return orderEntity;
     }
 
 }

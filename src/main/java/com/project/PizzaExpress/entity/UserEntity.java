@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 public class UserEntity {
@@ -113,23 +114,26 @@ public class UserEntity {
         JSONObject jsonObject = JSON.parseObject(userInfo);
 
         //用户信息插入
-        if (isUpdate)
-        {
+        if (isUpdate) {
             userEntity.setUid(jsonObject.getString("uid"));
         }
-        else
-        {
+        else {
             String uid = UUID.randomUUID().toString().replaceAll("-", "");
             userEntity.setUid(uid);
+            userEntity.setCreate_time(new Timestamp(new Date().getTime()));
         }
-        userEntity.setUsername(jsonObject.getString("username"));
-        userEntity.setPassword(jsonObject.getString("password"));
-        userEntity.setAddr(jsonObject.getString("addr"));
-        userEntity.setIs_admin(jsonObject.getBigDecimal("is_admin").intValue());
-        userEntity.setPhone(jsonObject.getString("phone"));
-        userEntity.setSina(jsonObject.getString("sina"));
-        userEntity.setQq(jsonObject.getString("qq"));
-        userEntity.setCreate_time(Timestamp.valueOf(jsonObject.getString("create_time")));
+
+        try{
+            userEntity.setUsername(jsonObject.getString("username").toString());
+            userEntity.setPassword(jsonObject.getString("password").toString());
+            userEntity.setAddr(jsonObject.getString("addr").toString());
+            userEntity.setIs_admin(jsonObject.getBigDecimal("is_admin").intValue());
+            userEntity.setPhone(jsonObject.getString("phone").toString());
+            userEntity.setSina(jsonObject.getString("sina").toString());
+            userEntity.setQq(jsonObject.getString("qq").toString());
+        }catch (Exception e) {
+            return null;
+        }
 
         return userEntity;
     }

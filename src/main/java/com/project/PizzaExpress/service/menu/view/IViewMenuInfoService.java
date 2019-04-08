@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.service.menuInfo.view;
+package com.project.PizzaExpress.service.menu.view;
 
 public interface IViewMenuInfoService {
 

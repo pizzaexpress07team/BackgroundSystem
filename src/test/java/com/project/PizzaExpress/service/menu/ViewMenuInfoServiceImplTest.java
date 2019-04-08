@@ -1,7 +1,7 @@
-package com.project.PizzaExpress.service.menuInfo;
+package com.project.PizzaExpress.service.menu;
 
-import com.project.PizzaExpress.service.menuInfo.view.IViewMenuInfoService;
-import com.project.PizzaExpress.service.menuInfo.view.ViewMenuInfoServiceImpl;
+import com.project.PizzaExpress.service.menu.view.IViewMenuInfoService;
+import com.project.PizzaExpress.service.menu.view.ViewMenuInfoServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

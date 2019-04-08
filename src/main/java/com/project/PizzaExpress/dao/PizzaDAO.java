@@ -9,14 +9,14 @@ import java.util.List;
 @Mapper
 public interface PizzaDAO {
 
-    @Insert("insert into pizza(p_type, p_name, price, is_empty, p_picture, f_id, p_size) "+
-            "values(#{type}, #{name}, #{price}, #{is_empty}, #{picture}, #{fId}, #{size})")
+    @Insert("insert into pizza(p_type, p_id, p_name, price, is_empty, p_picture, f_id, p_size) "+
+            "values(#{p_type}, #{p_id}, #{p_name}, #{price}, #{is_empty}, #{p_picture}, #{f_id}, #{p_size})")
     void insert(PizzaEntity pe);
 
     @Select("select * from pizza")
     List<PizzaEntity> queryAll();
 
-    @Select("select p_type, p_id, p_name, price, is_empty, p_picture, f_id, p_size from user where p_id = #{p_id}")
+    @Select("select p_type, p_id, p_name, price, is_empty, p_picture, f_id, p_size from pizza where p_id = #{p_id}")
     @Results({
             @Result(property = "p_type", column = "p_type"),
             @Result(property = "p_id", column = "p_id"),
@@ -27,5 +27,5 @@ public interface PizzaDAO {
             @Result(property = "f_id", column = "f_id"),
             @Result(property = "p_size", column = "p_size")
     })
-    List<UserEntity> queryPizzaInfo(String p_id);
+    List<PizzaEntity> queryPizzaInfo(String p_id);
 }

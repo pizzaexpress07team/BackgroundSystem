@@ -28,8 +28,8 @@ public interface UserDAO {
             "values(#{uid},#{username},#{password},#{addr},#{is_admin},#{phone},#{sina},#{qq},#{create_time})")
     void insert(UserEntity ue);
 
-    @Update("update user set username = #{name},password = #{password},addr = #{addr},is_admin = #{is_admin}," +
+    @Update("update user set username = #{username},password = #{password},addr = #{addr},is_admin = #{is_admin}," +
              "phone = #{phone},sina = #{sina},qq = #{qq} where uid = #{uid}")
-    int update(String uid, String password, String addr, int is_admin, String phone, String sina, String qq);
+    int update(UserEntity ue);
 
 }

@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.service.menuInfo.insert;
+package com.project.PizzaExpress.service.menu.insert;
 
 public interface IInsertMenuItemService {
 

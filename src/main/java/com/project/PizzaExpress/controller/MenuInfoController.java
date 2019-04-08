@@ -1,9 +1,9 @@
 package com.project.PizzaExpress.controller;
 
-import com.project.PizzaExpress.service.menuInfo.insert.IInsertMenuItemService;
-import com.project.PizzaExpress.service.menuInfo.insert.InsertMenuItemServiceImpl;
-import com.project.PizzaExpress.service.menuInfo.view.IViewMenuInfoService;
-import com.project.PizzaExpress.service.menuInfo.view.ViewMenuInfoServiceImpl;
+import com.project.PizzaExpress.service.menu.insert.IInsertMenuItemService;
+import com.project.PizzaExpress.service.menu.insert.InsertMenuItemServiceImpl;
+import com.project.PizzaExpress.service.menu.view.IViewMenuInfoService;
+import com.project.PizzaExpress.service.menu.view.ViewMenuInfoServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

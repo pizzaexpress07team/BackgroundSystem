@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.service.menuInfo.view;
+package com.project.PizzaExpress.service.menu.view;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
