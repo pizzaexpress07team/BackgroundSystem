@@ -1,5 +1,9 @@
 package com.project.PizzaExpress.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.project.PizzaExpress.service.deliverymanManage.join.CreateNewDeliverymanServiceImpl;
+import com.project.PizzaExpress.service.deliverymanManage.join.ICreateNewDeliverymanService;
 import com.project.PizzaExpress.service.userCenter.login.ILoginService;
 import com.project.PizzaExpress.service.userCenter.modify.IModifyService;
 import com.project.PizzaExpress.service.userCenter.modify.ModifyServiceImpl;
@@ -25,6 +29,8 @@ public class UserCenterController {
     private IModifyService modifyService = new ModifyServiceImpl();
     @Resource
     private IViewInfoService viewInfoService = new ViewInfoServiceImpl();
+    @Resource
+    private ICreateNewDeliverymanService createNewDeliverymanService = new CreateNewDeliverymanServiceImpl();
 
     /* errorCode:
      * 0 : 正常
@@ -50,10 +56,6 @@ public class UserCenterController {
         return re;
     }
 
-    /* return value:
-     * 0 : 成功
-     * 1 : 失败
-     */
     @RequestMapping("/modify")
     public String modify(HttpSession session, @RequestBody String userInfo) {
         String re = modifyService.modify(userInfo);
@@ -62,10 +64,28 @@ public class UserCenterController {
     }
 
     @RequestMapping("/view")
-    public String viewInfo(HttpSession session, @RequestParam(name = "username") String username)
+    public String viewInfo(HttpSession session, @RequestParam(name = "uid") String uid)
     {
-        String userInfo = viewInfoService.viewInfo(username);
+        String userInfo = viewInfoService.viewInfo(uid);
         session.setAttribute("return", userInfo);
         return userInfo;
     }
+
+    /* errorCode :
+     * 0 : 正常
+     * 1 : 数据库的插入过程出现异常
+     * 2 : uid对应的用户信息中缺少姓名或电话信息
+     * 3 : 没有找到f_id对应的factory
+     * 4 : 数据库factory中存在重复f_id的项（正常情况下不会发生）
+     * 5 : 没有找到uid对应的user
+     * 6 : 数据库user中存在重复uid的项（正常情况下不会发生）
+     */
+    @RequestMapping("/dm/join")
+    public String applyDeliveryman(@RequestParam(name = "uid") String uid, @RequestParam(name = "f_id") String f_id)
+    {
+        String re = JSON.toJSONString(createNewDeliverymanService.joinDeliveryman(uid, f_id), SerializerFeature.WriteMapNullValue);
+        return re;
+    }
+
+
 }

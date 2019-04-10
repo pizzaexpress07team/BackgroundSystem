@@ -39,6 +39,7 @@ public class SignUpServiceImpl implements ISignUpService{
                 {
                     result.put("errorCode", 0);
                     result.put("username", userEntity.getUsername());
+                    result.put("uid", userEntity.getUid());
                 }
                 else
                 {

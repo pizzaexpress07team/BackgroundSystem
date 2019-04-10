@@ -10,19 +10,22 @@ public interface UserDAO {
     @Select("select password from user where username = #{name}")
     List<String> query(String name);
 
-    @Select("select uid, username, password, addr, is_admin, phone, sina, qq, create_time from user where username = #{username}")
-    @Results({
-            @Result(property = "uid", column = "uid"),
-            @Result(property = "username", column = "username"),
-            @Result(property = "password", column = "password"),
-            @Result(property = "addr", column = "addr"),
-            @Result(property = "is_admin", column = "is_admin"),
-            @Result(property = "phone", column = "phone"),
-            @Result(property = "sina", column = "sina"),
-            @Result(property = "qq", column = "qq"),
-            @Result(property = "create_time", column = "create_time")
-    })
-    List<UserEntity> queryUserInfo(String username);
+    @Select("select uid from user where username = #{name}")
+    List<String> queryUID(String name);
+
+    @Select("select * from user where uid = #{uid}")//uid, username, password, addr, is_admin, phone, sina, qq, create_time
+//    @Results({
+//            @Result(property = "uid", column = "uid"),
+//            @Result(property = "username", column = "username"),
+//            @Result(property = "password", column = "password"),
+//            @Result(property = "addr", column = "addr"),
+//            @Result(property = "is_admin", column = "is_admin"),
+//            @Result(property = "phone", column = "phone"),
+//            @Result(property = "sina", column = "sina"),
+//            @Result(property = "qq", column = "qq"),
+//            @Result(property = "create_time", column = "create_time")
+//    })
+    List<UserEntity> queryUserInfo(String uid);
 
     @Insert("insert into user(uid,username,password,addr,is_admin,phone,sina,qq,create_time)"+
             "values(#{uid},#{username},#{password},#{addr},#{is_admin},#{phone},#{sina},#{qq},#{create_time})")

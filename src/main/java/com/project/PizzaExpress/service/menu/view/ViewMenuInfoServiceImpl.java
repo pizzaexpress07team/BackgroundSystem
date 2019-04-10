@@ -7,6 +7,8 @@ import com.project.PizzaExpress.dao.PizzaDAO;
 import com.project.PizzaExpress.entity.PizzaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -31,8 +33,16 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         else
         {
             result.put("errorCode", 0);
-            result.put("list", pizzaList);
-            result.put("total", pizzaList.size());
+            List<PizzaEntity> not_empty = new LinkedList<>();
+            for (PizzaEntity pe : pizzaList)
+            {
+                if (!pe.isIs_empty()) //不想前端传输is_empty为true的pizza数据
+                {
+                    not_empty.add(pe);//todo 不传输部分属性
+                }
+            }
+            result.put("list", not_empty);
+            result.put("total", not_empty.size());
         }
 
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);

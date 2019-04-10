@@ -2,6 +2,7 @@ package com.project.PizzaExpress.entity;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.ibatis.jdbc.Null;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -11,8 +12,11 @@ public class DeliverymanEntity {
     private String d_id;
     private String d_name;
     private String d_phone;
-    private Timestamp create_time;
     private String f_id;
+
+
+
+    private String uid;
 
     public String getD_id() {
         return d_id;
@@ -38,20 +42,33 @@ public class DeliverymanEntity {
         this.d_phone = d_phone;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
-    }
-
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
-    }
-
     public String getF_id() {
         return f_id;
     }
 
     public void setF_id(String f_id) {
         this.f_id = f_id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public JSONObject toJsonObject()
+    {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("d_id", d_id);
+        jsonObject.put("d_name", d_name);
+        jsonObject.put("d_phone", d_phone);
+        jsonObject.put("f_id", f_id);
+        jsonObject.put("uid", uid);
+
+        return jsonObject;
     }
 
     public static DeliverymanEntity fromJsonString(String deliverymanInfo, boolean isUpdate)
@@ -66,11 +83,16 @@ public class DeliverymanEntity {
         else {
             String did = UUID.randomUUID().toString().replaceAll("-", "");
             deliverymanEntity.setD_id(did);
+            deliverymanEntity.setUid(jsonObject.getString("uid"));
         }
-        deliverymanEntity.setD_name(jsonObject.getString("d_name"));
-        deliverymanEntity.setD_phone(jsonObject.getString("d_phone"));
-        deliverymanEntity.setCreate_time(jsonObject.getTimestamp("create_time"));
-        deliverymanEntity.setF_id(jsonObject.getString("f_id"));
+        try{
+            deliverymanEntity.setD_name(jsonObject.getString("d_name").toString());
+            deliverymanEntity.setD_phone(jsonObject.getString("d_phone").toString());
+            deliverymanEntity.setF_id(jsonObject.getString("f_id").toString());
+        }catch (NullPointerException e)
+        {
+            return null;
+        }
 
         return deliverymanEntity;
     }

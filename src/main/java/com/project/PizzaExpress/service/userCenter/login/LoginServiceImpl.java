@@ -25,9 +25,9 @@ public class LoginServiceImpl implements  ILoginService{
      */
     public String login(String username, String password)
     {
-        if (userDAO == null)
-            System.out.println("error");
-        List<UserEntity> passwords = userDAO.queryUserInfo(username);
+//        if (userDAO == null)
+//            System.out.println("error");
+        List<String> passwords = userDAO.query(username);
 
         JSONObject result = new JSONObject();
         if (passwords == null || passwords.size() == 0)
@@ -36,12 +36,13 @@ public class LoginServiceImpl implements  ILoginService{
             result.put("errorMsg", "Error username");
             return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
         }
-        for (UserEntity _password : passwords)
+        for (String _password : passwords)
         {
-            if (password != null && password.equals(_password.getPassword()))
+            if (password != null && password.equals(_password))
             {
                 result.put("errorCode", 0);
                 result.put("username", username);
+                result.put("uid", userDAO.queryUID(username).get(0));
                 return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
             }
         }

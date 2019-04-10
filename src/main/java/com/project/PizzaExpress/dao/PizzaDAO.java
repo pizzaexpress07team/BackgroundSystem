@@ -1,7 +1,6 @@
 package com.project.PizzaExpress.dao;
 
 import com.project.PizzaExpress.entity.PizzaEntity;
-import com.project.PizzaExpress.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

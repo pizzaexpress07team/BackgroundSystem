@@ -1,8 +1,8 @@
 package com.project.PizzaExpress.dao;
 
 import com.project.PizzaExpress.entity.OrderEntity;
+import com.project.PizzaExpress.entity.OrderFactoryEntity;
 import org.apache.ibatis.annotations.*;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
@@ -61,4 +61,19 @@ public interface OrderDAO {
 //            @Result(property = "p_size", column = "p_size")
 //    })
     List<OrderEntity> queryOrders(String u_id);
+
+    /*
+        insertRecord, deleteRecord, updateRecord, queryRecord for the operations of table "order_factory"
+     */
+    @Insert("insert into order_factory(o_id, f_list) values(#{o_id}, #{f_list})")
+    void insertRecord(OrderFactoryEntity ofe);
+
+    @Delete("delete from order_factory where o_id = #{o_id}")
+    void deleteRecord(String o_id);
+
+    @Update("update order_factory set f_list = #{f_list}, where o_id = #{o_id}")
+    int updateRecord(OrderFactoryEntity ofe);
+
+    @Select("select * from order_factory where o_id = #{o_id}")
+    List<OrderFactoryEntity> queryRecord(String o_id);
 }

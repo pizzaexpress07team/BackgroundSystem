@@ -15,11 +15,16 @@ public class ViewInfoServiceImpl implements IViewInfoService {
     @Autowired
     private UserDAO userDAO;
 
-    public String viewInfo(String username)
+    public String viewInfo(String uid)
     {
-        List<UserEntity> results = userDAO.queryUserInfo(username);
+        List<UserEntity> results = userDAO.queryUserInfo(uid);
         JSONObject result = new JSONObject();
-        if (results.size() == 1) {
+        if (results == null || results.size() < 1)
+        {
+            result.put("errorCode", 2);
+            result.put("errorMsg", "No such user");
+        }
+        else if (results.size() == 1) {
             UserEntity userEntity = results.get(0);
             JSONObject userInfo = userEntity.toJsonObject();
             result.put("errorCode", 0);
@@ -33,15 +38,10 @@ public class ViewInfoServiceImpl implements IViewInfoService {
 //            result.put("qq", userEntity.getQq());
 //            result.put("create_time", userEntity.getCreate_time());
         }
-        else if (results.size() > 1)
-        {
-            result.put("errorCode", 1);
-            result.put("errorMsg", "System Error : Duplicate Username");
-        }
         else
         {
-            result.put("errorCode", 2);
-            result.put("errorMsg", "No such user");
+            result.put("errorCode", 1);
+            result.put("errorMsg", "System Error : Duplicate User");
         }
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
     }
