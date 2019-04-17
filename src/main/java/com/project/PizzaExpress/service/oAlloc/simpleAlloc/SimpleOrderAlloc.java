@@ -1,11 +1,14 @@
 package com.project.PizzaExpress.service.oAlloc.simpleAlloc;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.dao.FactoryDAO;
 import com.project.PizzaExpress.dao.OrderDAO;
 import com.project.PizzaExpress.dao.UserDAO;
 import com.project.PizzaExpress.entity.FactoryEntity;
+import com.project.PizzaExpress.entity.OrderEntity;
+import com.project.PizzaExpress.entity.OrderFactoryEntity;
 import com.project.PizzaExpress.entity.UserEntity;
 import com.project.PizzaExpress.service.oAlloc.PositionProcess;
 import com.project.PizzaExpress.service.oAlloc.saveRecord.SaveRecord;
@@ -30,24 +33,13 @@ public class SimpleOrderAlloc {
 
     private static final double VELOCITY = 750;// meter per minute
     private static final double TIME_LIMIT_IN_MINUTES = 30;
+    private static final double NO_DM_DISTANCE = 5000;
 
-    public int simpleAlloc(String o_id, String uid, String addrID)
+    private JSONArray preAlloc(Vector<Double> u_pos)
     {
-//        List<OrderEntity> order = orderDAO.query(o_id);
-//        if (order == null || order.size() == 0)
-//            return 5;
-
-        List<UserEntity> user = userDAO.queryUserInfo(uid);
-        if (user == null || user.size() == 0)
-            return 4;
-
-        Vector<Float> u_pos = PositionProcess.getUserPosition(user.get(0).getUid(), addrID);
-        if (u_pos == null)
-            return 3;
-
         List<FactoryEntity> factories = factoryDAO.queryAll();
         if (factories == null || factories.size() == 0)
-            return 2;
+            return null;
 
         List<Vector<Object>> f_pos = new LinkedList<>();
         for (FactoryEntity fe : factories)
@@ -56,22 +48,52 @@ public class SimpleOrderAlloc {
         JSONArray f_array = new JSONArray();
         for (Vector<Object> pos : f_pos)
         {
-            if (pos != null && isInRange(PositionProcess.getDistance(
-                            (Float)pos.get(1),
-                            (Float)pos.get(2),
-                            u_pos.get(0),
-                            u_pos.get(1)), 5000))
+            if (pos != null && PositionProcess.getDistance(
+                    (Double)pos.get(1),
+                    (Double)pos.get(2),
+                    u_pos.get(0),
+                    u_pos.get(1)) < NO_DM_DISTANCE)
             {
                 JSONObject temp = new JSONObject();
                 temp.put("f_id", pos.get(0).toString());
+                temp.put("lng", pos.get(1));
+                temp.put("lat", pos.get(2));
                 f_array.add(temp);
+            }
+        }
+        return f_array;
+    }
+
+    public int simpleAlloc(OrderEntity order)
+    {
+        Vector<Double> u_pos = PositionProcess.processAddr(order.getO_delivery_addr());
+        if (u_pos == null || u_pos.size() < 2)
+            return 3;
+
+        JSONArray f_list = preAlloc(u_pos);
+        if (f_list == null)
+            return 2;
+        else if (f_list.size() == 0)
+            return 1;
+
+        JSONArray f_array = new JSONArray();
+        for (int i = 0; i < f_list.size(); i++)
+        {
+            JSONObject pos = f_list.getJSONObject(i);
+            if (pos != null && isInRange(PositionProcess.getDistance(
+                            (Double) pos.get("lng"),
+                            (Double) pos.get("lat"),
+                            u_pos.get(0),
+                            u_pos.get(1)), NO_DM_DISTANCE))
+            {
+                f_array.add(pos);
             }
         }
         if (f_array.size() == 0)
             return 1;
         else
         {
-            saveRecord.saveRecord(o_id, f_array.toString());
+            saveRecord.saveRecord(order.getO_id(), f_array.toString());
             return 0;
         }
     }

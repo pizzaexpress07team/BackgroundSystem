@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.jdbc.Null;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -13,10 +14,10 @@ public class DeliverymanEntity {
     private String d_name;
     private String d_phone;
     private String f_id;
-
-
-
     private String uid;
+    private BigDecimal lng;
+    private BigDecimal lat;
+    private int state = 0;
 
     public String getD_id() {
         return d_id;
@@ -58,6 +59,30 @@ public class DeliverymanEntity {
         this.uid = uid;
     }
 
+    public BigDecimal getLng() {
+        return lng;
+    }
+
+    public void setLng(BigDecimal lng) {
+        this.lng = lng;
+    }
+
+    public BigDecimal getLat() {
+        return lat;
+    }
+
+    public void setLat(BigDecimal lat) {
+        this.lat = lat;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
     public JSONObject toJsonObject()
     {
         JSONObject jsonObject = new JSONObject();
@@ -67,6 +92,9 @@ public class DeliverymanEntity {
         jsonObject.put("d_phone", d_phone);
         jsonObject.put("f_id", f_id);
         jsonObject.put("uid", uid);
+        jsonObject.put("lng", lng);
+        jsonObject.put("lat", lat);
+        jsonObject.put("state", state);
 
         return jsonObject;
     }
@@ -84,15 +112,18 @@ public class DeliverymanEntity {
             String did = UUID.randomUUID().toString().replaceAll("-", "");
             deliverymanEntity.setD_id(did);
             deliverymanEntity.setUid(jsonObject.getString("uid"));
+            try{
+                deliverymanEntity.setD_name(jsonObject.getString("d_name").toString());
+                deliverymanEntity.setD_phone(jsonObject.getString("d_phone").toString());
+                deliverymanEntity.setF_id(jsonObject.getString("f_id").toString());
+            }catch (NullPointerException e)
+            {
+                return null;
+            }
         }
-        try{
-            deliverymanEntity.setD_name(jsonObject.getString("d_name").toString());
-            deliverymanEntity.setD_phone(jsonObject.getString("d_phone").toString());
-            deliverymanEntity.setF_id(jsonObject.getString("f_id").toString());
-        }catch (NullPointerException e)
-        {
-            return null;
-        }
+        deliverymanEntity.setLng(jsonObject.getBigDecimal("lng"));
+        deliverymanEntity.setLat(jsonObject.getBigDecimal("lat"));
+        deliverymanEntity.setState(jsonObject.getInteger("state"));
 
         return deliverymanEntity;
     }

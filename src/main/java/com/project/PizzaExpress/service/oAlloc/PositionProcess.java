@@ -32,7 +32,7 @@ public class PositionProcess {
     public static Vector<Object> getFactoryPosition(String ... arg)
     {
         Vector<Object> re = new Vector<>();
-        Vector<Float> position;
+        Vector<Double> position;
         if (arg.length == 0)
             return null;
         else if (arg.length == 1)
@@ -57,27 +57,27 @@ public class PositionProcess {
      * @param uid user id
      * @return (longitude, latitude)
      */
-    public static Vector<Float> getUserPosition(String uid, String addrID)
+    public static Vector<Double> getUserPosition(String uid, int addrID)
     {
-        Vector<Float> position = new Vector<>();
+        Vector<Double> position = new Vector<>();
         List<UserEntity> user = userDAO.queryUserInfo(uid);
         if (user == null || user.size() == 0)
             return null;
-        JSONObject location = JSON.parseObject(user.get(0).getAddr()).getJSONObject(addrID);
-        position.add(0, location.getFloatValue("longitude"));
-        position.add(1, location.getFloatValue("latitude"));
+        JSONObject location = JSON.parseArray(user.get(0).getAddr()).getJSONObject(addrID);
+        position.add(0, location.getDoubleValue("longitude"));
+        position.add(1, location.getDoubleValue("latitude"));
 
         return position;
     }
 
-    public static Vector<Float> processAddr(String addr)
+    public static Vector<Double> processAddr(String addr)
     {
-        Vector<Float> position = new Vector<>();
+        Vector<Double> position = new Vector<>();
         if (addr == null || addr.equals(""))
             return null;
         JSONObject location = JSON.parseObject(addr);
-        position.add(0, location.getFloatValue("longitude"));
-        position.add(1, location.getFloatValue("latitude"));
+        position.add(0, location.getDoubleValue("longitude"));
+        position.add(1, location.getDoubleValue("latitude"));
         return position;
     }
 

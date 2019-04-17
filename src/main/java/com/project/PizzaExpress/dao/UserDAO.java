@@ -35,4 +35,7 @@ public interface UserDAO {
              "phone = #{phone},sina = #{sina},qq = #{qq} where uid = #{uid}")
     int update(UserEntity ue);
 
+    @Update(("update user set addr = #{addr} where uid = #{uid}"))
+    int updateAddr(String uid, String addr);
+
 }

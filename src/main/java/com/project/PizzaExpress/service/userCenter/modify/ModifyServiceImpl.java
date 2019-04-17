@@ -43,4 +43,25 @@ public class ModifyServiceImpl implements IModifyService{
 
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
     }
+
+    public JSONObject modifyAddr(String uid, String addr)
+    {
+        JSONObject result = new JSONObject();
+        if (uid == null || uid.equals(""))
+        {
+            result.put("errorCode", 1);
+            result.put("errorMsg", "User ID is empty");
+        }
+        else if (userDAO.updateAddr(uid, addr) == 1)
+        {
+            result.put("errorCode", 0);
+            result.put("uid", uid);
+        }
+        else
+        {
+            result.put("errorCode", 2);
+            result.put("errorMsg", "System Error : Update Error");
+        }
+        return result;
+    }
 }

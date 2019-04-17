@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.project.PizzaExpress.service.deliverymanManage.join.CreateNewDeliverymanServiceImpl;
 import com.project.PizzaExpress.service.deliverymanManage.join.ICreateNewDeliverymanService;
@@ -59,6 +60,15 @@ public class UserCenterController {
     @RequestMapping("/modify")
     public String modify(HttpSession session, @RequestBody String userInfo) {
         String re = modifyService.modify(userInfo);
+        session.setAttribute("return", re);
+        return re;
+    }
+
+    @RequestMapping("/mod_addr")
+    public String modifyAddr(HttpSession session,
+                             @RequestParam(name = "username") String uid,
+                             @RequestParam(name = "username") String addr) {
+        String re = JSON.toJSONString(modifyService.modifyAddr(uid, addr), SerializerFeature.WriteMapNullValue);
         session.setAttribute("return", re);
         return re;
     }

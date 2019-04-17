@@ -33,16 +33,4 @@ public class OrderFactoryEntity {
     public void setF_list(String f_list) {
         this.f_list = f_list;
     }
-
-    public List<String> getFactoryList()
-    {
-        List<String> factory_list = new LinkedList<>();
-        JSONArray list = JSON.parseArray(f_list);
-        for (int i = 0; i < list.size(); i++)
-        {
-            JSONObject factory = list.getJSONObject(i);
-            factory_list.add(factory.getString("f_id"));
-        }
-        return factory_list;
-    }
 }

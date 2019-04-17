@@ -1,9 +1,11 @@
 package com.project.PizzaExpress.service.orderManage.placeOrder;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.dao.OrderDAO;
 import com.project.PizzaExpress.entity.OrderEntity;
 import com.project.PizzaExpress.service.oAlloc.simpleAlloc.SimpleOrderAlloc;
+import com.project.PizzaExpress.service.orderManage.withUser.GetUserAddr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,11 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService{
     private OrderDAO orderDAO;
     @Resource
     private SimpleOrderAlloc simpleOrderAlloc = new SimpleOrderAlloc();
+    @Resource
+    private GetUserAddr getUserAddr = new GetUserAddr();
 
     @Override
-    public JSONObject confirmOrder(String orderInfo, String addrID) {
+    public JSONObject confirmOrder(String orderInfo, int addrID ) {
         JSONObject result = new JSONObject();
         if (orderInfo == null || orderInfo.equals(""))
         {
@@ -33,15 +37,17 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService{
             if (orderEntity.getU_id() == null || orderEntity.getU_id().equals("") ||
                     orderEntity.getDetail() == null|| orderEntity.getDetail().equals("") ||
                     orderEntity.getTotal_price().equals(new BigDecimal(0.0)) ||
-                    orderEntity.getO_delivery_addr() == null || orderEntity.getO_delivery_addr().equals(""))
+                    getUserAddr.getAddrByID(orderEntity.getU_id(), addrID) == null)
             {
                 result.put("errorCode", 6);
                 result.put("errorMsg", "Lack of necessary order information");
             }
             else
             {
+                String d_addr = JSON.toJSONString(getUserAddr.getAddrByID(orderEntity.getU_id(), addrID));
+                orderEntity.setO_delivery_addr(d_addr);
                 //simple order allocation
-                switch (simpleOrderAlloc.simpleAlloc(orderEntity.getO_id(), orderEntity.getU_id(), addrID))
+                switch (simpleOrderAlloc.simpleAlloc(orderEntity))
                 {
                     case 0:
                         orderDAO.insert(orderEntity);
@@ -69,9 +75,9 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService{
                         result.put("errorCode", 4);
                         result.put("errorMsg", "Lack of user address");
                         break;
-                    case 4:
-                        result.put("errorCode", 5);
-                        result.put("errorMsg", "No such user");
+//                    case 4:
+//                        result.put("errorCode", 5);
+//                        result.put("errorMsg", "No such user");
                 }
             }
         }

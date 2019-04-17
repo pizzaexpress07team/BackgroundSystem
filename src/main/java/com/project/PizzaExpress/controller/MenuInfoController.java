@@ -1,5 +1,6 @@
 package com.project.PizzaExpress.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.project.PizzaExpress.service.menu.insert.IInsertMenuItemService;
 import com.project.PizzaExpress.service.menu.insert.InsertMenuItemServiceImpl;
 import com.project.PizzaExpress.service.menu.view.IViewMenuInfoService;
@@ -25,7 +26,7 @@ public class MenuInfoController {
     public String displayMenu(HttpServletRequest request)
     {
 //        System.out.println(menuInfoService.displayMenu());
-        String result = menuInfoService.displayMenu();
+        String result = JSON.toJSONString(menuInfoService.totalDisplay());
 //        request.setAttribute("return", result);
         return result;
     }

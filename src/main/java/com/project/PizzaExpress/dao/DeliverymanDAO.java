@@ -28,4 +28,6 @@ public interface DeliverymanDAO {
     @Select("select * from deliveryman where f_id = #{f_id}")
     List<DeliverymanEntity> queryDeliverymans(String f_id);
 
+    @Update("update deliveryman set lng = #{lng}, lat = #{lat} where d_id = #{d_id}")
+    int updateLocation(String d_id, double lng, double lat);
 }

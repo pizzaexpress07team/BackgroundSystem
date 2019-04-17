@@ -1,5 +1,6 @@
 package com.project.PizzaExpress;
 
+import com.project.PizzaExpress.service.oAlloc.completeAlloc.CompleteAlloc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,6 +33,7 @@ public class PizzaExpressApplication extends SpringBootServletInitializer{
 	public static final int menuStateCode = 0;
 
 	public static void main(String[] args) throws Exception {
+//		System.out.println(new CompleteAlloc().getPath(40.01116, 116.339303, 39.936404, 116.452562).toJSONString());
 		SpringApplication.run(PizzaExpressApplication.class, args);
 	}
 
