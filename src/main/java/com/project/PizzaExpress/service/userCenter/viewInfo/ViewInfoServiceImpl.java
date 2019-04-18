@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.project.PizzaExpress.dao.UserDAO;
 import com.project.PizzaExpress.entity.UserEntity;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -44,5 +45,12 @@ public class ViewInfoServiceImpl implements IViewInfoService {
             result.put("errorMsg", "System Error : Duplicate User");
         }
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
+    }
+
+    @Override
+    public List<User> getAllUser(Integer pno, Integer pageSize) {
+        int startIndex = (pno - 1) * pageSize;
+        List<User> users = userDAO.queryAllUserInfo(startIndex, pageSize);
+        return users;
     }
 }

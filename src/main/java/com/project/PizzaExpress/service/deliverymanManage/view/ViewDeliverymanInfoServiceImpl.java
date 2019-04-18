@@ -5,6 +5,7 @@ import com.project.PizzaExpress.dao.DeliverymanDAO;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -77,5 +78,12 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
         }
 
         return result;
+    }
+
+    @Override
+    public DeliverymanEntity getDeliverStatus(String deliverId) {
+        List<DeliverymanEntity> query = deliverymanDAO.query(deliverId);
+        if(ObjectUtils.isEmpty(query))return null;
+        return query.get(0);
     }
 }

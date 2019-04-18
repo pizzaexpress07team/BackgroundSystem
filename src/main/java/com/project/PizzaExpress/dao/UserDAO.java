@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.dao;
 
 import com.project.PizzaExpress.entity.UserEntity;
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
 
@@ -38,4 +39,6 @@ public interface UserDAO {
     @Update(("update user set addr = #{addr} where uid = #{uid}"))
     int updateAddr(String uid, String addr);
 
+    @Select("select * from user where is_admin = 0 limit ${startIndex},${pageSize}")
+    List<User> queryAllUserInfo(Integer startIndex, Integer pageSize);
 }

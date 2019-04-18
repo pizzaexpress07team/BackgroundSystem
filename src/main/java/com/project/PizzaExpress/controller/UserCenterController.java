@@ -14,6 +14,7 @@ import com.project.PizzaExpress.service.userCenter.signUp.SignUpServiceImpl;
 import com.project.PizzaExpress.service.userCenter.viewInfo.IViewInfoService;
 import com.project.PizzaExpress.service.userCenter.viewInfo.ViewInfoServiceImpl;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -74,8 +75,7 @@ public class UserCenterController {
     }
 
     @RequestMapping("/view")
-    public String viewInfo(HttpSession session, @RequestParam(name = "uid") String uid)
-    {
+    public String viewInfo(HttpSession session, @RequestParam(name = "uid") String uid) {
         String userInfo = viewInfoService.viewInfo(uid);
         session.setAttribute("return", userInfo);
         return userInfo;
@@ -91,11 +91,14 @@ public class UserCenterController {
      * 6 : 数据库user中存在重复uid的项（正常情况下不会发生）
      */
     @RequestMapping("/dm/join")
-    public String applyDeliveryman(@RequestParam(name = "uid") String uid, @RequestParam(name = "f_id") String f_id)
-    {
+    public String applyDeliveryman(@RequestParam(name = "uid") String uid, @RequestParam(name = "f_id") String f_id) {
         String re = JSON.toJSONString(createNewDeliverymanService.joinDeliveryman(uid, f_id), SerializerFeature.WriteMapNullValue);
         return re;
     }
 
+    @RequestMapping("/list")
+    public String getAllUser(@RequestParam Integer pno, @RequestParam Integer pageSize) {
+        return JSON.toJSONString(viewInfoService.getAllUser(pno, pageSize));
+    }
 
 }
