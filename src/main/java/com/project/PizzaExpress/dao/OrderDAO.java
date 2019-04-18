@@ -77,6 +77,6 @@ public interface OrderDAO {
     @Select("select * from order_factory where o_id = #{o_id}")
     List<OrderFactoryEntity> queryRecord(String o_id);
 
-    @Select("select * from order limit ${startIndex},${pageSize}")
-    List<OrderEntity> queryAll(Integer startIndex, Integer pageSize);
+    @Select("select * from `order` limit ${startIndex},${pageSize}")
+    List<OrderEntity> queryAll(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
 }
