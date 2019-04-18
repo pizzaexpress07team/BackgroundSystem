@@ -48,9 +48,9 @@ public class ViewInfoServiceImpl implements IViewInfoService {
     }
 
     @Override
-    public List<User> getAllUser(Integer pno, Integer pageSize) {
+    public List<UserEntity> getAllUser(Integer pno, Integer pageSize) {
         int startIndex = (pno - 1) * pageSize;
-        List<User> users = userDAO.queryAllUserInfo(startIndex, pageSize);
+        List<UserEntity> users = userDAO.queryAllUserInfo(startIndex, pageSize);
         return users;
     }
 }

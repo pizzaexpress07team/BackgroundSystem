@@ -40,5 +40,5 @@ public interface UserDAO {
     int updateAddr(String uid, String addr);
 
     @Select("select * from user where is_admin = 0 limit ${startIndex},${pageSize}")
-    List<User> queryAllUserInfo(Integer startIndex, Integer pageSize);
+    List<UserEntity> queryAllUserInfo(Integer startIndex, Integer pageSize);
 }
