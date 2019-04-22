@@ -116,6 +116,11 @@ public class UserEntity {
         //用户信息插入
         if (isUpdate) {
             userEntity.setUid(jsonObject.getString("uid"));
+            userEntity.setAddr(jsonObject.getString("addr"));
+            userEntity.setIs_admin(jsonObject.getBigDecimal("is_admin").intValue());
+            userEntity.setPhone(jsonObject.getString("phone"));
+            userEntity.setSina(jsonObject.getString("sina"));
+            userEntity.setQq(jsonObject.getString("qq"));
         }
         else {
             String uid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -126,11 +131,7 @@ public class UserEntity {
         try{
             userEntity.setUsername(jsonObject.getString("username").toString());
             userEntity.setPassword(jsonObject.getString("password").toString());
-            userEntity.setAddr(jsonObject.getString("addr").toString());
-            userEntity.setIs_admin(jsonObject.getBigDecimal("is_admin").intValue());
-            userEntity.setPhone(jsonObject.getString("phone").toString());
-            userEntity.setSina(jsonObject.getString("sina").toString());
-            userEntity.setQq(jsonObject.getString("qq").toString());
+
         }catch (Exception e) {
             return null;
         }

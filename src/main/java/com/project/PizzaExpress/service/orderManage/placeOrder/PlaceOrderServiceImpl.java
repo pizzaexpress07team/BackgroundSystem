@@ -25,17 +25,22 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService {
     private GetUserAddr getUserAddr = new GetUserAddr();
 
     @Override
-    public JSONObject confirmOrder(String orderInfo, int addrID) {
+    public JSONObject confirmOrder(String orderInfo) {
         JSONObject result = new JSONObject();
         if (orderInfo == null || orderInfo.equals("")) {
             result.put("errorCode", 7);
             result.put("errorMsg", "No order information");
         } else {
             OrderEntity orderEntity = OrderEntity.fromJsonString(orderInfo, false);
+            int addrID = JSON.parseObject(orderInfo).getIntValue("addrID");
             if (orderEntity.getU_id() == null || orderEntity.getU_id().equals("") ||
                     orderEntity.getDetail() == null || orderEntity.getDetail().equals("") ||
                     orderEntity.getTotal_price().equals(new BigDecimal(0.0)) ||
                     getUserAddr.getAddrByID(orderEntity.getU_id(), addrID) == null) {
+                System.out.println(orderEntity.getU_id());
+                System.out.println(orderEntity.getDetail());
+                System.out.println(orderEntity.getTotal_price());
+                System.out.println(getUserAddr.getAddrByID(orderEntity.getU_id(), addrID));
                 result.put("errorCode", 6);
                 result.put("errorMsg", "Lack of necessary order information");
             } else {

@@ -27,7 +27,6 @@ public class GetUserAddr {
         JSONArray addr = JSON.parseArray(user.getAddr());
         if (addr == null || addr.size() == 0)
             return null;
-        JSONObject taddr = addr.getJSONObject(addrID);
-        return taddr;
+        return addr.getJSONObject(addrID);
     }
 }

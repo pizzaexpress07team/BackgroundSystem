@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.project.PizzaExpress.entity.OrderEntity;
+import com.project.PizzaExpress.service.orderManage.cancelOrder.CancelOrderServiceImpl;
+import com.project.PizzaExpress.service.orderManage.cancelOrder.ICancelOrderService;
+import com.project.PizzaExpress.service.orderManage.payOrder.IPayOrderService;
+import com.project.PizzaExpress.service.orderManage.payOrder.PayOrderServiceImpl;
 import com.project.PizzaExpress.service.orderManage.placeOrder.IPlaceOrderService;
 import com.project.PizzaExpress.service.orderManage.placeOrder.PlaceOrderServiceImpl;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.project.PizzaExpress.service.orderManage.viewOrder.IViewOrderService;
+import com.project.PizzaExpress.service.orderManage.viewOrder.ViewOrderServiceImpl;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,16 +24,43 @@ public class OrderController {
 
     @Resource
     private IPlaceOrderService placeOrderService = new PlaceOrderServiceImpl();
+    @Resource
+    private IPayOrderService payOrderService = new PayOrderServiceImpl();
+    @Resource
+    private IViewOrderService viewOrderService = new ViewOrderServiceImpl();
+    @Resource
+    private ICancelOrderService cancelOrderService = new CancelOrderServiceImpl();
 
     @RequestMapping("/confirm")
-    public String confirmOrder(String orderInfo, int addrID) {
-        JSONObject re = placeOrderService.confirmOrder(orderInfo, addrID);
+    public String confirmOrder(@RequestBody String orderInfo) {
+        JSONObject re = placeOrderService.confirmOrder(orderInfo);
+        return JSON.toJSONString(re, SerializerFeature.WriteMapNullValue);
+    }
+
+    @RequestMapping("/pay")
+    public String payOrder(@RequestParam(name = "o_id") String o_id) {
+        JSONObject re = payOrderService.payOrder(o_id);
         return JSON.toJSONString(re, SerializerFeature.WriteMapNullValue);
     }
 
     @RequestMapping("/list")
     public String getAllOrder(@RequestParam Integer pno, @RequestParam Integer pageSize) {
         return JSON.toJSONString(placeOrderService.getAllOrder(pno, pageSize));
+    }
+
+    @RequestMapping("/query")
+    public String viewOrder(@RequestParam(name = "o_id") String o_id) {
+        return JSON.toJSONString(viewOrderService.viewOrder(o_id));
+    }
+
+    @RequestMapping("/cancel")
+    public String cancelOrder(@RequestParam(name = "o_id") String o_id) {
+        return JSON.toJSONString(cancelOrderService.cancelOrder(o_id));
+    }
+
+    @RequestMapping("/view")
+    public String viewOrderByUser(@RequestParam(name = "uid") String uid) {
+        return JSON.toJSONString(viewOrderService.viewOrderByUser(uid));
     }
 
     @RequestMapping("/status/modify")

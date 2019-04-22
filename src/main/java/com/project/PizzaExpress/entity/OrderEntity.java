@@ -142,7 +142,6 @@ public class OrderEntity {
             orderEntity.setO_pay_state(0);
         }
         orderEntity.setU_id(jsonObject.getString("u_id"));
-        orderEntity.setDelivery_state(jsonObject.getInteger("delivery_state"));
         orderEntity.setF_id(jsonObject.getString("f_id"));
         orderEntity.setD_id(jsonObject.getString("d_id"));
         orderEntity.setDetail(jsonObject.getString("detail"));

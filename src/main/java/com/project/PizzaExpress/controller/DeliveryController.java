@@ -1,8 +1,8 @@
 package com.project.PizzaExpress.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.project.PizzaExpress.service.deliverymanManage.updateInfo.IUpdateDeliverymanInfoService;
-import com.project.PizzaExpress.service.deliverymanManage.updateInfo.UpdateDeliManImpl;
+import com.project.PizzaExpress.service.deliverymanManage.update.IUpdateDeliverymanInfoService;
+import com.project.PizzaExpress.service.deliverymanManage.update.UpdateDeliManImpl;
 import com.project.PizzaExpress.service.deliverymanManage.view.IViewDeliverymanInfoService;
 import com.project.PizzaExpress.service.deliverymanManage.view.ViewDeliverymanInfoServiceImpl;
 import org.springframework.web.bind.annotation.*;

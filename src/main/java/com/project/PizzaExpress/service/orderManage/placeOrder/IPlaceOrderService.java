@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IPlaceOrderService {
 
-    JSONObject confirmOrder(String orderInfo, int addrID);
+    JSONObject confirmOrder(String orderInfo);
     JSONObject payOrder(String o_id);
 
     List<OrderEntity> getAllOrder(Integer pno, Integer pageSize);

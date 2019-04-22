@@ -1,4 +1,4 @@
-package com.project.PizzaExpress.service.deliverymanManage.updateInfo;
+package com.project.PizzaExpress.service.deliverymanManage.update;
 
 import com.alibaba.fastjson.JSONObject;
 

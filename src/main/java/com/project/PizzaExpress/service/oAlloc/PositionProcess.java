@@ -17,11 +17,11 @@ import java.util.Vector;
 public class PositionProcess {
 
     @Autowired
-    private static UserDAO userDAO;
+    private UserDAO userDAO;
     @Autowired
     private static OrderDAO orderDAO;
     @Autowired
-    private static FactoryDAO factoryDAO;
+    private FactoryDAO factoryDAO;
 
     private static final double EARTH_RADIUS = 6371393;//m
 
@@ -29,7 +29,7 @@ public class PositionProcess {
      * @param arg (factory id) or (factory id, factory address)
      * @return (factory id, longitude, latitude)
      */
-    public static Vector<Object> getFactoryPosition(String ... arg)
+    public Vector<Object> getFactoryPosition(String ... arg)
     {
         Vector<Object> re = new Vector<>();
         Vector<Double> position;
@@ -57,27 +57,27 @@ public class PositionProcess {
      * @param uid user id
      * @return (longitude, latitude)
      */
-    public static Vector<Double> getUserPosition(String uid, int addrID)
+    public Vector<Double> getUserPosition(String uid, int addrID)
     {
         Vector<Double> position = new Vector<>();
         List<UserEntity> user = userDAO.queryUserInfo(uid);
         if (user == null || user.size() == 0)
             return null;
         JSONObject location = JSON.parseArray(user.get(0).getAddr()).getJSONObject(addrID);
-        position.add(0, location.getDoubleValue("longitude"));
-        position.add(1, location.getDoubleValue("latitude"));
+        position.add(0, location.getDoubleValue("lng"));
+        position.add(1, location.getDoubleValue("lat"));
 
         return position;
     }
 
-    public static Vector<Double> processAddr(String addr)
+    public Vector<Double> processAddr(String addr)
     {
         Vector<Double> position = new Vector<>();
         if (addr == null || addr.equals(""))
             return null;
         JSONObject location = JSON.parseObject(addr);
-        position.add(0, location.getDoubleValue("longitude"));
-        position.add(1, location.getDoubleValue("latitude"));
+        position.add(0, location.getDoubleValue("lng"));
+        position.add(1, location.getDoubleValue("lat"));
         return position;
     }
 
