@@ -31,4 +31,9 @@ public class DeliveryController {
     public String getDeliverStatus(@RequestParam String deliverId) {
         return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatus(deliverId));
     }
+
+    @RequestMapping("/list")
+    public String getAllDeliver() {
+        return JSON.toJSONString(viewDeliverymanInfoService.viewAllInfo());
+    }
 }
