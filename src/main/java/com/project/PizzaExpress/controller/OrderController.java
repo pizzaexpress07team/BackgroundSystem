@@ -38,4 +38,13 @@ public class OrderController {
         return JSON.toJSONString(placeOrderService.modifyOrderStatus(status, orderId));
     }
 
+    @RequestMapping("/status/delete")
+    public String deleteOrderStatus(@RequestParam String orderId) {
+        return JSON.toJSONString(placeOrderService.deleteOrderStatus(orderId));
+    }
+
+    @RequestMapping("/status/get")
+    public String getOrderStatus(@RequestParam String orderId) {
+        return JSON.toJSONString(placeOrderService.getOrderStatus(orderId));
+    }
 }

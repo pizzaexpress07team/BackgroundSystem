@@ -16,7 +16,7 @@ public interface OrderDAO {
                 "#{f_id}, #{d_id}, #{detail}, #{total_price}, #{o_pay_state}, #{o_delivery_addr}, #{pay_id})")
     void insert(OrderEntity oe);
 
-    @Delete("delete from order where o_id = #{o_id}")
+    @Delete("delete from `order` where o_id = #{o_id}")
     void delete(String o_id);
 
     @Update("update order set o_pay_time = #{o_pay_time} where o_id = #{o_id}")
@@ -46,8 +46,11 @@ public interface OrderDAO {
     @Update("update order set pay_id = #{pay_id} where o_id = #{o_id}")
     int updatePayId(String o_id, String pay_id);
 
-    @Select("select * from order where o_id = #{o_id}")
+    @Select("select * from `order` where o_id = #{o_id}")
     List<OrderEntity> query(String o_id);
+
+    @Select("select * from `order` where o_id like #{o_id}")
+    List<OrderEntity> queryLike(@Param("o_id")String o_id);
 
     @Select("select * from order where u_id = #{u_id}")
 //    @Results({

@@ -95,4 +95,24 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService {
         orderDAO.updateDeliveryState(orderId, status);
         return orderDAO.query(orderId).get(0);
     }
+
+    @Override
+    public JSONObject deleteOrderStatus(String orderId) {
+        JSONObject result = new JSONObject();
+        List<OrderEntity> query = orderDAO.query(orderId);
+        if (ObjectUtils.isEmpty(query)) {
+            result.put("errorCode", 1);
+            result.put("errorMsg", "No such order id");
+        } else {
+            orderDAO.delete(orderId);
+            result.put("errorCode", 0);
+        }
+        return result;
+    }
+
+    @Override
+    public List<OrderEntity> getOrderStatus(String orderId) {
+        List<OrderEntity> query = orderDAO.queryLike("%" + orderId + "%");
+        return query;
+    }
 }
