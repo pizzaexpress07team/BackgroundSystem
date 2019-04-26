@@ -18,6 +18,7 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
     @Autowired
     private PizzaDAO pizzaDAO;
 
+    @Override
     public String displayMenu()
     {
         List<PizzaEntity> pizzaList = pizzaDAO.queryAll();
@@ -45,6 +46,7 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         return JSON.toJSONString(result, SerializerFeature.WriteMapNullValue);
     }
 
+    @Override
     public JSONObject totalDisplay()
     {
         List<PizzaWithResEntity> pizzaList = pizzaDAO.queryAllWithRes();
@@ -72,5 +74,11 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<PizzaWithResEntity> getMenuStatus(String p_name){
+        List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResLike("%" + p_name + "%");
+        return query;
     }
 }

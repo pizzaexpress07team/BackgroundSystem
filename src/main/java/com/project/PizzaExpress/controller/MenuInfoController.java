@@ -5,10 +5,8 @@ import com.project.PizzaExpress.service.menu.insert.IInsertMenuItemService;
 import com.project.PizzaExpress.service.menu.insert.InsertMenuItemServiceImpl;
 import com.project.PizzaExpress.service.menu.view.IViewMenuInfoService;
 import com.project.PizzaExpress.service.menu.view.ViewMenuInfoServiceImpl;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,5 +34,10 @@ public class MenuInfoController {
     {
         String re = insertMenuItemService.insertMenuItem(pizzaInfo);
         return re;
+    }
+
+    @RequestMapping("/get")
+    public String getMenuStatus(@RequestParam String p_name){
+        return JSON.toJSONString(menuInfoService.getMenuStatus(p_name));
     }
 }
