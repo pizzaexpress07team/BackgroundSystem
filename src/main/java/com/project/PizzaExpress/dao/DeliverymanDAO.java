@@ -3,7 +3,6 @@ package com.project.PizzaExpress.dao;
 
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 
 @Mapper
@@ -30,4 +29,7 @@ public interface DeliverymanDAO {
 
     @Update("update deliveryman set lng = #{lng}, lat = #{lat} where d_id = #{d_id}")
     int updateLocation(String d_id, double lng, double lat);
+
+    @Select("select * from deliveryman limit ${startIndex},${pageSize}")
+    List<DeliverymanEntity> queryAllByPage(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
 }

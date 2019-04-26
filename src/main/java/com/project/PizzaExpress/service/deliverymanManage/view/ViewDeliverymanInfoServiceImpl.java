@@ -86,4 +86,10 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
         if(ObjectUtils.isEmpty(query))return null;
         return query.get(0);
     }
+
+    @Override
+    public List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize){
+        int startIndex = (pno - 1) * pageSize;
+        return deliverymanDAO.queryAllByPage(startIndex, pageSize);
+    }
 }

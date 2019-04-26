@@ -32,8 +32,15 @@ public class DeliveryController {
         return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatus(deliverId));
     }
 
-    @RequestMapping("/list")
+    //显示所有配送员信息
+    @RequestMapping("/OldList")
     public String getAllDeliver() {
         return JSON.toJSONString(viewDeliverymanInfoService.viewAllInfo());
+    }
+
+    //分页显示所有配送员信息
+    @RequestMapping("/list")
+    public String getAllOrder(@RequestParam Integer pno, @RequestParam Integer pageSize) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryManByPage(pno, pageSize));
     }
 }
