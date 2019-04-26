@@ -1,13 +1,10 @@
 package com.project.PizzaExpress.dao;
 
-
-import com.project.PizzaExpress.entity.FactoryResEntity;
-import org.apache.ibatis.annotations.*;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface ResourceDao {
-    @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id")
-    List<FactoryResEntity> queryAll();
+public interface ResourceDAO {
+    @Select("SELECT * FROM")
 }
