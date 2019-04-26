@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IFactoryResService {
     List<FactoryResEntity> getAllFactoryRes();
+
+    List<FactoryResEntity> getFactoryRes(String f_id);
 }

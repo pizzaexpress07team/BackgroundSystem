@@ -49,6 +49,9 @@ public interface OrderDAO {
     @Select("select * from `order` where o_id = #{o_id}")
     List<OrderEntity> query(String o_id);
 
+    @Select("select * from `order` where o_id like #{o_id}")
+    List<OrderEntity> queryLike(@Param("o_id")String o_id);
+
     @Select("select * from `order` where u_id = #{u_id} order by o_create_time desc")
     List<OrderEntity> queryOrders(@Param("u_id") String u_id);
 
