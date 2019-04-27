@@ -32,4 +32,7 @@ public interface DeliverymanDAO {
 
     @Select("select * from deliveryman limit ${startIndex},${pageSize}")
     List<DeliverymanEntity> queryAllByPage(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    @Select("select * from deliveryman where d_name like #{d_name}")
+    List<DeliverymanEntity> queryLike(String d_name);
 }

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PizzaTypeEntity {
@@ -31,11 +32,10 @@ public class PizzaTypeEntity {
     public Map<String, Integer> getResNumMap()
     {
         Map<String, Integer> map = new HashMap<>();
-        JSONArray res_arr = JSON.parseArray(resource);
+        List<String> res_arr = JSON.parseArray(resource,String.class); //['巧克力','牛奶']
         for (int i = 0; i < res_arr.size(); i++)
         {
-            JSONObject res = res_arr.getJSONObject(i);
-            map.put(res.getString("r_id"), res.getIntValue("num"));
+            map.put(res_arr.get(i), 1);
         }
         return map;
     }

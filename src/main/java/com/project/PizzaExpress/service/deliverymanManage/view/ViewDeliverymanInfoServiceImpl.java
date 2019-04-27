@@ -88,6 +88,12 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     }
 
     @Override
+    public List<DeliverymanEntity> getDeliverStatusLike(String d_name){
+        List<DeliverymanEntity> query = deliverymanDAO.queryLike("%" + d_name + "%");
+        return query;
+    }
+
+    @Override
     public List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize){
         int startIndex = (pno - 1) * pageSize;
         return deliverymanDAO.queryAllByPage(startIndex, pageSize);

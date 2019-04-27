@@ -15,4 +15,7 @@ public interface ResourceDAO {
 
     @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where f_id like #{f_id}")
     List<FactoryResEntity> queryLike(@Param("f_id")String f_id);
+
+    @Select("SELECT r_id FROM resource where r_name = #{r_name}")
+    String queryRidByRname(@Param("r_name")String r_name);
 }

@@ -13,6 +13,7 @@ public interface IViewDeliverymanInfoService {
     JSONObject viewByFactory(String f_id);
 
     DeliverymanEntity getDeliverStatus(String deliverId);
+    List<DeliverymanEntity> getDeliverStatusLike(String d_name);
 
     List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize);
 }

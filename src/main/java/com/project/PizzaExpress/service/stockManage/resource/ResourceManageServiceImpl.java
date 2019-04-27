@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.dao.FactoryResourceDAO;
 import com.project.PizzaExpress.dao.PizzaTypeDAO;
+import com.project.PizzaExpress.dao.ResourceDAO;
 import com.project.PizzaExpress.entity.FactoryResourceEntity;
 import com.project.PizzaExpress.entity.OrderEntity;
 import com.project.PizzaExpress.entity.PizzaTypeEntity;
@@ -22,6 +23,8 @@ public class ResourceManageServiceImpl implements IResourceManageService{
     private PizzaTypeDAO pizzaTypeDAO;
     @Autowired
     private FactoryResourceDAO factoryResourceDAO;
+    @Autowired
+    private ResourceDAO resourceDAO;
 
     @Override
     public JSONObject decreaseResource(OrderEntity order) {
@@ -36,9 +39,10 @@ public class ResourceManageServiceImpl implements IResourceManageService{
             String p_name = pizza.getString("name");
             List<PizzaTypeEntity> res_list = pizzaTypeDAO.query(p_name);
             Map<String, Integer> resources = res_list.get(0).getResNumMap();
-            for (String key : resources.keySet())
+            Map<String, Integer> resources_new = mapNameToRid(resources);
+            for (String key : resources_new.keySet())
             {
-                int res_change = - (resources.get(key) * pizza_count);
+                int res_change = - (resources_new.get(key) * pizza_count);
                 if (!fac_res.get(key).changeResNum(res_change))
                 {
                     result.put("errorCode", 1);
@@ -66,9 +70,18 @@ public class ResourceManageServiceImpl implements IResourceManageService{
         Map<String, FactoryResourceEntity> map = new HashMap<>();
         for (int i = 0; i < fac_res.size(); i++)
         {
-            FactoryResourceEntity entity = fac_res.get(0);
+            FactoryResourceEntity entity = fac_res.get(i);
             map.put(entity.getR_id(), entity);
         }
         return map;
+    }
+
+    Map<String, Integer> mapNameToRid(Map<String, Integer> map){
+        Map<String, Integer> resources_new = new HashMap<>();
+        for (String key : map.keySet())
+        {
+            resources_new.put(resourceDAO.queryRidByRname(key),map.get(key));
+        }
+        return resources_new;
     }
 }

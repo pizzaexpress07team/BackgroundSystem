@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.project.PizzaExpress.entity.DeliverymanEntity;
 import com.project.PizzaExpress.service.deliverymanManage.update.IUpdateDeliverymanInfoService;
 import com.project.PizzaExpress.service.deliverymanManage.update.UpdateDeliManImpl;
 import com.project.PizzaExpress.service.deliverymanManage.view.IViewDeliverymanInfoService;
@@ -27,9 +28,16 @@ public class DeliveryController {
         return re;
     }
 
+    //精准查找
     @RequestMapping("/status")
     public String getDeliverStatus(@RequestParam String deliverId) {
         return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatus(deliverId));
+    }
+
+    //模糊查找
+    @RequestMapping("/get")
+    public String getDeliverStatusLike(@RequestParam String d_name) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatusLike(d_name));
     }
 
     //显示所有配送员信息
@@ -40,7 +48,14 @@ public class DeliveryController {
 
     //分页显示所有配送员信息
     @RequestMapping("/list")
-    public String getAllOrder(@RequestParam Integer pno, @RequestParam Integer pageSize) {
+    public String getAllDeliverByPage(@RequestParam Integer pno, @RequestParam Integer pageSize) {
         return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryManByPage(pno, pageSize));
+    }
+
+    //增加配送员信息TODO
+    @RequestMapping("/add")
+    public String addDeliverMan(@RequestParam String deliverInfo){
+        DeliverymanEntity deliverymanEntity = DeliverymanEntity.fromJsonString(deliverInfo,false);
+        return null;
     }
 }
