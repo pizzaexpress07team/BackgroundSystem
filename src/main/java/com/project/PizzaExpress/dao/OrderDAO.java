@@ -29,7 +29,7 @@ public interface OrderDAO {
     int updateFid(@Param("o_id")String o_id, @Param("f_id")String f_id);
 
     @Update("update `order` set d_id = #{d_id} where o_id = #{o_id}")
-    int updateDid(String o_id, String d_id);
+    int updateDid(@Param("o_id")String o_id, @Param("d_id")String d_id);
 
     @Update("update `order` set detail = #{detail} where o_id = #{o_id}")
     int updateDetail(@Param("o_id")String o_id, String detail);

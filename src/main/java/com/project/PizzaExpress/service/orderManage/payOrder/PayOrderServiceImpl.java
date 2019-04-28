@@ -66,6 +66,7 @@ public class PayOrderServiceImpl implements IPayOrderService{
                     List<DeliverymanEntity> dms = deliverymanDAO.queryAll();
                     int index = (int)(Math.random() * dms.size());
                     DeliverymanEntity dm = dms.get(index);
+                    orderDAO.updateDid(o_id,dm.getD_id());
                     result.put("errorCode", 0);
                     result.put("o_id", o_id);
                     result.put("duration", path.getDoubleValue("duration"));
