@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.dao;
 
 
+import com.project.PizzaExpress.entity.DeliManWithOrderEntity;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
@@ -25,7 +26,7 @@ public interface DeliverymanDAO {
     List<DeliverymanEntity> queryAll();
 
     @Select("select * from deliveryman where f_id = #{f_id}")
-    List<DeliverymanEntity> queryDeliverymans(String f_id);
+    List<DeliverymanEntity> queryDeliverymansByFid(String f_id);
 
     @Update("update deliveryman set lng = #{lng}, lat = #{lat} where d_id = #{d_id}")
     int updateLocation(String d_id, double lng, double lat);
@@ -35,4 +36,10 @@ public interface DeliverymanDAO {
 
     @Select("select * from deliveryman where d_name like #{d_name}")
     List<DeliverymanEntity> queryLike(String d_name);
+
+    @Select("SELECT * FROM deliveryman JOIN `order` ON deliveryman.d_id = order.d_id limit ${startIndex},${pageSize}")
+    List<DeliManWithOrderEntity> queryDelimanOrderByPage(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    @Select("SELECT COUNT(*) FROM deliveryman JOIN `order` ON deliveryman.d_id = order.d_id")
+    String queryDelimanOrderSize();
 }

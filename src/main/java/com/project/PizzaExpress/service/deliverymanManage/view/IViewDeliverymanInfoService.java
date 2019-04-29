@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.service.deliverymanManage.view;
 
 import com.alibaba.fastjson.JSONObject;
+import com.project.PizzaExpress.entity.DeliManWithOrderEntity;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface IViewDeliverymanInfoService {
     List<DeliverymanEntity> getDeliverStatusLike(String d_name);
 
     List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize);
+    JSONObject getAllDeliveryOrderByPage(Integer pno, Integer pageSize);
 }

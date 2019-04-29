@@ -58,4 +58,10 @@ public class DeliveryController {
         DeliverymanEntity deliverymanEntity = DeliverymanEntity.fromJsonString(deliverInfo,false);
         return null;
     }
+
+    //分页显示所有当前有订单的配送员信息以及订单信息
+    @RequestMapping("/listOrder")
+    public String getAllDeliverOrderByPage(@RequestParam Integer pno, @RequestParam Integer pageSize){
+        return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryOrderByPage(pno,pageSize));
+    }
 }

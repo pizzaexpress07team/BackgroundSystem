@@ -2,6 +2,7 @@ package com.project.PizzaExpress.service.deliverymanManage.view;
 
 import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.dao.DeliverymanDAO;
+import com.project.PizzaExpress.entity.DeliManWithOrderEntity;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,7 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
 
     @Override
     public JSONObject viewByFactory(String f_id) {
-        List<DeliverymanEntity> dmList = deliverymanDAO.queryDeliverymans(f_id);
+        List<DeliverymanEntity> dmList = deliverymanDAO.queryDeliverymansByFid(f_id);
 
         JSONObject result = new JSONObject();
         if (dmList == null || dmList.size() == 0)
@@ -97,5 +98,16 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     public List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize){
         int startIndex = (pno - 1) * pageSize;
         return deliverymanDAO.queryAllByPage(startIndex, pageSize);
+    }
+
+    @Override
+    public JSONObject getAllDeliveryOrderByPage(Integer pno, Integer pageSize){
+        int startIndex = (pno - 1) * pageSize;
+        List<DeliManWithOrderEntity> list = deliverymanDAO.queryDelimanOrderByPage(startIndex, pageSize);
+        String total = deliverymanDAO.queryDelimanOrderSize();
+        JSONObject result = new JSONObject();
+        result.put("list",list);
+        result.put("total",total);
+        return result;
     }
 }

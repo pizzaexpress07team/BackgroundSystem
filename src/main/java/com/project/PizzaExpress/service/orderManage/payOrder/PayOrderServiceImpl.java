@@ -63,7 +63,7 @@ public class PayOrderServiceImpl implements IPayOrderService{
                 int d = orderDAO.updatePaytime(o_id, new Timestamp(new Date().getTime()));
                 if (a == 1 && b == 1 && c == 1 && d == 1)
                 {
-                    List<DeliverymanEntity> dms = deliverymanDAO.queryAll();
+                    List<DeliverymanEntity> dms = deliverymanDAO.queryDeliverymansByFid(order.getF_id());
                     int index = (int)(Math.random() * dms.size());
                     DeliverymanEntity dm = dms.get(index);
                     orderDAO.updateDid(o_id,dm.getD_id());
