@@ -95,9 +95,14 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     }
 
     @Override
-    public List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize){
+    public JSONObject getAllDeliveryManByPage(Integer pno, Integer pageSize){
         int startIndex = (pno - 1) * pageSize;
-        return deliverymanDAO.queryAllByPage(startIndex, pageSize);
+        List<DeliverymanEntity> list = deliverymanDAO.queryAllByPage(startIndex, pageSize);
+        String total = deliverymanDAO.queryDelimanSize();
+        JSONObject result = new JSONObject();
+        result.put("list",list);
+        result.put("total",total);
+        return result;
     }
 
     @Override

@@ -42,4 +42,7 @@ public interface DeliverymanDAO {
 
     @Select("SELECT COUNT(*) FROM deliveryman JOIN `order` ON deliveryman.d_id = order.d_id")
     String queryDelimanOrderSize();
+
+    @Select("SELECT COUNT(*) FROM deliveryman")
+    String queryDelimanSize();
 }

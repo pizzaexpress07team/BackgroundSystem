@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class DeliManWithOrderEntity extends OrderEntity{
     private String d_name;
     private String d_phone;
-    private String u_id;
+    private String uid;
     private BigDecimal lng;
     private BigDecimal lat;
     private int state;
@@ -26,14 +26,12 @@ public class DeliManWithOrderEntity extends OrderEntity{
         this.d_phone = d_phone;
     }
 
-    @Override
-    public String getU_id() {
-        return u_id;
+    public String getUid() {
+        return uid;
     }
 
-    @Override
-    public void setU_id(String u_id) {
-        this.u_id = u_id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public BigDecimal getLng() {

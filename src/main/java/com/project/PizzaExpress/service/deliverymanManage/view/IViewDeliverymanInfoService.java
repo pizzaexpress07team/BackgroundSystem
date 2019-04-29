@@ -16,6 +16,6 @@ public interface IViewDeliverymanInfoService {
     DeliverymanEntity getDeliverStatus(String deliverId);
     List<DeliverymanEntity> getDeliverStatusLike(String d_name);
 
-    List<DeliverymanEntity> getAllDeliveryManByPage(Integer pno, Integer pageSize);
+    JSONObject getAllDeliveryManByPage(Integer pno, Integer pageSize);
     JSONObject getAllDeliveryOrderByPage(Integer pno, Integer pageSize);
 }
