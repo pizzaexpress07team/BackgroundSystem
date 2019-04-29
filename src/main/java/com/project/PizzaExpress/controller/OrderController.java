@@ -53,11 +53,13 @@ public class OrderController {
         return JSON.toJSONString(viewOrderService.viewOrder(o_id));
     }
 
+    //取消订单
     @RequestMapping("/cancel")
     public String cancelOrder(@RequestParam(name = "o_id") String o_id) {
         return JSON.toJSONString(cancelOrderService.cancelOrder(o_id));
     }
 
+    //用户查看自己的订单
     @RequestMapping("/view")
     public String viewOrderByUser(@RequestParam(name = "uid") String uid) {
         return JSON.toJSONString(viewOrderService.viewOrderByUser(uid));

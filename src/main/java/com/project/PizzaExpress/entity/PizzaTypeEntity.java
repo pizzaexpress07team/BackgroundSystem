@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class PizzaTypeEntity {
 
@@ -38,5 +39,20 @@ public class PizzaTypeEntity {
             map.put(res_arr.get(i), 1);
         }
         return map;
+    }
+
+    public static PizzaTypeEntity fromJsonString(String pizzaTypeInfo)
+    {
+        PizzaTypeEntity pizzaTypeEntity = new PizzaTypeEntity();
+        JSONObject jsonObject = JSON.parseObject(pizzaTypeInfo);
+        try{
+            pizzaTypeEntity.setP_name(jsonObject.getString("p_name"));
+            pizzaTypeEntity.setResource(jsonObject.getString("resource"));
+        }catch (NullPointerException e)
+        {
+            return null;
+        }
+
+        return pizzaTypeEntity;
     }
 }

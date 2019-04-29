@@ -37,4 +37,9 @@ public interface PizzaDAO {
 
     @Select("select * from pizza natural join pizza_type where p_name like #{p_name}")
     List<PizzaWithResEntity> queryPizzaInfoWithResLike(String p_name);
+
+    @Update("update pizza set p_type = #{p_type}, price = #{price}, " +
+            "is_empty = #{is_empty}, p_picture = #{p_picture}, f_id = #{f_id}, p_size = #{p_size} " +
+            "where p_id = #{p_id}")
+    int updatePizzaInfo(PizzaEntity pe);
 }

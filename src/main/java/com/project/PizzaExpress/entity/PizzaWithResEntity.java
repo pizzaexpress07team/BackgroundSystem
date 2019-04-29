@@ -1,5 +1,8 @@
 package com.project.PizzaExpress.entity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 public class PizzaWithResEntity extends PizzaEntity{
 
     private String resource;
@@ -30,7 +33,9 @@ public class PizzaWithResEntity extends PizzaEntity{
 
     public static PizzaWithResEntity fromJsonString(String pizzaInfo, boolean isUpdate)
     {
-        return transFromPizzaEntity(fromJsonString(pizzaInfo, isUpdate));
+        PizzaWithResEntity pizzaWithResEntity = transFromPizzaEntity(PizzaEntity.fromJsonString(pizzaInfo, isUpdate));
+        JSONObject jsonObject = JSON.parseObject(pizzaInfo);
+        pizzaWithResEntity.setResource(jsonObject.getString("resource").toString());
+        return pizzaWithResEntity;
     }
-
 }
