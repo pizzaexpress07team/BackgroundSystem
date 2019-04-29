@@ -63,18 +63,27 @@ public class OrderController {
         return JSON.toJSONString(viewOrderService.viewOrderByUser(uid));
     }
 
+    //修改订单状态
     @RequestMapping("/status/modify")
     public String modifyOrderStatus(@RequestParam Integer status,@RequestParam String orderId) {
         return JSON.toJSONString(placeOrderService.modifyOrderStatus(status, orderId));
     }
 
+    //删除订单
     @RequestMapping("/status/delete")
     public String deleteOrderStatus(@RequestParam String orderId) {
         return JSON.toJSONString(placeOrderService.deleteOrderStatus(orderId));
     }
 
+    //模糊查询订单
     @RequestMapping("/status/get")
     public String getOrderStatus(@RequestParam String orderId) {
         return JSON.toJSONString(placeOrderService.getOrderStatus(orderId));
+    }
+
+    //精准查询订单
+    @RequestMapping("/status/query")
+    public String queryOrderStatus(@RequestParam String orderId) {
+        return JSON.toJSONString(placeOrderService.queryOrderStatus(orderId));
     }
 }

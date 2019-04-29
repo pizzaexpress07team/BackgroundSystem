@@ -18,4 +18,6 @@ public interface IPlaceOrderService {
     JSONObject deleteOrderStatus(String orderId);
 
     List<OrderEntity> getOrderStatus(String orderId);
+
+    List<OrderEntity> queryOrderStatus(String orderId);
 }

@@ -120,4 +120,10 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService {
         List<OrderEntity> query = orderDAO.queryLike("%" + orderId + "%");
         return query;
     }
+
+    @Override
+    public List<OrderEntity> queryOrderStatus(String orderId){
+        List<OrderEntity> query = orderDAO.query(orderId);
+        return query;
+    }
 }
