@@ -62,6 +62,12 @@ public class DeliveryController {
         return JSON.toJSONString(createNewDeliverymanService.insertDeliveryman(deliverInfo));
     }
 
+    //修改配送员信息
+    @RequestMapping("/modify")
+    public String modifyDeliverMan(@RequestParam String deliverInfo){
+        return JSON.toJSONString(updateDeliverymanInfoService.modifyDeliveryman(deliverInfo));
+    }
+
     //分页显示所有当前有订单的配送员信息以及订单信息
     @RequestMapping("/listOrder")
     public String getAllDeliverOrderByPage(@RequestParam Integer pno, @RequestParam Integer pageSize){

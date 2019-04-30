@@ -3,6 +3,7 @@ package com.project.PizzaExpress.service.deliverymanManage.update;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.dao.DeliverymanDAO;
+import com.project.PizzaExpress.entity.DeliverymanEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,28 @@ public class UpdateDeliManImpl implements IUpdateDeliverymanInfoService {
             result.put("errorMsg", "Lack of location information");
         }
 
+        return result;
+    }
+
+    public JSONObject modifyDeliveryman(String deliverInfo){
+        JSONObject result = new JSONObject();
+        if (deliverInfo == null || deliverInfo.equals("")) {
+            result.put("errorCode", 3);
+            result.put("errorMsg", "No deliveryman information");
+        }else{
+            DeliverymanEntity deliverymanEntity = DeliverymanEntity.fromJsonString(deliverInfo,true);
+            if(deliverymanEntity==null){
+                result.put("errorCode", 4);
+                result.put("errorMsg", "Lack of necessary deliveryman information");
+            }else if(deliverymanDAO.query(deliverymanEntity.getD_id()).size() == 0){
+                result.put("errorCode", 1);
+                result.put("errorMsg", "deliveryman item not exists");
+            }else{
+                deliverymanDAO.update(deliverymanEntity);
+                result.put("errorCode", 0);
+                result.put("successModify", deliverymanEntity);
+            }
+        }
         return result;
     }
 }
