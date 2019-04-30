@@ -9,5 +9,5 @@ public interface IViewMenuInfoService {
 
     String displayMenu();
     JSONObject totalDisplay();
-    List<PizzaWithResEntity> getMenuStatus(String p_name);
+    JSONObject getItemWithResByNameLike(String p_name);
 }

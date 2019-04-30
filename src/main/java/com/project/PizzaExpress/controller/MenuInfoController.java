@@ -49,12 +49,17 @@ public class MenuInfoController {
     }
 
     //根据披萨名 模糊查询披萨信息（带原料）
-    @RequestMapping("/get")
-    public String getMenuStatusWithRes(@RequestParam String p_name){
-        return JSON.toJSONString(menuInfoService.getMenuStatus(p_name));
+    @RequestMapping("/getByNameLike")
+    public String getItemWithResByNameLike(@RequestParam String p_name){
+        return JSON.toJSONString(menuInfoService.getItemWithResByNameLike(p_name));
     }
 
     //根据披萨id 模糊查询披萨信息（带原料）
+    @RequestMapping("/getByIdLike")
+    public String getItemWithResByIdLike(@RequestParam String p_name){
+        //TODO
+        return null;
+    }
 
     //根据披萨id 精准查询披萨信息（带原料）
 
