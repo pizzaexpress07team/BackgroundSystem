@@ -11,4 +11,5 @@ public interface IViewMenuInfoService {
     JSONObject totalDisplay();
     JSONObject getItemWithResByNameLike(String p_name);
     JSONObject getItemWithResByIdLike(String p_id);
+    JSONObject getItemWithResById(String p_id);
 }

@@ -97,4 +97,17 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         result.put("total",total);
         return result;
     }
+
+    public JSONObject getItemWithResById(String p_id){
+        JSONObject result = new JSONObject();
+        List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResById(p_id);
+        if(query.size()==0){
+            result.put("errorCode",1);
+            result.put("errorMsg", "No such menu item");
+        }else{
+            result.put("errorCode",0);
+            result.put("MenuItem",query.get(0));
+        }
+        return result;
+    }
 }

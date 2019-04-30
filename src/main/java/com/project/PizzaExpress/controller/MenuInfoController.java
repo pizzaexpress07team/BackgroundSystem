@@ -61,6 +61,10 @@ public class MenuInfoController {
     }
 
     //根据披萨id 精准查询披萨信息（带原料）
+    @RequestMapping("/getById")
+    public String getItemWithResById(@RequestParam String p_id){
+        return JSON.toJSONString(menuInfoService.getItemWithResById(p_id));
+    }
 
     //修改一个菜单项（带原料）
     @RequestMapping("/modify")

@@ -33,7 +33,7 @@ public interface PizzaDAO {
     List<PizzaWithResEntity> queryAllWithRes();
 
     @Select("select * from pizza natural join pizza_type where p_id = #{p_id}")
-    List<PizzaWithResEntity> queryPizzaInfoWithRes(String p_id);
+    List<PizzaWithResEntity> queryPizzaInfoWithResById(String p_id);
 
     @Select("select * from pizza natural join pizza_type where p_id like #{p_id}")
     List<PizzaWithResEntity> queryPizzaInfoWithResByIdLike(String p_id);
