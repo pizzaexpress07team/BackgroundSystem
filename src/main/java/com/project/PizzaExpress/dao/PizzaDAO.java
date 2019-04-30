@@ -45,4 +45,7 @@ public interface PizzaDAO {
             "is_empty = #{is_empty}, p_picture = #{p_picture}, f_id = #{f_id}, p_size = #{p_size} " +
             "where p_id = #{p_id}")
     int updatePizzaInfo(PizzaEntity pe);
+
+    @Delete("delete from pizza where p_id = #{p_id}")
+    void delete(String p_id);
 }

@@ -1,6 +1,8 @@
 package com.project.PizzaExpress.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.project.PizzaExpress.service.menu.delete.DeleteMenuItemServiceImpl;
+import com.project.PizzaExpress.service.menu.delete.IDeleteMenuItemService;
 import com.project.PizzaExpress.service.menu.insert.IInsertMenuItemService;
 import com.project.PizzaExpress.service.menu.insert.InsertMenuItemServiceImpl;
 import com.project.PizzaExpress.service.menu.modify.IModifyMenuItemService;
@@ -23,6 +25,8 @@ public class MenuInfoController {
     private IInsertMenuItemService insertMenuItemService = new InsertMenuItemServiceImpl();
     @Resource
     private IModifyMenuItemService modifyMenuItemService = new ModifyMenuItemServiceImpl();
+    @Resource
+    private IDeleteMenuItemService deleteMenuItemService = new DeleteMenuItemServiceImpl();
 
     //查看菜单中的所有菜单项（带原料）
     @RequestMapping("/info")
@@ -70,5 +74,11 @@ public class MenuInfoController {
     @RequestMapping("/modify")
     public String modifyMenuItemWithRes(@RequestBody String pizzaInfoWithRes){
         return JSON.toJSONString(modifyMenuItemService.modifyMenuItemWithRes(pizzaInfoWithRes));
+    }
+
+    //删除一个菜单项（带原料删除）
+    @RequestMapping("/deleteWithRes")
+    public String deleteMenuItemWithRes(@RequestBody String p_id){
+        return JSON.toJSONString(deleteMenuItemService.deleteMenuItemWithRes(p_id));
     }
 }

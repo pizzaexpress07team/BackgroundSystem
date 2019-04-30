@@ -16,4 +16,7 @@ public interface PizzaTypeDAO {
 
     @Update("update pizza_type set resource = #{resource} where p_name = #{p_name}")
     int updatePizzaType(PizzaTypeEntity pte);
+
+    @Delete("delete from pizza_type where p_name = #{p_name}")
+    void delete(String p_name);
 }
