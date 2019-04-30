@@ -17,7 +17,7 @@ public class DeliverymanEntity {
     private String uid;
     private BigDecimal lng;
     private BigDecimal lat;
-    private int state = 0;
+    private int state;
 
     public String getD_id() {
         return d_id;

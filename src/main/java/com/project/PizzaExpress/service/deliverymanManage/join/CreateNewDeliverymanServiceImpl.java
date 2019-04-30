@@ -102,6 +102,7 @@ public class CreateNewDeliverymanServiceImpl implements ICreateNewDeliverymanSer
                 result.put("errorCode", 1);
                 result.put("errorMsg", "deliveryman item exists");
             }else{
+                deliverymanEntity.setState(0); //配送员的初始状态应设为0 表示还没接订单
                 deliverymanDAO.insert(deliverymanEntity);
                 List<DeliverymanEntity> query = deliverymanDAO.query(deliverymanEntity.getD_id());
                 if (query.size() == 1)

@@ -22,9 +22,14 @@ public class DeleteDeliverymanServiceImpl implements IDeleteDeliverymanService {
             result.put("errorCode", 1);
             result.put("errorMsg", "No such deliveryman item");
         }else {
-            deliverymanDAO.delete(d_id);
-            result.put("errorCode",0);
-            result.put("successDelete",query);
+            if(query.get(0).getState() == 1){
+                result.put("errorCode", 2);
+                result.put("errorMsg", "this deliveryman have order");
+            }else {
+                deliverymanDAO.delete(d_id);
+                result.put("errorCode", 0);
+                result.put("successDelete", query);
+            }
         }
         return result;
     }
