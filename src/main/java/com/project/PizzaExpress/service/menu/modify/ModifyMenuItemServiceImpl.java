@@ -22,21 +22,20 @@ public class ModifyMenuItemServiceImpl implements IModifyMenuItemService{
             result.put("errorCode", 3);
             result.put("errorMsg", "No pizza information");
         }else{
-            PizzaWithResEntity pizzaWithResEntity = PizzaWithResEntity.fromJsonString(pizzaInfoWithRes,false);
-            PizzaEntity pizzaEntity = PizzaEntity.fromJsonString(pizzaInfoWithRes,false);
+            PizzaWithResEntity pizzaWithResEntity = PizzaWithResEntity.fromJsonString(pizzaInfoWithRes,true);
+            PizzaEntity pizzaEntity = PizzaEntity.fromJsonString(pizzaInfoWithRes,true);
             PizzaTypeEntity pizzaTypeEntity = PizzaTypeEntity.fromJsonString(pizzaInfoWithRes);
             if(pizzaWithResEntity==null){
                 result.put("errorCode", 4);
                 result.put("errorMsg", "Lack of necessary pizza information");
             }else if(pizzaDAO.queryPizzaInfo(pizzaWithResEntity.getP_id()).size() == 0){
                 result.put("errorCode", 1);
-                result.put("errorMsg", "Pizza item exists");
+                result.put("errorMsg", "Pizza item not exists");
             }else{
                 pizzaDAO.updatePizzaInfo(pizzaEntity);
                 pizzaTypeDAO.updatePizzaType(pizzaTypeEntity);
                 result.put("errorCode", 0);
-                result.put("p_id", pizzaWithResEntity.getP_id());
-                result.put("p_name", pizzaWithResEntity.getP_name());
+                result.put("successModify", pizzaWithResEntity);
             }
         }
         return result;

@@ -61,7 +61,7 @@ public class InsertMenuItemServiceImpl implements IInsertMenuItemService{
             PizzaWithResEntity pizzaWithResEntity = PizzaWithResEntity.fromJsonString(pizzaInfoWithRes,false);
             PizzaEntity pizzaEntity = PizzaEntity.fromJsonString(pizzaInfoWithRes,false);
             PizzaTypeEntity pizzaTypeEntity = PizzaTypeEntity.fromJsonString(pizzaInfoWithRes);
-            if(pizzaWithResEntity==null){
+            if(pizzaWithResEntity == null){
                 result.put("errorCode", 4);
                 result.put("errorMsg", "Lack of necessary pizza information");
             } else if(pizzaDAO.queryPizzaInfo(pizzaWithResEntity.getP_id()).size() != 0){
@@ -73,9 +73,7 @@ public class InsertMenuItemServiceImpl implements IInsertMenuItemService{
                 if(pizzaDAO.queryPizzaInfo(pizzaEntity.getP_id()).size() == 1 &&
                         pizzaTypeDAO.query(pizzaTypeEntity.getP_name()).size() == 1 ){
                     result.put("errorCode", 0);
-                    result.put("p_id", pizzaWithResEntity.getP_id());
-                    result.put("p_name", pizzaWithResEntity.getP_name());
-                    result.put("resource", pizzaWithResEntity.getResource());
+                    result.put("successInsert", pizzaWithResEntity);
                 }else{
                     result.put("errorCode", 2);
                     result.put("errorMsg", "System Error : Insert Error");

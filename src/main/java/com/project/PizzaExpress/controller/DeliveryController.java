@@ -2,6 +2,8 @@ package com.project.PizzaExpress.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
+import com.project.PizzaExpress.service.deliverymanManage.join.CreateNewDeliverymanServiceImpl;
+import com.project.PizzaExpress.service.deliverymanManage.join.ICreateNewDeliverymanService;
 import com.project.PizzaExpress.service.deliverymanManage.update.IUpdateDeliverymanInfoService;
 import com.project.PizzaExpress.service.deliverymanManage.update.UpdateDeliManImpl;
 import com.project.PizzaExpress.service.deliverymanManage.view.IViewDeliverymanInfoService;
@@ -20,6 +22,8 @@ public class DeliveryController {
     private IUpdateDeliverymanInfoService updateDeliverymanInfoService = new UpdateDeliManImpl();
     @Resource
     private IViewDeliverymanInfoService viewDeliverymanInfoService = new ViewDeliverymanInfoServiceImpl();
+    @Resource
+    private ICreateNewDeliverymanService createNewDeliverymanService = new CreateNewDeliverymanServiceImpl();
 
     @RequestMapping("/locate")
     public String locate(HttpSession session, @RequestBody String info) {
@@ -52,11 +56,10 @@ public class DeliveryController {
         return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryManByPage(pno, pageSize));
     }
 
-    //增加配送员信息TODO
+    //增加配送员信息
     @RequestMapping("/add")
     public String addDeliverMan(@RequestParam String deliverInfo){
-        DeliverymanEntity deliverymanEntity = DeliverymanEntity.fromJsonString(deliverInfo,false);
-        return null;
+        return JSON.toJSONString(createNewDeliverymanService.insertDeliveryman(deliverInfo));
     }
 
     //分页显示所有当前有订单的配送员信息以及订单信息
