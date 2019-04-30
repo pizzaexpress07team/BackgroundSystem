@@ -6,7 +6,6 @@ import com.project.PizzaExpress.entity.PizzaWithResEntity;
 import java.util.List;
 
 public interface IViewMenuInfoService {
-
     String displayMenu();
     JSONObject totalDisplay();
     JSONObject getItemWithResByNameLike(String p_name);
