@@ -45,4 +45,7 @@ public interface DeliverymanDAO {
 
     @Select("SELECT COUNT(*) FROM deliveryman")
     String queryDelimanSize();
+
+    @Update("update deliveryman set state = #{state} where d_id = #{d_id}")
+    int updateDelivermanState(String d_id, Integer state);
 }

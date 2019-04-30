@@ -66,6 +66,7 @@ public class PayOrderServiceImpl implements IPayOrderService{
                     List<DeliverymanEntity> dms = deliverymanDAO.queryDeliverymansByFid(order.getF_id());
                     int index = (int)(Math.random() * dms.size());
                     DeliverymanEntity dm = dms.get(index);
+                    deliverymanDAO.updateDelivermanState(dm.getD_id(),1); //给订单分配配送员 配送员可有多个订单 一旦有订单的配送员state就是1
                     orderDAO.updateDid(o_id,dm.getD_id());
                     result.put("errorCode", 0);
                     result.put("o_id", o_id);
