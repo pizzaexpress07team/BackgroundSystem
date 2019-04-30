@@ -56,9 +56,8 @@ public class MenuInfoController {
 
     //根据披萨id 模糊查询披萨信息（带原料）
     @RequestMapping("/getByIdLike")
-    public String getItemWithResByIdLike(@RequestParam String p_name){
-        //TODO
-        return null;
+    public String getItemWithResByIdLike(@RequestParam String p_id){
+        return JSON.toJSONString(menuInfoService.getItemWithResByIdLike(p_id));
     }
 
     //根据披萨id 精准查询披萨信息（带原料）

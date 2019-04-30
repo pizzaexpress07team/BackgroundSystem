@@ -79,7 +79,18 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
     @Override
     public JSONObject getItemWithResByNameLike(String p_name){
         JSONObject result = new JSONObject();
-        List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResLike("%" + p_name + "%");
+        List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResByNameLike("%" + p_name + "%");
+        int total = query.size();
+        result.put("errorCode",0);
+        result.put("list",query);
+        result.put("total",total);
+        return result;
+    }
+
+    @Override
+    public JSONObject getItemWithResByIdLike(String p_id){
+        JSONObject result = new JSONObject();
+        List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResByIdLike("%" + p_id + "%");
         int total = query.size();
         result.put("errorCode",0);
         result.put("list",query);
