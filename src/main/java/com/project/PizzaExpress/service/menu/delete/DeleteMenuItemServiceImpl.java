@@ -27,7 +27,7 @@ public class DeleteMenuItemServiceImpl implements IDeleteMenuItemService{
             pizzaTypeDAO.delete(query.get(0).getP_name());
             pizzaDAO.delete(p_id);
             result.put("errorCode",0);
-            result.put("deletedItem",query);
+            result.put("successDelete",query);
         }
         return result;
     }

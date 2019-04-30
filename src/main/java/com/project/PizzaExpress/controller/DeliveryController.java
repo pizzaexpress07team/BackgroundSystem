@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 import com.project.PizzaExpress.service.deliverymanManage.join.CreateNewDeliverymanServiceImpl;
 import com.project.PizzaExpress.service.deliverymanManage.join.ICreateNewDeliverymanService;
+import com.project.PizzaExpress.service.deliverymanManage.quit.DeleteDeliverymanServiceImpl;
+import com.project.PizzaExpress.service.deliverymanManage.quit.IDeleteDeliverymanService;
 import com.project.PizzaExpress.service.deliverymanManage.update.IUpdateDeliverymanInfoService;
 import com.project.PizzaExpress.service.deliverymanManage.update.UpdateDeliManImpl;
 import com.project.PizzaExpress.service.deliverymanManage.view.IViewDeliverymanInfoService;
@@ -24,6 +26,8 @@ public class DeliveryController {
     private IViewDeliverymanInfoService viewDeliverymanInfoService = new ViewDeliverymanInfoServiceImpl();
     @Resource
     private ICreateNewDeliverymanService createNewDeliverymanService = new CreateNewDeliverymanServiceImpl();
+    @Resource
+    private IDeleteDeliverymanService deleteDeliverymanService = new DeleteDeliverymanServiceImpl();
 
     @RequestMapping("/locate")
     public String locate(HttpSession session, @RequestBody String info) {
@@ -66,6 +70,12 @@ public class DeliveryController {
     @RequestMapping("/modify")
     public String modifyDeliverMan(@RequestParam String deliverInfo){
         return JSON.toJSONString(updateDeliverymanInfoService.modifyDeliveryman(deliverInfo));
+    }
+
+    //删除配送员信息
+    @RequestMapping("/delete")
+    public String deleteDeliverMan(@RequestParam String d_id){
+        return JSON.toJSONString(deleteDeliverymanService.deleteDeliveryman(d_id));
     }
 
     //分页显示所有当前有订单的配送员信息以及订单信息
