@@ -49,7 +49,7 @@ public class DeliveryController {
     }
 
     //根据d_name查找配送员信息（模糊）
-    @RequestMapping("/get")
+    @RequestMapping("/getByNameLike")
     public String getDeliverStatusLike(@RequestParam String d_name) {
         return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByNameLike(d_name));
     }

@@ -42,7 +42,7 @@ public class FactoryResController {
     }
 
     //根据原料名 查询工厂库存信息（精准）
-    @RequestMapping("/getByNameLike")
+    @RequestMapping("/getByName")
     public String getFactoryResByName(@RequestParam String r_name) {
         return JSON.toJSONString(factoryResService.getFactoryResByName(r_name));
     }
