@@ -13,8 +13,9 @@ public interface IViewDeliverymanInfoService {
     JSONObject viewAllInfo();
     JSONObject viewByFactory(String f_id);
 
-    DeliverymanEntity getDeliverStatus(String deliverId);
-    List<DeliverymanEntity> getDeliverStatusLike(String d_name);
+    JSONObject getDelivermanById(String deliverId);
+    JSONObject getDelivermanByIdLike(String deliverId);
+    JSONObject getDeliverStatusLike(String d_name);
 
     JSONObject getAllDeliveryManByPage(Integer pno, Integer pageSize);
     JSONObject getAllDeliveryOrderByPage(Integer pno, Integer pageSize);

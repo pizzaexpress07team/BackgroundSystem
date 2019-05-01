@@ -20,7 +20,16 @@ public interface DeliverymanDAO {
     int update(DeliverymanEntity de);
 
     @Select("select * from deliveryman where d_id = #{d_id}")
-    List<DeliverymanEntity> query(String d_id);
+    List<DeliverymanEntity> queryById(String d_id);
+
+    @Select("select * from deliveryman where d_id like #{d_id}")
+    List<DeliverymanEntity> queryByIdLike(String d_id);
+
+    @Select("select * from deliveryman where d_name = #{d_name}")
+    List<DeliverymanEntity> queryByName(String d_name);
+
+    @Select("select * from deliveryman where d_name like #{d_name}")
+    List<DeliverymanEntity> queryByNameLike(String d_name);
 
     @Select("select * from deliveryman")
     List<DeliverymanEntity> queryAll();
@@ -33,9 +42,6 @@ public interface DeliverymanDAO {
 
     @Select("select * from deliveryman limit ${startIndex},${pageSize}")
     List<DeliverymanEntity> queryAllByPage(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
-
-    @Select("select * from deliveryman where d_name like #{d_name}")
-    List<DeliverymanEntity> queryLike(String d_name);
 
     @Select("SELECT * FROM deliveryman JOIN `order` ON deliveryman.d_id = order.d_id limit ${startIndex},${pageSize}")
     List<DeliManWithOrderEntity> queryDelimanOrderByPage(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);

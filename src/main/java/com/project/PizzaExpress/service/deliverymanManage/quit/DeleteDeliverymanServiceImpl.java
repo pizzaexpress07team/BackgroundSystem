@@ -17,7 +17,7 @@ public class DeleteDeliverymanServiceImpl implements IDeleteDeliverymanService {
 
     public JSONObject deleteDeliveryman(String d_id){
         JSONObject result = new JSONObject();
-        List<DeliverymanEntity> query = deliverymanDAO.query(d_id);
+        List<DeliverymanEntity> query = deliverymanDAO.queryById(d_id);
         if(ObjectUtils.isEmpty(query)){
             result.put("errorCode", 1);
             result.put("errorMsg", "No such deliveryman item");

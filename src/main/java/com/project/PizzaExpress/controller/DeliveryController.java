@@ -36,13 +36,19 @@ public class DeliveryController {
         return re;
     }
 
-    //精准查找
-    @RequestMapping("/status")
-    public String getDeliverStatus(@RequestParam String deliverId) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatus(deliverId));
+    //根据d_id查找配送员信息（精准）
+    @RequestMapping("/getById")
+    public String getDelivermanById(@RequestParam String deliverId) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanById(deliverId));
     }
 
-    //模糊查找
+    //根据d_id查找配送员信息（模糊）
+    @RequestMapping("/getByIdLike")
+    public String getDelivermanByIdLike(@RequestParam String deliverId) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByIdLike(deliverId));
+    }
+
+    //根据d_name查找配送员信息（模糊）
     @RequestMapping("/get")
     public String getDeliverStatusLike(@RequestParam String d_name) {
         return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatusLike(d_name));

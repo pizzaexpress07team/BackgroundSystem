@@ -52,16 +52,10 @@ public class FactoryResController {
     public String updateFactoryResNum(@RequestParam String f_id,@RequestParam String r_id,@RequestParam int num) {
         return JSON.toJSONString(factoryResService.updateFactoryResNum(f_id,r_id,num));
     }
-    
-    //修改工厂库存信息
 
     //增加工厂库存信息条目
     @RequestMapping("/addFacResItem")
     public String addFactoryResItem(@RequestParam String FacResInfo) {
         return JSON.toJSONString(factoryResService.addFactoryResItem(FacResInfo));
     }
-
-    //删除工厂库存信息条目
-
-
 }

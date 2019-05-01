@@ -59,7 +59,7 @@ public class CreateNewDeliverymanServiceImpl implements ICreateNewDeliverymanSer
                     String d_id = UUID.randomUUID().toString().replaceAll("-", "");
                     de.setD_id(d_id);
                     deliverymanDAO.insert(de);
-                    List<DeliverymanEntity> results = deliverymanDAO.query(d_id);
+                    List<DeliverymanEntity> results = deliverymanDAO.queryById(d_id);
                     if (results.size() == 1)
                     {
                         result.put("errorCode", 0);
@@ -98,13 +98,13 @@ public class CreateNewDeliverymanServiceImpl implements ICreateNewDeliverymanSer
             if(deliverymanEntity == null){
                 result.put("errorCode", 4);
                 result.put("errorMsg", "Lack of necessary deliveryman information");
-            } else if(deliverymanDAO.query(deliverymanEntity.getD_id()).size() != 0){
+            } else if(deliverymanDAO.queryById(deliverymanEntity.getD_id()).size() != 0){
                 result.put("errorCode", 1);
                 result.put("errorMsg", "deliveryman item exists");
             }else{
                 deliverymanEntity.setState(0); //配送员的初始状态应设为0 表示还没接订单
                 deliverymanDAO.insert(deliverymanEntity);
-                List<DeliverymanEntity> query = deliverymanDAO.query(deliverymanEntity.getD_id());
+                List<DeliverymanEntity> query = deliverymanDAO.queryById(deliverymanEntity.getD_id());
                 if (query.size() == 1)
                 {
                     result.put("errorCode", 0);

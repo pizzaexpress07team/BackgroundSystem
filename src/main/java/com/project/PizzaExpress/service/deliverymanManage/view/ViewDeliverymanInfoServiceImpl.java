@@ -19,7 +19,7 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     @Override
     public JSONObject viewInfo(String d_id) {
         JSONObject result = new JSONObject();
-        List<DeliverymanEntity> dmList = deliverymanDAO.query(d_id);
+        List<DeliverymanEntity> dmList = deliverymanDAO.queryById(d_id);
         if (dmList == null || dmList.size() < 1)
         {
             result.put("errorCode", 2);
@@ -82,16 +82,45 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     }
 
     @Override
-    public DeliverymanEntity getDeliverStatus(String deliverId) {
-        List<DeliverymanEntity> query = deliverymanDAO.query(deliverId);
-        if(ObjectUtils.isEmpty(query))return null;
-        return query.get(0);
+    public JSONObject getDelivermanById(String deliverId) {
+        JSONObject result = new JSONObject();
+        List<DeliverymanEntity> query = deliverymanDAO.queryById(deliverId);
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such deliverid");
+        }else{
+            result.put("errorCode",0);
+            result.put("successQuery",query.get(0));
+        }
+        return result;
     }
 
     @Override
-    public List<DeliverymanEntity> getDeliverStatusLike(String d_name){
-        List<DeliverymanEntity> query = deliverymanDAO.queryLike("%" + d_name + "%");
-        return query;
+    public JSONObject getDelivermanByIdLike(String deliverId){
+        JSONObject result = new JSONObject();
+        List<DeliverymanEntity> query = deliverymanDAO.queryByIdLike("%" + deliverId + "%");
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such deliverid");
+        }else{
+            result.put("errorCode",0);
+            result.put("list",query);
+        }
+        return result;
+    }
+
+    @Override
+    public JSONObject getDeliverStatusLike(String d_name){
+        JSONObject result = new JSONObject();
+        List<DeliverymanEntity> query = deliverymanDAO.queryByNameLike("%" + d_name + "%");
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such deliver Name");
+        }else{
+            result.put("errorCode",0);
+            result.put("list",query);
+        }
+        return result;
     }
 
     @Override

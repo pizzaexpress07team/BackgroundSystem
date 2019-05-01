@@ -57,7 +57,7 @@ public class UpdateDeliManImpl implements IUpdateDeliverymanInfoService {
             if(deliverymanEntity==null){
                 result.put("errorCode", 4);
                 result.put("errorMsg", "Lack of necessary deliveryman information");
-            }else if(deliverymanDAO.query(deliverymanEntity.getD_id()).size() == 0){
+            }else if(deliverymanDAO.queryById(deliverymanEntity.getD_id()).size() == 0){
                 result.put("errorCode", 1);
                 result.put("errorMsg", "deliveryman item not exists");
             }else{
