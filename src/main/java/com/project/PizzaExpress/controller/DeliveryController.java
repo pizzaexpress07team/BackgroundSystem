@@ -51,7 +51,7 @@ public class DeliveryController {
     //根据d_name查找配送员信息（模糊）
     @RequestMapping("/get")
     public String getDeliverStatusLike(@RequestParam String d_name) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDeliverStatusLike(d_name));
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByNameLike(d_name));
     }
 
     //显示所有配送员信息
@@ -66,16 +66,16 @@ public class DeliveryController {
         return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryManByPage(pno, pageSize));
     }
 
+    //分页显示所有当前有订单的配送员信息以及订单信息
+    @RequestMapping("/listOrder")
+    public String getAllDeliverOrderByPage(@RequestParam Integer pno, @RequestParam Integer pageSize){
+        return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryOrderByPage(pno,pageSize));
+    }
+
     //增加配送员信息
     @RequestMapping("/add")
     public String addDeliverMan(@RequestParam String deliverInfo){
         return JSON.toJSONString(createNewDeliverymanService.insertDeliveryman(deliverInfo));
-    }
-
-    //修改配送员信息
-    @RequestMapping("/modify")
-    public String modifyDeliverMan(@RequestParam String deliverInfo){
-        return JSON.toJSONString(updateDeliverymanInfoService.modifyDeliveryman(deliverInfo));
     }
 
     //删除配送员信息
@@ -84,9 +84,9 @@ public class DeliveryController {
         return JSON.toJSONString(deleteDeliverymanService.deleteDeliveryman(d_id));
     }
 
-    //分页显示所有当前有订单的配送员信息以及订单信息
-    @RequestMapping("/listOrder")
-    public String getAllDeliverOrderByPage(@RequestParam Integer pno, @RequestParam Integer pageSize){
-        return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryOrderByPage(pno,pageSize));
+    //修改配送员信息
+    @RequestMapping("/modify")
+    public String modifyDeliverMan(@RequestParam String deliverInfo){
+        return JSON.toJSONString(updateDeliverymanInfoService.modifyDeliveryman(deliverInfo));
     }
 }

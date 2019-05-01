@@ -105,12 +105,13 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
         }else{
             result.put("errorCode",0);
             result.put("list",query);
+            result.put("total",query.size());
         }
         return result;
     }
 
     @Override
-    public JSONObject getDeliverStatusLike(String d_name){
+    public JSONObject getDelivermanByNameLike(String d_name){
         JSONObject result = new JSONObject();
         List<DeliverymanEntity> query = deliverymanDAO.queryByNameLike("%" + d_name + "%");
         if(ObjectUtils.isEmpty(query)){
@@ -119,16 +120,18 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
         }else{
             result.put("errorCode",0);
             result.put("list",query);
+            result.put("total",query.size());
         }
         return result;
     }
 
     @Override
     public JSONObject getAllDeliveryManByPage(Integer pno, Integer pageSize){
+        JSONObject result = new JSONObject();
         int startIndex = (pno - 1) * pageSize;
         List<DeliverymanEntity> list = deliverymanDAO.queryAllByPage(startIndex, pageSize);
         String total = deliverymanDAO.queryDelimanSize();
-        JSONObject result = new JSONObject();
+        result.put("errorCode",0);
         result.put("list",list);
         result.put("total",total);
         return result;
@@ -136,10 +139,11 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
 
     @Override
     public JSONObject getAllDeliveryOrderByPage(Integer pno, Integer pageSize){
+        JSONObject result = new JSONObject();
         int startIndex = (pno - 1) * pageSize;
         List<DeliManWithOrderEntity> list = deliverymanDAO.queryDelimanOrderByPage(startIndex, pageSize);
         String total = deliverymanDAO.queryDelimanOrderSize();
-        JSONObject result = new JSONObject();
+        result.put("errorCode",0);
         result.put("list",list);
         result.put("total",total);
         return result;

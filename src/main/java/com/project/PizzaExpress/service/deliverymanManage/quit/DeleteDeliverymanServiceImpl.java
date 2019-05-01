@@ -27,8 +27,13 @@ public class DeleteDeliverymanServiceImpl implements IDeleteDeliverymanService {
                 result.put("errorMsg", "this deliveryman have order");
             }else {
                 deliverymanDAO.delete(d_id);
-                result.put("errorCode", 0);
-                result.put("successDelete", query);
+                if(deliverymanDAO.queryById(d_id).size() == 0) {
+                    result.put("errorCode", 0);
+                    result.put("successDelete", query);
+                }else{
+                    result.put("errorCode", 3);
+                    result.put("errorMsg", "Delete error");
+                }
             }
         }
         return result;
