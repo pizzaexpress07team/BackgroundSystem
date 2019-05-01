@@ -15,6 +15,7 @@ public interface IFactoryResService {
     JSONObject getFactoryResByName(String r_name);
 
     //增
+    JSONObject addFactoryResItem(String FacResInfo);
 
     //删
 

@@ -1,5 +1,8 @@
 package com.project.PizzaExpress.entity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 public class FactoryResourceEntity {
 
     private String f_id;
@@ -39,5 +42,18 @@ public class FactoryResourceEntity {
             return true;
         }
         return false;
+    }
+
+    public static FactoryResourceEntity fromJsonString(String FactoryResourceInfo){
+        FactoryResourceEntity factoryResourceEntity = new FactoryResourceEntity();
+        JSONObject jsonObject = JSON.parseObject(FactoryResourceInfo);
+        try {
+            factoryResourceEntity.setF_id(jsonObject.getString("f_id").toString());
+            factoryResourceEntity.setR_id(jsonObject.getString("r_id").toString());
+            factoryResourceEntity.setR_num(jsonObject.getInteger("r_num"));
+        }catch (NullPointerException e){
+            return null;
+        }
+        return factoryResourceEntity;
     }
 }

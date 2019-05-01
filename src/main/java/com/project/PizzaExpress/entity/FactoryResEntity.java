@@ -1,12 +1,15 @@
 package com.project.PizzaExpress.entity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.math.BigDecimal;
 
 public class FactoryResEntity {
 
     private String f_id;
     private String r_id;
-    private BigDecimal r_num;
+    private int r_num;
     private String r_name;
     private String r_company;
     private String r_person;
@@ -21,9 +24,9 @@ public class FactoryResEntity {
 
     public void setR_id(String r_id) { this.r_id = r_id; }
 
-    public BigDecimal getR_num() { return r_num; }
+    public int getR_num() { return r_num; }
 
-    public void setR_num(BigDecimal r_num) { this.r_num = r_num; }
+    public void setR_num(int r_num) { this.r_num = r_num; }
 
     public String getR_name() { return r_name; }
 
@@ -40,4 +43,21 @@ public class FactoryResEntity {
     public String getR_type() { return r_type; }
 
     public void setR_type(String r_type) { this.r_type = r_type; }
+
+    public static FactoryResEntity fromJsonString(String FactoryResInfo){
+        FactoryResEntity factoryResEntity = new FactoryResEntity();
+        JSONObject jsonObject = JSON.parseObject(FactoryResInfo);
+        try {
+            factoryResEntity.setF_id(jsonObject.getString("f_id").toString());
+            factoryResEntity.setR_id(jsonObject.getString("r_id").toString());
+            factoryResEntity.setR_num(jsonObject.getInteger("r_num"));
+            factoryResEntity.setR_name(jsonObject.getString("r_name").toString());
+            factoryResEntity.setR_company(jsonObject.getString("r_company").toString());
+            factoryResEntity.setR_person(jsonObject.getString("r_person").toString());
+            factoryResEntity.setR_type(jsonObject.getString("r_type").toString());
+        }catch (NullPointerException e){
+            return null;
+        }
+        return factoryResEntity;
+    }
 }

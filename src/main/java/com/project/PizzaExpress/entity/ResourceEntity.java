@@ -1,5 +1,8 @@
 package com.project.PizzaExpress.entity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 public class ResourceEntity {
 
     private String r_id;
@@ -48,5 +51,18 @@ public class ResourceEntity {
         this.r_type = r_type;
     }
 
-
+    public static ResourceEntity fromJsonString(String ResourceInfo){
+        ResourceEntity resourceEntity = new ResourceEntity();
+        JSONObject jsonObject = JSON.parseObject(ResourceInfo);
+        try {
+            resourceEntity.setR_id(jsonObject.getString("r_id").toString());
+            resourceEntity.setR_name(jsonObject.getString("r_name").toString());
+            resourceEntity.setR_company(jsonObject.getString("r_company").toString());
+            resourceEntity.setR_person(jsonObject.getString("r_person").toString());
+            resourceEntity.setR_type(jsonObject.getString("r_type").toString());
+        }catch (NullPointerException e){
+            return null;
+        }
+        return resourceEntity;
+    }
 }

@@ -54,6 +54,10 @@ public class FactoryResController {
     }
 
     //增加库存信息
+    @RequestMapping("/addFacResItem")
+    public String addFactoryResItem(@RequestParam String FacResInfo) {
+        return JSON.toJSONString(factoryResService.addFactoryResItem(FacResInfo));
+    }
 
     //删除库存信息
 
