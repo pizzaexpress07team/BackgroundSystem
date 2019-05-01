@@ -20,5 +20,5 @@ public interface IFactoryResService {
     //删
 
     //改
-    JSONObject addFactoryResNum(String f_id,String r_id,int num);
+    JSONObject updateFactoryResNum(String f_id,String r_id,int num);
 }

@@ -69,7 +69,7 @@ public class FactoryResServiceImpl implements IFactoryResService{
     }
 
     //改
-    public JSONObject addFactoryResNum(String f_id,String r_id,int num){
+    public JSONObject updateFactoryResNum(String f_id,String r_id,int num){
         JSONObject result = new JSONObject();
         factoryResourceDAO.updateResourceNum(f_id,r_id,num);
         List<FactoryResEntity> query = factoryResDAO.queryByFidAndRid(f_id,r_id);
