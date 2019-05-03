@@ -15,6 +15,12 @@ public interface FactoryResDAO {
     @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id")
     List<FactoryResEntity> queryAll();
 
+    @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id limit ${startIndex},${pageSize}")
+    List<FactoryResEntity> queryAllByPage(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    @Select("SELECT COUNT(*) FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id")
+    String queryFactoryResSize();
+
     @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where f_id like #{f_id}")
     List<FactoryResEntity> queryLike(@Param("f_id")String f_id);
 

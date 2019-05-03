@@ -18,9 +18,15 @@ public class FactoryResController {
     private IFactoryResService factoryResService = new FactoryResServiceImpl();
 
     //查询所有工厂库存信息
-    @RequestMapping("/list")
+    @RequestMapping("/oldList")
     public String getAllFactoryRes() {
         return JSON.toJSONString(factoryResService.getAllFactoryRes());
+    }
+
+    //查询所有工厂库存信息（分页）
+    @RequestMapping("/list")
+    public String getAllFactoryResByPage(@RequestParam Integer pno, @RequestParam Integer pageSize) {
+        return JSON.toJSONString(factoryResService.getAllFactoryResByPage(pno, pageSize));
     }
 
     //根据工厂id 查询工厂库存信息（模糊）

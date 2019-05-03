@@ -55,7 +55,7 @@ public class DeliveryController {
     }
 
     //显示所有配送员信息
-    @RequestMapping("/OldList")
+    @RequestMapping("/oldList")
     public String getAllDeliver() {
         return JSON.toJSONString(viewDeliverymanInfoService.viewAllInfo());
     }

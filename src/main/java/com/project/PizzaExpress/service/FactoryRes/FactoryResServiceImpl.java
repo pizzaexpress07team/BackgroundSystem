@@ -24,8 +24,25 @@ public class FactoryResServiceImpl implements IFactoryResService{
 
     //查
     @Override
-    public List<FactoryResEntity> getAllFactoryRes() {
-        return factoryResDAO.queryAll();
+    public JSONObject getAllFactoryRes() {
+        JSONObject result = new JSONObject();
+        List<FactoryResEntity> query =  factoryResDAO.queryAll();
+        result.put("errorCode",0);
+        result.put("list",query);
+        result.put("total",query.size());
+        return result;
+    }
+
+    @Override
+    public JSONObject getAllFactoryResByPage(Integer pno, Integer pageSize){
+        JSONObject result = new JSONObject();
+        int startIndex = (pno - 1) * pageSize;
+        List<FactoryResEntity> query = factoryResDAO.queryAllByPage(startIndex,pageSize);
+        String total = factoryResDAO.queryFactoryResSize();
+        result.put("errorCode",0);
+        result.put("list",query);
+        result.put("total",total);
+        return result;
     }
 
     @Override

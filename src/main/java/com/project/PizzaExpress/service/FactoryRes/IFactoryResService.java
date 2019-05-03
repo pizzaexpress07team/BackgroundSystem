@@ -1,6 +1,7 @@
 package com.project.PizzaExpress.service.FactoryRes;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.project.PizzaExpress.entity.FactoryResEntity;
 
 import java.awt.*;
@@ -8,7 +9,8 @@ import java.util.List;
 
 public interface IFactoryResService {
     //查
-    List<FactoryResEntity> getAllFactoryRes();
+    JSONObject getAllFactoryRes();
+    JSONObject getAllFactoryResByPage(Integer pno, Integer pageSize);
     JSONObject getFactoryResByIdLike(String f_id);
     JSONObject getFactoryResById(String f_id);
     JSONObject getFactoryResByNameLike(String r_name);
