@@ -66,6 +66,12 @@ public class DeliveryController {
         return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByIdLike(d_id));
     }
 
+    //根据d_id查找当前有订单的配送员信息以及配送员当前的订单（精准）
+    @RequestMapping("/getDeliOrderById")
+    public String getDeliverOrderById(@RequestParam String d_id) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDeliverOrderById(d_id));
+    }
+
     //根据d_name查找配送员信息（模糊）
     @RequestMapping("/getByNameLike")
     public String getDelivermanByNameLike(@RequestParam String d_name) {

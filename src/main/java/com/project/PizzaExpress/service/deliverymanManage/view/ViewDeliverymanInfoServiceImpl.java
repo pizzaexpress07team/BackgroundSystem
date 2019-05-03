@@ -82,9 +82,9 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     }
 
     @Override
-    public JSONObject getDelivermanById(String deliverId) {
+    public JSONObject getDelivermanById(String d_id) {
         JSONObject result = new JSONObject();
-        List<DeliverymanEntity> query = deliverymanDAO.queryById(deliverId);
+        List<DeliverymanEntity> query = deliverymanDAO.queryById(d_id);
         if(ObjectUtils.isEmpty(query)){
             result.put("errorCode",1);
             result.put("errorMsg","no such deliverid");
@@ -96,9 +96,9 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     }
 
     @Override
-    public JSONObject getDelivermanByIdLike(String deliverId){
+    public JSONObject getDelivermanByIdLike(String d_id){
         JSONObject result = new JSONObject();
-        List<DeliverymanEntity> query = deliverymanDAO.queryByIdLike("%" + deliverId + "%");
+        List<DeliverymanEntity> query = deliverymanDAO.queryByIdLike("%" + d_id + "%");
         if(ObjectUtils.isEmpty(query)){
             result.put("errorCode",1);
             result.put("errorMsg","no such deliverid");
@@ -106,6 +106,27 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
             result.put("errorCode",0);
             result.put("list",query);
             result.put("total",query.size());
+        }
+        return result;
+    }
+
+    @Override
+    public JSONObject getDeliverOrderById(String d_id){
+        JSONObject result = new JSONObject();
+        List<DeliManWithOrderEntity> list = deliverymanDAO.queryDeliverOrderById(d_id);
+        List<DeliverymanEntity> query = deliverymanDAO.queryById(d_id);
+        if(ObjectUtils.isEmpty(list)){
+            if(ObjectUtils.isEmpty(query)) {
+                result.put("errorCode", 1);
+                result.put("errorMsg", "no such deliver ID");
+            }else {
+                result.put("errorCode", 2);
+                result.put("errorMsg", "this deliver ID have no order");
+            }
+        }else{
+            result.put("errorCode",0);
+            result.put("list",list);
+            result.put("total",list.size());
         }
         return result;
     }
