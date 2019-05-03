@@ -16,7 +16,7 @@ public interface IFactoryResService {
     JSONObject getFactoryResByRNameLike(String r_name);
     JSONObject getFactoryResByRName(String r_name);
     JSONObject getFactoryResByRId(String r_id);
-
+    JSONObject getFactoryResByFIdAndRId(String f_id,String r_id);
     //增
     JSONObject addFactoryResItem(String FacResInfo);
 

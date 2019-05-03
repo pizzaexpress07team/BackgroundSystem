@@ -121,13 +121,27 @@ public class FactoryResServiceImpl implements IFactoryResService{
         return result;
     }
 
+    @Override
+    public JSONObject getFactoryResByFIdAndRId(String f_id,String r_id){
+        JSONObject result = new JSONObject();
+        List<FactoryResEntity> query = factoryResDAO.queryByFidAndRid(f_id,r_id);
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such data");
+        }else{
+            result.put("errorCode",0);
+            result.put("SuccessQuery",query.get(0));
+        }
+        return result;
+    }
+
     //改
     public JSONObject updateFactoryResNum(String f_id,String r_id,int num){
         JSONObject result = new JSONObject();
         factoryResourceDAO.updateResourceNum(f_id,r_id,num);
         List<FactoryResEntity> query = factoryResDAO.queryByFidAndRid(f_id,r_id);
         result.put("errorCode",0);
-        result.put("SuccessAddNum",query.get(0));
+        result.put("SuccessUpdate",query.get(0));
         return result;
     }
 

@@ -60,6 +60,10 @@ public class FactoryResController {
     }
 
     //根据工厂id和原料id 查询工厂库存信息（精准）
+    @RequestMapping("/getByFIdAndRId")
+    public String getFactoryResByFIdAndRId(@RequestParam String f_id,@RequestParam String r_id) {
+        return JSON.toJSONString(factoryResService.getFactoryResByFIdAndRId(f_id, r_id));
+    }
 
     //修改工厂库存数量
     @RequestMapping("/updateResNum")
