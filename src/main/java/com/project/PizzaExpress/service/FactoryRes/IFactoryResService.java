@@ -11,10 +11,11 @@ public interface IFactoryResService {
     //查
     JSONObject getAllFactoryRes();
     JSONObject getAllFactoryResByPage(Integer pno, Integer pageSize);
-    JSONObject getFactoryResByIdLike(String f_id);
-    JSONObject getFactoryResById(String f_id);
-    JSONObject getFactoryResByNameLike(String r_name);
-    JSONObject getFactoryResByName(String r_name);
+    JSONObject getFactoryResByFIdLike(String f_id);
+    JSONObject getFactoryResByFId(String f_id);
+    JSONObject getFactoryResByRNameLike(String r_name);
+    JSONObject getFactoryResByRName(String r_name);
+    JSONObject getFactoryResByRId(String r_id);
 
     //增
     JSONObject addFactoryResItem(String FacResInfo);

@@ -31,28 +31,35 @@ public class FactoryResController {
 
     //根据工厂id 查询工厂库存信息（精准）
     @RequestMapping("/getByFId")
-    public String getFactoryResById(@RequestParam String f_id) {
-        return JSON.toJSONString(factoryResService.getFactoryResById(f_id));
+    public String getFactoryResByFId(@RequestParam String f_id) {
+        return JSON.toJSONString(factoryResService.getFactoryResByFId(f_id));
     }
 
     //根据工厂id 查询工厂库存信息（模糊）
     @RequestMapping("/getByFIdLike")
-    public String getFactoryResByIdLike(@RequestParam String f_id) {
-        return JSON.toJSONString(factoryResService.getFactoryResByIdLike(f_id));
+    public String getFactoryResByFIdLike(@RequestParam String f_id) {
+        return JSON.toJSONString(factoryResService.getFactoryResByFIdLike(f_id));
     }
 
     //根据原料名 查询工厂库存信息（精准）
     @RequestMapping("/getByRName")
-    public String getFactoryResByName(@RequestParam String r_name) {
-        return JSON.toJSONString(factoryResService.getFactoryResByName(r_name));
+    public String getFactoryResByRName(@RequestParam String r_name) {
+        return JSON.toJSONString(factoryResService.getFactoryResByRName(r_name));
     }
 
     //根据原料名 查询工厂库存信息（模糊）
     @RequestMapping("/getByRNameLike")
-    public String getFactoryResByNameLike(@RequestParam String r_name) {
-        return JSON.toJSONString(factoryResService.getFactoryResByNameLike(r_name));
+    public String getFactoryResByRNameLike(@RequestParam String r_name) {
+        return JSON.toJSONString(factoryResService.getFactoryResByRNameLike(r_name));
     }
 
+    //根据原料id 查询工厂库存信息（精准）
+    @RequestMapping("/getByRId")
+    public String getFactoryResByRId(@RequestParam String r_id) {
+        return JSON.toJSONString(factoryResService.getFactoryResByRId(r_id));
+    }
+
+    //根据工厂id和原料id 查询工厂库存信息（精准）
 
     //修改工厂库存数量
     @RequestMapping("/updateResNum")

@@ -47,7 +47,7 @@ public class FactoryResServiceImpl implements IFactoryResService{
     }
 
     @Override
-    public JSONObject getFactoryResByIdLike(String f_id){
+    public JSONObject getFactoryResByFIdLike(String f_id){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.queryLike("%" + f_id + "%");
         if(ObjectUtils.isEmpty(query)){
@@ -62,7 +62,7 @@ public class FactoryResServiceImpl implements IFactoryResService{
     }
 
     @Override
-    public JSONObject getFactoryResById(String f_id){
+    public JSONObject getFactoryResByFId(String f_id){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.query(f_id);
         if(ObjectUtils.isEmpty(query)){
@@ -77,7 +77,7 @@ public class FactoryResServiceImpl implements IFactoryResService{
     }
 
     @Override
-    public JSONObject getFactoryResByNameLike(String r_name){
+    public JSONObject getFactoryResByRNameLike(String r_name){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.queryByNameLike("%" + r_name + "%");
         if(ObjectUtils.isEmpty(query)){
@@ -92,12 +92,27 @@ public class FactoryResServiceImpl implements IFactoryResService{
     }
 
     @Override
-    public JSONObject getFactoryResByName(String r_name){
+    public JSONObject getFactoryResByRName(String r_name){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.queryByName(r_name);
         if(ObjectUtils.isEmpty(query)){
             result.put("errorCode",1);
             result.put("errorMsg","no such resource name");
+        }else{
+            result.put("errorCode",0);
+            result.put("SuccessQuery",query);
+            result.put("total",query.size());
+        }
+        return result;
+    }
+
+    @Override
+    public JSONObject getFactoryResByRId(String r_id){
+        JSONObject result = new JSONObject();
+        List<FactoryResEntity> query = factoryResDAO.queryByRId(r_id);
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such resource ID");
         }else{
             result.put("errorCode",0);
             result.put("SuccessQuery",query);
