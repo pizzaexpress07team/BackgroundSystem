@@ -38,14 +38,14 @@ public class DeliveryController {
 
     //根据d_id查找配送员信息（精准）
     @RequestMapping("/getById")
-    public String getDelivermanById(@RequestParam String deliverId) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanById(deliverId));
+    public String getDelivermanById(@RequestParam String d_id) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanById(d_id));
     }
 
     //根据d_id查找配送员信息（模糊）
     @RequestMapping("/getByIdLike")
-    public String getDelivermanByIdLike(@RequestParam String deliverId) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByIdLike(deliverId));
+    public String getDelivermanByIdLike(@RequestParam String d_id) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByIdLike(d_id));
     }
 
     //根据d_name查找配送员信息（模糊）

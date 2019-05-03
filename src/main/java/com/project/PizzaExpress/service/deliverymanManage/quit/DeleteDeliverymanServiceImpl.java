@@ -29,10 +29,10 @@ public class DeleteDeliverymanServiceImpl implements IDeleteDeliverymanService {
                 deliverymanDAO.delete(d_id);
                 if(deliverymanDAO.queryById(d_id).size() == 0) {
                     result.put("errorCode", 0);
-                    result.put("successDelete", query);
+                    result.put("successDelete", query.get(0));
                 }else{
                     result.put("errorCode", 3);
-                    result.put("errorMsg", "Delete error");
+                    result.put("errorMsg", "System Error : Delete error");
                 }
             }
         }

@@ -50,12 +50,12 @@ public class UpdateDeliManImpl implements IUpdateDeliverymanInfoService {
     public JSONObject modifyDeliveryman(String deliverInfo){
         JSONObject result = new JSONObject();
         if (deliverInfo == null || deliverInfo.equals("")) {
-            result.put("errorCode", 3);
+            result.put("errorCode", 2);
             result.put("errorMsg", "No deliveryman information");
         }else{
             DeliverymanEntity deliverymanEntity = DeliverymanEntity.fromJsonString(deliverInfo,true);
             if(deliverymanEntity==null){
-                result.put("errorCode", 4);
+                result.put("errorCode", 3);
                 result.put("errorMsg", "Lack of necessary deliveryman information");
             }else if(deliverymanDAO.queryById(deliverymanEntity.getD_id()).size() == 0){
                 result.put("errorCode", 1);
