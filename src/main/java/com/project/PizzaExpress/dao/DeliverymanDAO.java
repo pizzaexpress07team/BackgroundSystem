@@ -10,7 +10,7 @@ import java.util.List;
 public interface DeliverymanDAO {
 
     @Insert("insert into deliveryman(d_id, d_name, d_phone, f_id, uid, state) " +
-            "values(#{d_id}, #{d_name}, #{d_phone}, #{f_id}, #{uid}), #{state})")
+            "values(#{d_id}, #{d_name}, #{d_phone}, #{f_id}, #{uid}, #{state})")
     void insert(DeliverymanEntity de);
 
     @Delete("delete from deliveryman where d_id = #{d_id}")
