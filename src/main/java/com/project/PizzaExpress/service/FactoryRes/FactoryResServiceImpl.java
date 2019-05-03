@@ -9,6 +9,7 @@ import com.project.PizzaExpress.entity.FactoryResourceEntity;
 import com.project.PizzaExpress.entity.ResourceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -49,9 +50,14 @@ public class FactoryResServiceImpl implements IFactoryResService{
     public JSONObject getFactoryResByIdLike(String f_id){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.queryLike("%" + f_id + "%");
-        result.put("errorCode",0);
-        result.put("SuccessQuery",query);
-        result.put("total",query.size());
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such factory ID");
+        }else{
+            result.put("errorCode",0);
+            result.put("SuccessQuery",query);
+            result.put("total",query.size());
+        }
         return result;
     }
 
@@ -59,9 +65,14 @@ public class FactoryResServiceImpl implements IFactoryResService{
     public JSONObject getFactoryResById(String f_id){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.query(f_id);
-        result.put("errorCode",0);
-        result.put("SuccessQuery",query);
-        result.put("total",query.size());
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such factory ID");
+        }else{
+            result.put("errorCode",0);
+            result.put("SuccessQuery",query);
+            result.put("total",query.size());
+        }
         return result;
     }
 
@@ -69,9 +80,14 @@ public class FactoryResServiceImpl implements IFactoryResService{
     public JSONObject getFactoryResByNameLike(String r_name){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.queryByNameLike("%" + r_name + "%");
-        result.put("errorCode",0);
-        result.put("SuccessQuery",query);
-        result.put("total",query.size());
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such resource name");
+        }else{
+            result.put("errorCode",0);
+            result.put("SuccessQuery",query);
+            result.put("total",query.size());
+        }
         return result;
     }
 
@@ -79,9 +95,14 @@ public class FactoryResServiceImpl implements IFactoryResService{
     public JSONObject getFactoryResByName(String r_name){
         JSONObject result = new JSONObject();
         List<FactoryResEntity> query = factoryResDAO.queryByName(r_name);
-        result.put("errorCode",0);
-        result.put("SuccessQuery",query);
-        result.put("total",query.size());
+        if(ObjectUtils.isEmpty(query)){
+            result.put("errorCode",1);
+            result.put("errorMsg","no such resource name");
+        }else{
+            result.put("errorCode",0);
+            result.put("SuccessQuery",query);
+            result.put("total",query.size());
+        }
         return result;
     }
 

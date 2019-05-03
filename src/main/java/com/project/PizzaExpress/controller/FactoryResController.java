@@ -29,29 +29,30 @@ public class FactoryResController {
         return JSON.toJSONString(factoryResService.getAllFactoryResByPage(pno, pageSize));
     }
 
-    //根据工厂id 查询工厂库存信息（模糊）
-    @RequestMapping("/getByIdLike")
-    public String getFactoryResByIdLike(@RequestParam String f_id) {
-        return JSON.toJSONString(factoryResService.getFactoryResByIdLike(f_id));
-    }
-
     //根据工厂id 查询工厂库存信息（精准）
-    @RequestMapping("/getById")
+    @RequestMapping("/getByFId")
     public String getFactoryResById(@RequestParam String f_id) {
         return JSON.toJSONString(factoryResService.getFactoryResById(f_id));
     }
 
+    //根据工厂id 查询工厂库存信息（模糊）
+    @RequestMapping("/getByFIdLike")
+    public String getFactoryResByIdLike(@RequestParam String f_id) {
+        return JSON.toJSONString(factoryResService.getFactoryResByIdLike(f_id));
+    }
+
+    //根据原料名 查询工厂库存信息（精准）
+    @RequestMapping("/getByRName")
+    public String getFactoryResByName(@RequestParam String r_name) {
+        return JSON.toJSONString(factoryResService.getFactoryResByName(r_name));
+    }
+
     //根据原料名 查询工厂库存信息（模糊）
-    @RequestMapping("/getByNameLike")
+    @RequestMapping("/getByRNameLike")
     public String getFactoryResByNameLike(@RequestParam String r_name) {
         return JSON.toJSONString(factoryResService.getFactoryResByNameLike(r_name));
     }
 
-    //根据原料名 查询工厂库存信息（精准）
-    @RequestMapping("/getByName")
-    public String getFactoryResByName(@RequestParam String r_name) {
-        return JSON.toJSONString(factoryResService.getFactoryResByName(r_name));
-    }
 
     //修改工厂库存数量
     @RequestMapping("/updateResNum")
