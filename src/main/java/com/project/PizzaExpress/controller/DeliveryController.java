@@ -36,24 +36,6 @@ public class DeliveryController {
         return re;
     }
 
-    //根据d_id查找配送员信息（精准）
-    @RequestMapping("/getById")
-    public String getDelivermanById(@RequestParam String d_id) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanById(d_id));
-    }
-
-    //根据d_id查找配送员信息（模糊）
-    @RequestMapping("/getByIdLike")
-    public String getDelivermanByIdLike(@RequestParam String d_id) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByIdLike(d_id));
-    }
-
-    //根据d_name查找配送员信息（模糊）
-    @RequestMapping("/getByNameLike")
-    public String getDeliverStatusLike(@RequestParam String d_name) {
-        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByNameLike(d_name));
-    }
-
     //显示所有配送员信息
     @RequestMapping("/oldList")
     public String getAllDeliver() {
@@ -70,6 +52,30 @@ public class DeliveryController {
     @RequestMapping("/listOrder")
     public String getAllDeliverOrderByPage(@RequestParam Integer pno, @RequestParam Integer pageSize){
         return JSON.toJSONString(viewDeliverymanInfoService.getAllDeliveryOrderByPage(pno,pageSize));
+    }
+
+    //根据d_id查找配送员信息（精准）
+    @RequestMapping("/getById")
+    public String getDelivermanById(@RequestParam String d_id) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanById(d_id));
+    }
+
+    //根据d_id查找配送员信息（模糊）
+    @RequestMapping("/getByIdLike")
+    public String getDelivermanByIdLike(@RequestParam String d_id) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByIdLike(d_id));
+    }
+
+    //根据d_name查找配送员信息（模糊）
+    @RequestMapping("/getByNameLike")
+    public String getDelivermanByNameLike(@RequestParam String d_name) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDelivermanByNameLike(d_name));
+    }
+
+    //根据d_name查找当前有订单的配送员信息以及配送员当前的订单（模糊）
+    @RequestMapping("/getDeliOrderByNameLike")
+    public String getDeliverOrderByNameLike(@RequestParam String d_name) {
+        return JSON.toJSONString(viewDeliverymanInfoService.getDeliverOrderByNameLike(d_name));
     }
 
     //增加配送员信息

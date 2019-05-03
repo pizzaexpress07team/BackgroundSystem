@@ -31,6 +31,9 @@ public interface DeliverymanDAO {
     @Select("select * from deliveryman where d_name like #{d_name}")
     List<DeliverymanEntity> queryByNameLike(String d_name);
 
+    @Select("select * from deliveryman JOIN `order` ON deliveryman.d_id = order.d_id where d_name like #{d_name}")
+    List<DeliManWithOrderEntity> queryDeliverOrderByNameLike(String d_name);
+
     @Select("select * from deliveryman")
     List<DeliverymanEntity> queryAll();
 

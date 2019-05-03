@@ -126,6 +126,27 @@ public class ViewDeliverymanInfoServiceImpl implements IViewDeliverymanInfoServi
     }
 
     @Override
+    public JSONObject getDeliverOrderByNameLike(String d_name){
+        JSONObject result = new JSONObject();
+        List<DeliManWithOrderEntity> list = deliverymanDAO.queryDeliverOrderByNameLike("%" + d_name + "%");
+        List<DeliverymanEntity> query = deliverymanDAO.queryByNameLike("%" + d_name + "%");
+        if(ObjectUtils.isEmpty(list)){
+            if(ObjectUtils.isEmpty(query)) {
+                result.put("errorCode", 1);
+                result.put("errorMsg", "no such deliver Name");
+            }else {
+                result.put("errorCode", 2);
+                result.put("errorMsg", "this deliver name have no order");
+            }
+        }else{
+            result.put("errorCode",0);
+            result.put("list",list);
+            result.put("total",list.size());
+        }
+        return result;
+    }
+
+    @Override
     public JSONObject getAllDeliveryManByPage(Integer pno, Integer pageSize){
         JSONObject result = new JSONObject();
         int startIndex = (pno - 1) * pageSize;
