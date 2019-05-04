@@ -16,6 +16,5 @@ public interface IViewOrderService {
     List<OrderEntity> getOrderStatusByIdLike(String orderId);
     List<OrderEntity> getOrderStatusById(String orderId);
 
-    JSONObject getOrderStatusByNameLike(String username);
-
+    JSONObject getOrderStatusByUserName(String username);
 }

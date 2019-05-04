@@ -3,6 +3,7 @@ package com.project.PizzaExpress.service.orderManage.viewOrder;
 import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.dao.DeliverymanDAO;
 import com.project.PizzaExpress.dao.OrderDAO;
+import com.project.PizzaExpress.dao.UserDAO;
 import com.project.PizzaExpress.entity.DeliverymanEntity;
 import com.project.PizzaExpress.entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class ViewOrderServiceImpl implements IViewOrderService{
 
     @Autowired
     private OrderDAO orderDAO;
+    @Autowired
+    private UserDAO userDAO;
     @Autowired
     private DeliverymanDAO deliverymanDAO;
 
@@ -97,9 +100,23 @@ public class ViewOrderServiceImpl implements IViewOrderService{
     }
 
     @Override
-    public JSONObject getOrderStatusByNameLike(String username){
+    public JSONObject getOrderStatusByUserName(String username){
         JSONObject result = new JSONObject();
-
+        List<String> uidQuery = userDAO.queryUidByUserName(username);
+        if(uidQuery.size()==0){
+            result.put("errorCode",1);
+            result.put("errorMsg","This username is not exist");
+        }else {
+            List<OrderEntity> list = orderDAO.queryOrderByUid(uidQuery.get(0));
+            if(list.size() == 0){
+                result.put("errorCode",2);
+                result.put("errorMsg","This username have no order");
+            }else{
+                result.put("errorCode",0);
+                result.put("total",list.size());
+                result.put("list",list);
+            }
+        }
         return result;
     }
 }

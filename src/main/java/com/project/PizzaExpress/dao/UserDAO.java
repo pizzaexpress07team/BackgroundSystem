@@ -41,4 +41,7 @@ public interface UserDAO {
 
     @Select("select * from user where is_admin = 0 limit ${startIndex},${pageSize}")
     List<UserEntity> queryAllUserInfo(@Param("startIndex")Integer startIndex, @Param("pageSize")Integer pageSize);
+
+    @Select("select uid from user where username = #{username}")
+    List<String> queryUidByUserName(@Param("username")String username);
 }

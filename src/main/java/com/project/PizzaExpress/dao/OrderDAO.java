@@ -78,4 +78,7 @@ public interface OrderDAO {
 
     @Select("SELECT COUNT(*) FROM `order`")
     String queryOrderSize();
+
+    @Select("select * from `order` where u_id = #{u_id}")
+    List<OrderEntity> queryOrderByUid(@Param("u_id")String u_id);
 }
