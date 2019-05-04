@@ -6,6 +6,7 @@ import com.project.PizzaExpress.dao.OrderDAO;
 import com.project.PizzaExpress.entity.OrderEntity;
 import com.project.PizzaExpress.service.oAlloc.simpleAlloc.SimpleOrderAlloc;
 import com.project.PizzaExpress.service.orderManage.withUser.GetUserAddr;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -88,9 +89,20 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService {
     }
 
     @Override
-    public List<OrderEntity> getAllOrder(Integer pno, Integer pageSize) {
+    public JSONObject getAllOrder(Integer pno, Integer pageSize) {
+        JSONObject result = new JSONObject();
         int startIndex = (pno - 1) * pageSize;
-        return orderDAO.queryAll(startIndex, pageSize);
+        List<OrderEntity> list = orderDAO.queryAll(startIndex, pageSize);
+        String total = orderDAO.queryOrderSize();
+        if(list.size() == 0){
+            result.put("errorCode", 1);
+            result.put("errorMsg", "No order in this page");
+        }else{
+            result.put("errorCode", 0);
+            result.put("databaseTotal",total);
+            result.put("list",list);
+        }
+        return result;
     }
 
     @Override

@@ -31,12 +31,14 @@ public class OrderController {
     @Resource
     private ICancelOrderService cancelOrderService = new CancelOrderServiceImpl();
 
+    //确认订单
     @RequestMapping("/confirm")
     public String confirmOrder(@RequestBody String orderInfo) {
         JSONObject re = placeOrderService.confirmOrder(orderInfo);
         return JSON.toJSONString(re, SerializerFeature.WriteMapNullValue);
     }
 
+    //支付订单
     @RequestMapping("/pay")
     public String payOrder(@RequestParam(name = "o_id") String o_id) {
         JSONObject re = payOrderService.payOrder(o_id);
@@ -55,6 +57,7 @@ public class OrderController {
         return JSON.toJSONString(placeOrderService.getAllOrderByTime(pno, pageSize));
     }
 
+    //根据订单id 查询订单（精准）
     @RequestMapping("/query")
     public String viewOrder(@RequestParam(name = "o_id") String o_id) {
         return JSON.toJSONString(viewOrderService.viewOrder(o_id));
