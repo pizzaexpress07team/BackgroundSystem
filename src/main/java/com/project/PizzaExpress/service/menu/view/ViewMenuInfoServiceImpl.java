@@ -81,9 +81,14 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         JSONObject result = new JSONObject();
         List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResByNameLike("%" + p_name + "%");
         int total = query.size();
-        result.put("errorCode",0);
-        result.put("list",query);
-        result.put("total",total);
+        if(total == 0){
+            result.put("errorCode",1);
+            result.put("errorMsg","No such menu item");
+        }else {
+            result.put("errorCode",0);
+            result.put("list",query);
+            result.put("total",total);
+        }
         return result;
     }
 
@@ -92,9 +97,14 @@ public class ViewMenuInfoServiceImpl implements  IViewMenuInfoService {
         JSONObject result = new JSONObject();
         List<PizzaWithResEntity> query = pizzaDAO.queryPizzaInfoWithResByIdLike("%" + p_id + "%");
         int total = query.size();
-        result.put("errorCode",0);
-        result.put("list",query);
-        result.put("total",total);
+        if(total == 0) {
+            result.put("errorCode",1);
+            result.put("errorMsg","No such menu item");
+        }else {
+            result.put("errorCode",0);
+            result.put("list",query);
+            result.put("total",total);
+        }
         return result;
     }
 
