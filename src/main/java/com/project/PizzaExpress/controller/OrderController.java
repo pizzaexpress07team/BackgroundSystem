@@ -43,9 +43,16 @@ public class OrderController {
         return JSON.toJSONString(re, SerializerFeature.WriteMapNullValue);
     }
 
+    //分页查看所有订单
     @RequestMapping("/list")
     public String getAllOrder(@RequestParam Integer pno, @RequestParam Integer pageSize) {
         return JSON.toJSONString(placeOrderService.getAllOrder(pno, pageSize));
+    }
+
+    //分页查看所有订单（按时间排序）
+    @RequestMapping("/listByTime")
+    public String getAllOrderByTime(@RequestParam Integer pno, @RequestParam Integer pageSize) {
+        return JSON.toJSONString(placeOrderService.getAllOrderByTime(pno, pageSize));
     }
 
     @RequestMapping("/query")

@@ -12,6 +12,7 @@ public interface IPlaceOrderService {
     JSONObject payOrder(String o_id);
 
     List<OrderEntity> getAllOrder(Integer pno, Integer pageSize);
+    JSONObject getAllOrderByTime(Integer pno, Integer pageSize);
 
     OrderEntity modifyOrderStatus(Integer status, String orderId);
 

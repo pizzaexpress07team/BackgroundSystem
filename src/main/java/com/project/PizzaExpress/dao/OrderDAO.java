@@ -72,4 +72,10 @@ public interface OrderDAO {
 
     @Select("select * from `order` limit ${startIndex},${pageSize}")
     List<OrderEntity> queryAll(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    @Select("SELECT * FROM `order` ORDER BY o_create_time DESC limit ${startIndex},${pageSize}")
+    List<OrderEntity> queryAllByTime(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    @Select("SELECT COUNT(*) FROM `order`")
+    String queryOrderSize();
 }

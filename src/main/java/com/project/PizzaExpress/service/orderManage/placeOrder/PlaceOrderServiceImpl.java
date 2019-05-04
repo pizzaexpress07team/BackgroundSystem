@@ -94,6 +94,23 @@ public class PlaceOrderServiceImpl implements IPlaceOrderService {
     }
 
     @Override
+    public JSONObject getAllOrderByTime(Integer pno, Integer pageSize){
+        JSONObject result = new JSONObject();
+        int startIndex = (pno - 1) * pageSize;
+        List<OrderEntity> list = orderDAO.queryAllByTime(startIndex,pageSize);
+        String total = orderDAO.queryOrderSize();
+        if(list.size() == 0){
+            result.put("errorCode", 1);
+            result.put("errorMsg", "No order in this page");
+        }else{
+            result.put("errorCode", 0);
+            result.put("databaseTotal",total);
+            result.put("list",list);
+        }
+        return result;
+    }
+
+    @Override
     public OrderEntity modifyOrderStatus(Integer status, String orderId) {
         List<OrderEntity> query = orderDAO.query(orderId);
         if (ObjectUtils.isEmpty(query)) return null;
