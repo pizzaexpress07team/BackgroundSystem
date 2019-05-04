@@ -48,9 +48,19 @@ public class ViewInfoServiceImpl implements IViewInfoService {
     }
 
     @Override
-    public List<UserEntity> getAllUser(Integer pno, Integer pageSize) {
+    public JSONObject getAllUser(Integer pno, Integer pageSize) {
+        JSONObject result = new JSONObject();
         int startIndex = (pno - 1) * pageSize;
-        List<UserEntity> users = userDAO.queryAllUserInfo(startIndex, pageSize);
-        return users;
+        List<UserEntity> list = userDAO.queryAllUserInfo(startIndex, pageSize);
+        String total = userDAO.queryUserSize();
+        if(list.size() == 0){
+            result.put("errorCode",1);
+            result.put("errorMsg","No item in this page");
+        }else{
+            result.put("errorCode",0);
+            result.put("list",list);
+            result.put("dataBaseTotal",total);
+        }
+        return result;
     }
 }

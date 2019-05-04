@@ -1,5 +1,6 @@
 package com.project.PizzaExpress.service.userCenter.viewInfo;
 
+import com.alibaba.fastjson.JSONObject;
 import com.project.PizzaExpress.entity.UserEntity;
 import org.apache.catalina.User;
 
@@ -9,5 +10,5 @@ public interface IViewInfoService {
 
     String viewInfo(String uid);
 
-    List<UserEntity> getAllUser(Integer pno, Integer pageSize);
+    JSONObject getAllUser(Integer pno, Integer pageSize);
 }

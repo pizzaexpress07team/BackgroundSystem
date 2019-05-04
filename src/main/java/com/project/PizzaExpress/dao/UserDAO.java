@@ -44,4 +44,7 @@ public interface UserDAO {
 
     @Select("select uid from user where username = #{username}")
     List<String> queryUidByUserName(@Param("username")String username);
+
+    @Select("select count(*) from user")
+    String queryUserSize();
 }
