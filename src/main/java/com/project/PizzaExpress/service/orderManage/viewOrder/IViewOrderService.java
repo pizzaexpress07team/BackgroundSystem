@@ -17,4 +17,6 @@ public interface IViewOrderService {
     JSONObject getOrderStatusByIdLike(String o_id);
 
     JSONObject getOrderStatusByUserName(String username);
+
+    JSONObject getOrderDelivermanByOid(String o_id);
 }

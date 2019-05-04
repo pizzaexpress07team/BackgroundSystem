@@ -72,19 +72,19 @@ public class OrderController {
     }
 
     //根据订单ID查询订单（精准）
-    @RequestMapping("/status/getById")
+    @RequestMapping("/getById")
     public String getOrderStatusById(@RequestParam String o_id) {
         return JSON.toJSONString(viewOrderService.getOrderStatusById(o_id));
     }
 
     //根据订单ID查询订单（模糊）
-    @RequestMapping("/status/getByIdLike")
+    @RequestMapping("/getByIdLike")
     public String getOrderStatusByIdLike(@RequestParam String o_id) {
         return JSON.toJSONString(viewOrderService.getOrderStatusByIdLike(o_id));
     }
 
     //根据用户名查询订单（精准）（注：这里的用户名是用户账户名，非配送客户名）
-    @RequestMapping("/status/getByUserName")
+    @RequestMapping("/getByUserName")
     public String getOrderStatusByNameLike(@RequestParam String username) {
         return JSON.toJSONString(viewOrderService.getOrderStatusByUserName(username));
     }
@@ -95,6 +95,12 @@ public class OrderController {
         return JSON.toJSONString(viewOrderService.viewOrderByUser(uid));
     }
 
+    //查询订单配送员信息
+    @RequestMapping("/getOrderDeliverman")
+    public String getOrderDelivermanByOid(@RequestParam String o_id){
+        return JSON.toJSONString(viewOrderService.getOrderDelivermanByOid(o_id));
+    }
+
     //取消订单
     @RequestMapping("/cancel")
     public String cancelOrder(@RequestParam(name = "o_id") String o_id) {
@@ -102,13 +108,13 @@ public class OrderController {
     }
 
     //删除订单
-    @RequestMapping("/status/delete")
+    @RequestMapping("/delete")
     public String deleteOrderStatus(@RequestParam String o_id) {
         return JSON.toJSONString(deleteOrderService.deleteOrderStatus(o_id));
     }
 
     //修改订单配送状态
-    @RequestMapping("/status/modifyDeliState")
+    @RequestMapping("/modifyDeliState")
     public String modifyOrderDeliState(@RequestParam Integer deliState,@RequestParam String o_id) {
         return JSON.toJSONString(modifyOrderService.modifyOrderDeliState(deliState, o_id));
     }

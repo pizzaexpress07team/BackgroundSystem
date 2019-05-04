@@ -142,4 +142,24 @@ public class ViewOrderServiceImpl implements IViewOrderService{
         }
         return result;
     }
+
+    @Override
+    public  JSONObject getOrderDelivermanByOid(String o_id){
+        JSONObject result = new JSONObject();
+        List<String> didQuery = orderDAO.queryDidByOid(o_id);
+        if(didQuery.size() == 0){
+            result.put("errorCode",1);
+            result.put("errorMsg","This order is not allocated deliverman");
+        }else{
+            List<DeliverymanEntity> query = deliverymanDAO.queryById(didQuery.get(0));
+            if(query.size() == 0){
+                result.put("errorCode",2);
+                result.put("errorMsg","Error deliverman ID");
+            }else {
+                result.put("errorCode",0);
+                result.put("successQuery",query.get(0));
+            }
+        }
+        return result;
+    }
 }
