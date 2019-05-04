@@ -18,6 +18,7 @@ public class ViewOrderServiceImpl implements IViewOrderService{
     @Autowired
     private DeliverymanDAO deliverymanDAO;
 
+    @Override
     public JSONObject viewOrder(String o_id)
     {
         JSONObject result = new JSONObject();
@@ -39,12 +40,66 @@ public class ViewOrderServiceImpl implements IViewOrderService{
         return result;
     }
 
+    @Override
     public JSONObject viewOrderByUser(String uid)
     {
         JSONObject result = new JSONObject();
         List<OrderEntity> orders = orderDAO.queryOrders(uid);
         result.put("total", orders.size());
         result.put("list", orders);
+        return result;
+    }
+
+    @Override
+    public JSONObject getAllOrder(Integer pno, Integer pageSize) {
+        JSONObject result = new JSONObject();
+        int startIndex = (pno - 1) * pageSize;
+        List<OrderEntity> list = orderDAO.queryAll(startIndex, pageSize);
+        String total = orderDAO.queryOrderSize();
+        if(list.size() == 0){
+            result.put("errorCode", 1);
+            result.put("errorMsg", "No order in this page");
+        }else{
+            result.put("errorCode", 0);
+            result.put("databaseTotal",total);
+            result.put("list",list);
+        }
+        return result;
+    }
+
+    @Override
+    public JSONObject getAllOrderByTime(Integer pno, Integer pageSize){
+        JSONObject result = new JSONObject();
+        int startIndex = (pno - 1) * pageSize;
+        List<OrderEntity> list = orderDAO.queryAllByTime(startIndex,pageSize);
+        String total = orderDAO.queryOrderSize();
+        if(list.size() == 0){
+            result.put("errorCode", 1);
+            result.put("errorMsg", "No order in this page");
+        }else{
+            result.put("errorCode", 0);
+            result.put("databaseTotal",total);
+            result.put("list",list);
+        }
+        return result;
+    }
+
+    @Override
+    public List<OrderEntity> getOrderStatusByIdLike(String orderId) {
+        List<OrderEntity> query = orderDAO.queryLike("%" + orderId + "%");
+        return query;
+    }
+
+    @Override
+    public List<OrderEntity> getOrderStatusById(String orderId){
+        List<OrderEntity> query = orderDAO.query(orderId);
+        return query;
+    }
+
+    @Override
+    public JSONObject getOrderStatusByNameLike(String username){
+        JSONObject result = new JSONObject();
+
         return result;
     }
 }

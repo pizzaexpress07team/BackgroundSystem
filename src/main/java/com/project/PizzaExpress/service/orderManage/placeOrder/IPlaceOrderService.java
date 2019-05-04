@@ -10,15 +10,4 @@ public interface IPlaceOrderService {
 
     JSONObject confirmOrder(String orderInfo);
     JSONObject payOrder(String o_id);
-
-    JSONObject getAllOrder(Integer pno, Integer pageSize);
-    JSONObject getAllOrderByTime(Integer pno, Integer pageSize);
-
-    OrderEntity modifyOrderStatus(Integer status, String orderId);
-
-    JSONObject deleteOrderStatus(String orderId);
-
-    List<OrderEntity> getOrderStatus(String orderId);
-
-    List<OrderEntity> queryOrderStatus(String orderId);
 }

@@ -6,6 +6,10 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.project.PizzaExpress.entity.OrderEntity;
 import com.project.PizzaExpress.service.orderManage.cancelOrder.CancelOrderServiceImpl;
 import com.project.PizzaExpress.service.orderManage.cancelOrder.ICancelOrderService;
+import com.project.PizzaExpress.service.orderManage.deleteOrder.DeleteOrderServiceImpl;
+import com.project.PizzaExpress.service.orderManage.deleteOrder.IDeleteOrderService;
+import com.project.PizzaExpress.service.orderManage.modifyOrder.IModifyOrderService;
+import com.project.PizzaExpress.service.orderManage.modifyOrder.ModifyOrderServiceImpl;
 import com.project.PizzaExpress.service.orderManage.payOrder.IPayOrderService;
 import com.project.PizzaExpress.service.orderManage.payOrder.PayOrderServiceImpl;
 import com.project.PizzaExpress.service.orderManage.placeOrder.IPlaceOrderService;
@@ -29,6 +33,10 @@ public class OrderController {
     @Resource
     private IViewOrderService viewOrderService = new ViewOrderServiceImpl();
     @Resource
+    private IDeleteOrderService deleteOrderService = new DeleteOrderServiceImpl();
+    @Resource
+    private IModifyOrderService modifyOrderService = new ModifyOrderServiceImpl();
+    @Resource
     private ICancelOrderService cancelOrderService = new CancelOrderServiceImpl();
 
     //确认订单
@@ -48,16 +56,16 @@ public class OrderController {
     //分页查看所有订单
     @RequestMapping("/list")
     public String getAllOrder(@RequestParam Integer pno, @RequestParam Integer pageSize) {
-        return JSON.toJSONString(placeOrderService.getAllOrder(pno, pageSize));
+        return JSON.toJSONString(viewOrderService.getAllOrder(pno, pageSize));
     }
 
     //分页查看所有订单（按时间排序）
     @RequestMapping("/listByTime")
     public String getAllOrderByTime(@RequestParam Integer pno, @RequestParam Integer pageSize) {
-        return JSON.toJSONString(placeOrderService.getAllOrderByTime(pno, pageSize));
+        return JSON.toJSONString(viewOrderService.getAllOrderByTime(pno, pageSize));
     }
 
-    //根据订单id 查询订单（精准）
+    //弃用
     @RequestMapping("/query")
     public String viewOrder(@RequestParam(name = "o_id") String o_id) {
         return JSON.toJSONString(viewOrderService.viewOrder(o_id));
@@ -78,24 +86,30 @@ public class OrderController {
     //修改订单状态
     @RequestMapping("/status/modify")
     public String modifyOrderStatus(@RequestParam Integer status,@RequestParam String orderId) {
-        return JSON.toJSONString(placeOrderService.modifyOrderStatus(status, orderId));
+        return JSON.toJSONString(modifyOrderService.modifyOrderStatus(status, orderId));
     }
 
     //删除订单
     @RequestMapping("/status/delete")
     public String deleteOrderStatus(@RequestParam String orderId) {
-        return JSON.toJSONString(placeOrderService.deleteOrderStatus(orderId));
+        return JSON.toJSONString(deleteOrderService.deleteOrderStatus(orderId));
     }
 
-    //模糊查询订单
-    @RequestMapping("/status/get")
-    public String getOrderStatus(@RequestParam String orderId) {
-        return JSON.toJSONString(placeOrderService.getOrderStatus(orderId));
+    //根据订单ID查询订单（模糊）
+    @RequestMapping("/status/getByIdLike")
+    public String getOrderStatusByIdLike(@RequestParam String orderId) {
+        return JSON.toJSONString(viewOrderService.getOrderStatusByIdLike(orderId));
     }
 
-    //精准查询订单
-    @RequestMapping("/status/query")
-    public String queryOrderStatus(@RequestParam String orderId) {
-        return JSON.toJSONString(placeOrderService.queryOrderStatus(orderId));
+    //根据订单ID查询订单（精准）
+    @RequestMapping("/status/getById")
+    public String getOrderStatusById(@RequestParam String orderId) {
+        return JSON.toJSONString(viewOrderService.getOrderStatusById(orderId));
+    }
+
+    //根据用户姓名查询订单（模糊）
+    @RequestMapping("/status/getByNameLike")
+    public String getOrderStatusByNameLike(@RequestParam String username) {
+        return JSON.toJSONString(viewOrderService.getOrderStatusByNameLike(username));
     }
 }
