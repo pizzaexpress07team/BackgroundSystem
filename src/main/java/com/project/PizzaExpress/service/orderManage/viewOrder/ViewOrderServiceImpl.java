@@ -47,9 +47,15 @@ public class ViewOrderServiceImpl implements IViewOrderService{
     public JSONObject viewOrderByUser(String uid)
     {
         JSONObject result = new JSONObject();
-        List<OrderEntity> orders = orderDAO.queryOrders(uid);
-        result.put("total", orders.size());
-        result.put("list", orders);
+        List<OrderEntity> list = orderDAO.queryOrders(uid);
+        if(list.size() == 0){
+            result.put("errorCode", 1);
+            result.put("errorMsg", "This uid has no order");
+        }else {
+            result.put("errorCode",0);
+            result.put("list", list);
+            result.put("total", list.size());
+        }
         return result;
     }
 
@@ -88,15 +94,32 @@ public class ViewOrderServiceImpl implements IViewOrderService{
     }
 
     @Override
-    public List<OrderEntity> getOrderStatusByIdLike(String orderId) {
-        List<OrderEntity> query = orderDAO.queryLike("%" + orderId + "%");
-        return query;
+    public JSONObject getOrderStatusById(String o_id){
+        JSONObject result = new JSONObject();
+        List<OrderEntity> query = orderDAO.query(o_id);
+        if(query.size() == 0){
+            result.put("errorCode",1);
+            result.put("errorMsg","This order ID is not exist");
+        }else {
+            result.put("errorCode",0);
+            result.put("successQuery",query.get(0));
+        }
+        return result;
     }
 
     @Override
-    public List<OrderEntity> getOrderStatusById(String orderId){
-        List<OrderEntity> query = orderDAO.query(orderId);
-        return query;
+    public JSONObject getOrderStatusByIdLike(String o_id) {
+        JSONObject result = new JSONObject();
+        List<OrderEntity> list = orderDAO.queryLike("%" + o_id + "%");
+        if(list.size() == 0){
+            result.put("errorCode",1);
+            result.put("errorMsg","This order ID is not exist");
+        }else {
+            result.put("errorCode",0);
+            result.put("list",list);
+            result.put("total",list.size());
+        }
+        return result;
     }
 
     @Override

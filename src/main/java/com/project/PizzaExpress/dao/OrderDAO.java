@@ -81,4 +81,7 @@ public interface OrderDAO {
 
     @Select("select * from `order` where u_id = #{u_id}")
     List<OrderEntity> queryOrderByUid(@Param("u_id")String u_id);
+
+    @Select("select delivery_state from `order` where o_id = #{o_id}")
+    List<Integer> queryDeliStateByOid(@Param("o_id")String o_id);
 }

@@ -13,8 +13,8 @@ public interface IViewOrderService {
     JSONObject getAllOrder(Integer pno, Integer pageSize);
     JSONObject getAllOrderByTime(Integer pno, Integer pageSize);
 
-    List<OrderEntity> getOrderStatusByIdLike(String orderId);
-    List<OrderEntity> getOrderStatusById(String orderId);
+    JSONObject getOrderStatusById(String o_id);
+    JSONObject getOrderStatusByIdLike(String o_id);
 
     JSONObject getOrderStatusByUserName(String username);
 }
