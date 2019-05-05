@@ -33,10 +33,10 @@ public interface FactoryResDAO {
     @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where r_name = #{r_name}")
     List<FactoryResEntity> queryByName(@Param("r_name")String r_name);
 
-    @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where r_id = #{r_id}")
+    @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where factory_resource.r_id = #{r_id}")
     List<FactoryResEntity> queryByRId(@Param("r_id")String r_id);
 
-    @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where f_id = #{f_id} and r_id = #{r_id}")
+    @Select("SELECT * FROM factory_resource JOIN resource ON factory_resource.r_id = resource.r_id where f_id = #{f_id} and factory_resource.r_id = #{r_id}")
     List<FactoryResEntity> queryByFidAndRid(@Param("f_id")String f_id, @Param("r_id")String r_id);
 
 }

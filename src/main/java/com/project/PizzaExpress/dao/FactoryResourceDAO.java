@@ -11,7 +11,7 @@ public interface FactoryResourceDAO {
             "values(#{f_id},#{r_id},#{r_num})")
     void insert(FactoryResourceEntity fre);
 
-    @Update("update factory_resource set r_num = #{r_num} where f_id = #{f_id} and r_id = #{r_id}")
+    @Update("update factory_resource set r_num = r_num + #{r_num} where f_id = #{f_id} and r_id = #{r_id}")
     int updateResourceNum(@Param("f_id") String f_id, @Param("r_id") String r_id, @Param("r_num") int r_num);
 
     @Select("select * from factory_resource where f_id = #{f_id}")

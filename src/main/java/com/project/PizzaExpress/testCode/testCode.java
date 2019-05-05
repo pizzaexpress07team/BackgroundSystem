@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class testCode {
     public static void main(String args[]){
-        String fileName = "C:/Users/任律达/Desktop/JsonTest";
+        String fileName = "C:/Users/任律达/Desktop/JsonTest1";
         Path path = Paths.get(fileName);
         try {
             byte[] bytes = Files.readAllBytes(path);

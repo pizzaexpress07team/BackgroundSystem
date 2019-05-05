@@ -24,7 +24,7 @@ public class DeleteOrderServiceImpl implements IDeleteOrderService {
             result.put("errorMsg", "No such order id");
         } else {
             orderDAO.delete(o_id);
-            if(orderDAO.query(o_id).size() != 0){
+            if(orderDAO.query(o_id).size() == 0){
                 result.put("errorCode", 0);
                 result.put("successDelete",query.get(0));
             }else{

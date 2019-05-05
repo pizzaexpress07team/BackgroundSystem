@@ -40,7 +40,7 @@ public class MenuInfoController {
 
     //新建一个菜单项（不带原料）
     @RequestMapping("/create")
-    public String createNewMenuItem(@RequestBody String pizzaInfo)
+    public String createNewMenuItem(@RequestParam String pizzaInfo)
     {
         String re = insertMenuItemService.insertMenuItem(pizzaInfo);
         return re;
@@ -48,7 +48,7 @@ public class MenuInfoController {
 
     //新建一个菜单项（带原料）
     @RequestMapping("/createWithRes")
-    public String createNewMenuItemWithRes(@RequestBody String pizzaInfoWithRes){
+    public String createNewMenuItemWithRes(@RequestParam String pizzaInfoWithRes){
         return JSON.toJSONString(insertMenuItemService.insertMenuItemWithRes(pizzaInfoWithRes));
     }
 
@@ -72,13 +72,13 @@ public class MenuInfoController {
 
     //修改一个菜单项（带原料）
     @RequestMapping("/modify")
-    public String modifyMenuItemWithRes(@RequestBody String pizzaInfoWithRes){
+    public String modifyMenuItemWithRes(@RequestParam String pizzaInfoWithRes){
         return JSON.toJSONString(modifyMenuItemService.modifyMenuItemWithRes(pizzaInfoWithRes));
     }
 
     //删除一个菜单项（带原料删除）
     @RequestMapping("/deleteWithRes")
-    public String deleteMenuItemWithRes(@RequestBody String p_id){
+    public String deleteMenuItemWithRes(@RequestParam String p_id){
         return JSON.toJSONString(deleteMenuItemService.deleteMenuItemWithRes(p_id));
     }
 }

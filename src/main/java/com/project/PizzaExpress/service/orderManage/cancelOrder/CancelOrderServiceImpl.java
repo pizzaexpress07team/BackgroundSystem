@@ -25,7 +25,7 @@ public class CancelOrderServiceImpl implements ICancelOrderService{
             result.put("errorMsg", "No such order ID");
         }else{
             orderDAO.delete(o_id);
-            if(orderDAO.query(o_id).size() != 0){
+            if(orderDAO.query(o_id).size() == 0){
                 result.put("errorCode", 0);
                 result.put("successCancel",query.get(0));
             }else{
