@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.project.PizzaExpress.service.deliverymanManage.join.CreateNewDeliverymanServiceImpl;
 import com.project.PizzaExpress.service.deliverymanManage.join.ICreateNewDeliverymanService;
+import com.project.PizzaExpress.service.userCenter.delete.DeleteInfoServiceImpl;
+import com.project.PizzaExpress.service.userCenter.delete.IDeleteInfoService;
 import com.project.PizzaExpress.service.userCenter.login.ILoginService;
 import com.project.PizzaExpress.service.userCenter.modify.IModifyService;
 import com.project.PizzaExpress.service.userCenter.modify.ModifyServiceImpl;
@@ -31,6 +33,8 @@ public class UserCenterController {
     private IModifyService modifyService = new ModifyServiceImpl();
     @Resource
     private IViewInfoService viewInfoService = new ViewInfoServiceImpl();
+    @Resource
+    private IDeleteInfoService deleteInfoService = new DeleteInfoServiceImpl();
     @Resource
     private ICreateNewDeliverymanService createNewDeliverymanService = new CreateNewDeliverymanServiceImpl();
 
@@ -111,5 +115,12 @@ public class UserCenterController {
     @RequestMapping("/getByUserNameLike")
     public String getByUserNameLike(@RequestParam String username){
         return JSON.toJSONString(viewInfoService.getByUserNameLike(username));
+    }
+
+    //根据uid删除用户信息
+    @RequestMapping("/delete")
+    public String deleteUserInfoByUid(@RequestParam String uid){
+        //TODO
+        return JSON.toJSONString(deleteInfoService.deleteUserInfoByUid(uid));
     }
 }

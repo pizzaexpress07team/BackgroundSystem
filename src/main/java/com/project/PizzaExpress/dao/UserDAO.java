@@ -53,4 +53,7 @@ public interface UserDAO {
 
     @Select("select * from user where username like #{username}")
     List<UserEntity> queryByUserNameLike(String username);
+
+    @Delete("delete from user where uid = #{uid}")
+    void deleteInfoByUid(String uid);
 }
