@@ -47,4 +47,10 @@ public interface UserDAO {
 
     @Select("select count(*) from user")
     String queryUserSize();
+
+    @Select("select * from user where username = #{username}")
+    List<UserEntity> queryByUserName(@Param("username")String username);
+
+    @Select("select * from user where username like #{username}")
+    List<UserEntity> queryByUserNameLike(@Param("username")String username);
 }

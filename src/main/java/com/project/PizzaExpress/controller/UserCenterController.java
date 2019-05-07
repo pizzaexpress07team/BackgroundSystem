@@ -101,4 +101,10 @@ public class UserCenterController {
         return JSON.toJSONString(viewInfoService.getAllUser(pno, pageSize));
     }
 
+    //根据用户名获取用户信息（精准）
+    @RequestMapping("/getByUserName")
+    public String getByUserName(@RequestParam String username){
+        return JSON.toJSONString(viewInfoService.getByUserName(username));
+    }
+
 }
