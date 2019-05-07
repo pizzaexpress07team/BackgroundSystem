@@ -107,4 +107,9 @@ public class UserCenterController {
         return JSON.toJSONString(viewInfoService.getByUserName(username));
     }
 
+    //根据用户名获取用户信息（模糊）
+    @RequestMapping("/getByUserNameLike")
+    public String getByUserNameLike(@RequestParam String username){
+        return JSON.toJSONString(viewInfoService.getByUserNameLike(username));
+    }
 }

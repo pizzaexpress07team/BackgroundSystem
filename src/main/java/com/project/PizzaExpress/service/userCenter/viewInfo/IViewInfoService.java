@@ -13,4 +13,5 @@ public interface IViewInfoService {
     JSONObject getAllUser(Integer pno, Integer pageSize);
 
     JSONObject getByUserName(String username);
+    JSONObject getByUserNameLike(String username);
 }

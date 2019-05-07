@@ -49,8 +49,8 @@ public interface UserDAO {
     String queryUserSize();
 
     @Select("select * from user where username = #{username}")
-    List<UserEntity> queryByUserName(@Param("username")String username);
+    List<UserEntity> queryByUserName(String username);
 
     @Select("select * from user where username like #{username}")
-    List<UserEntity> queryByUserNameLike(@Param("username")String username);
+    List<UserEntity> queryByUserNameLike(String username);
 }

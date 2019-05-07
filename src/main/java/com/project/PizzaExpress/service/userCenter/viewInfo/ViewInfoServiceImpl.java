@@ -73,6 +73,20 @@ public class ViewInfoServiceImpl implements IViewInfoService {
             result.put("errorMsg","No such User Name");
         }else{
             result.put("errorCode",0);
+            result.put("successQuery",list.get(0));
+        }
+        return result;
+    }
+
+    @Override
+    public JSONObject getByUserNameLike(String username){
+        JSONObject result = new JSONObject();
+        List<UserEntity> list = userDAO.queryByUserNameLike("%" + username + "%");
+        if(list.size() == 0){
+            result.put("errorCode",1);
+            result.put("errorMsg","No such User Name");
+        }else{
+            result.put("errorCode",0);
             result.put("list",list);
             result.put("total",list.size());
         }
